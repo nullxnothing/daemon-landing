@@ -1,0 +1,65 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+node_modules
+dist
+dist-ssr
+dist-electron
+release
+*.local
+
+# Editor
+.vscode/.debug.env
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Lockfile (keep pnpm-lock.yaml committed for deterministic installs)
+package-lock.json
+yarn.lock
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+*.p12
+credentials.json
+
+# SQLite
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Build artifacts
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
+# Internal planning docs (keep local, not in public repo)
+MASTER_PLAN.md
+CLAUDE.md
+CLAUDE_FLAGS.md
+AGENTS.md
+gotomarket.md
+features/
+
+# Claude Code config (per-machine)
+.claude/
+.mcp.json
+
+# Internal dev artifacts
+PLUGIN_TODOS.md
+.planning/
+.playwright-mcp/
+Usersoffic.claudeplans/
