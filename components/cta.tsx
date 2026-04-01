@@ -1,60 +1,84 @@
 "use client";
 
-import { Download, Github, ArrowRight } from "lucide-react";
+import { Monitor, Apple, Github } from "lucide-react";
+
+const RELEASE_URL =
+  "https://github.com/nullxnothing/daemon/releases/latest";
 
 export function CTA() {
   return (
-    <section className="py-32 px-6">
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Main CTA */}
-        <h2 className="text-4xl md:text-6xl font-bold gradient-text text-balance">
-          Ready to build the future?
+    <section id="download" className="py-24 md:py-32 px-6">
+      <div className="max-w-3xl mx-auto text-center">
+        {/* Heading */}
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight gradient-text text-balance">
+          Ready to ship faster?
         </h2>
-        <p className="mt-6 text-xl text-muted max-w-2xl mx-auto leading-relaxed">
-          Download Daemon and experience AI-native development.
-          Free, open source, and built for developers.
+        <p className="mt-5 text-lg text-muted max-w-xl mx-auto leading-relaxed">
+          Free, open source, and built for developers who work alone and move fast.
         </p>
 
-        {/* Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Download buttons */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
-            href="https://github.com/nullxnothing/daemon/releases"
-            className="group flex items-center gap-3 bg-foreground text-background px-8 py-4 rounded-[var(--radius)] font-medium text-lg transition-all hover:bg-muted hover:scale-105"
+            href={RELEASE_URL}
+            className="group flex items-center gap-2.5 bg-foreground text-background px-6 py-3.5 rounded-xl font-medium text-[15px] transition-all duration-200 hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_30px_rgba(62,207,142,0.2)]"
           >
-            <Download className="size-5" />
-            Download Now
-            <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
+            <Monitor className="size-[18px]" />
+            Download for Windows
           </a>
-          
           <a
-            href="https://github.com/nullxnothing/daemon"
-            className="flex items-center gap-3 border border-border px-8 py-4 rounded-[var(--radius)] font-medium text-lg text-muted transition-all hover:border-muted hover:text-foreground hover:bg-card"
+            href={RELEASE_URL}
+            className="group flex items-center gap-2.5 border border-border bg-card px-6 py-3.5 rounded-xl font-medium text-[15px] text-muted transition-all duration-200 hover:border-muted hover:text-foreground hover:bg-card-hover"
           >
-            <Github className="size-5" />
-            Star on GitHub
+            <Apple className="size-[18px]" />
+            Download for Mac
           </a>
         </div>
 
-        {/* Stats or social proof */}
-        <div className="mt-16 pt-16 border-t border-border">
-          <div className="grid grid-cols-3 gap-8">
+        {/* Meta info */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[13px] text-muted-foreground">
+          <span className="flex items-center gap-1.5">
+            <span className="size-1.5 rounded-full bg-accent" />
+            v1.0.0
+          </span>
+          <span>MIT License</span>
+          <a
+            href="https://github.com/nullxnothing/daemon"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+          >
+            <Github className="size-3.5" />
+            Open Source
+          </a>
+        </div>
+
+        {/* Divider + stats */}
+        <div className="mt-16 pt-12 border-t border-border">
+          <div className="grid grid-cols-3 gap-8 max-w-md mx-auto">
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground">
-                100%
+              <div className="text-2xl md:text-3xl font-bold text-foreground">
+                30+
               </div>
-              <div className="mt-2 text-sm text-muted">Open Source</div>
+              <div className="mt-1 text-[13px] text-muted-foreground">
+                Panels
+              </div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground">
-                MIT
+              <div className="text-2xl md:text-3xl font-bold text-foreground">
+                14
               </div>
-              <div className="mt-2 text-sm text-muted">Licensed</div>
+              <div className="mt-1 text-[13px] text-muted-foreground">
+                IPC Modules
+              </div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground">
-                V1
+              <div className="text-2xl md:text-3xl font-bold text-foreground">
+                10
               </div>
-              <div className="mt-2 text-sm text-muted">Released</div>
+              <div className="mt-1 text-[13px] text-muted-foreground">
+                Services
+              </div>
             </div>
           </div>
         </div>

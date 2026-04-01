@@ -1,77 +1,160 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowRight, Download, Github } from "lucide-react";
+import { Monitor, Apple } from "lucide-react";
+
+const RELEASE_URL =
+  "https://github.com/nullxnothing/daemon/releases/latest";
+
+function TerminalMockup() {
+  return (
+    <div className="relative w-full max-w-3xl mx-auto">
+      {/* Glow behind the terminal */}
+      <div className="absolute -inset-4 bg-accent/5 rounded-3xl blur-3xl animate-glow-pulse" />
+
+      {/* Terminal window */}
+      <div className="relative rounded-xl border border-border bg-[#0c0c0c] overflow-hidden shadow-2xl shadow-black/50">
+        {/* Title bar */}
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-[#111111]">
+          <div className="flex items-center gap-1.5">
+            <div className="size-2.5 rounded-full bg-[#ff5f57]" />
+            <div className="size-2.5 rounded-full bg-[#febc2e]" />
+            <div className="size-2.5 rounded-full bg-[#28c840]" />
+          </div>
+          <div className="flex-1 text-center">
+            <span className="text-[11px] text-muted-foreground font-mono">
+              daemon ~/projects/my-app
+            </span>
+          </div>
+        </div>
+
+        {/* Terminal content */}
+        <div className="p-5 font-mono text-[13px] leading-relaxed space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="text-accent">~</span>
+            <span className="text-muted">claude --model claude-opus-4-20250514</span>
+          </div>
+          <div className="text-muted-foreground mt-3 space-y-0.5">
+            <p>
+              <span className="text-accent">agent</span> analyzing project
+              structure...
+            </p>
+            <p>
+              <span className="text-accent">agent</span> found 23 files across
+              4 modules
+            </p>
+            <p>
+              <span className="text-accent">agent</span> implementing auth
+              middleware with rate limiting
+            </p>
+            <p>
+              <span className="text-accent">agent</span>{" "}
+              <span className="text-foreground">
+                created src/middleware/auth.ts
+              </span>
+            </p>
+            <p>
+              <span className="text-accent">agent</span>{" "}
+              <span className="text-foreground">
+                created src/middleware/rateLimit.ts
+              </span>
+            </p>
+            <p>
+              <span className="text-accent">agent</span> running tests...{" "}
+              <span className="text-accent">12 passed</span>
+            </p>
+          </div>
+          <div className="flex items-center gap-2 mt-3">
+            <span className="text-accent">~</span>
+            <span className="text-muted-foreground">|</span>
+            <span
+              className="inline-block w-[7px] h-[15px] bg-accent/70"
+              style={{ animation: "cursor-blink 1.2s step-end infinite" }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
-      {/* Subtle radial gradient background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#0a0a0a] via-black to-black" />
-      
-      {/* Floating logo */}
-      <div className="relative z-10 animate-float">
-        <div className="relative w-48 h-48 md:w-64 md:h-64 glow rounded-full">
-          <Image
-            src="/images/daemon-logo.png"
-            alt="Daemon Logo"
-            fill
-            className="object-contain"
-            priority
-          />
-        </div>
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-14 overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0">
+        {/* Radial gradient */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(62,207,142,0.08),transparent)]" />
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+          }}
+        />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mt-12 text-center max-w-4xl">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-          <span className="gradient-text">DAEMON</span>
+      <div className="relative z-10 text-center max-w-4xl w-full">
+        {/* Version badge */}
+        <div className="animate-fade-up inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card text-[13px] text-muted mb-8">
+          <span className="size-1.5 rounded-full bg-accent" />
+          v1.0.0 — Now available
+        </div>
+
+        {/* Headline */}
+        <h1
+          className="animate-fade-up text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.9]"
+          style={{ animationDelay: "100ms" }}
+        >
+          <span className="gradient-text">Code. Deploy.</span>
+          <br />
+          <span className="gradient-text">Ship.</span>
         </h1>
-        
-        <p className="mt-6 text-xl md:text-2xl text-muted max-w-2xl mx-auto leading-relaxed text-balance">
-          The AI-native IDE built for the future of development.
+
+        {/* Subtitle */}
+        <p
+          className="animate-fade-up mt-6 text-lg md:text-xl text-muted max-w-xl mx-auto leading-relaxed"
+          style={{ animationDelay: "200ms" }}
+        >
+          The AI-native IDE built for solo developers who ship fast.
+          <br className="hidden sm:block" />
           Not a fork. Purpose-built from scratch.
         </p>
 
         {/* CTAs */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div
+          className="animate-fade-up mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
+          style={{ animationDelay: "300ms" }}
+        >
           <a
-            href="https://github.com/nullxnothing/daemon/releases"
-            className="group flex items-center gap-3 bg-foreground text-background px-8 py-4 rounded-[var(--radius)] font-medium text-lg transition-all hover:bg-muted hover:scale-105"
+            href={RELEASE_URL}
+            className="group flex items-center gap-2.5 bg-foreground text-background px-6 py-3 rounded-xl font-medium text-[15px] transition-all duration-200 hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_30px_rgba(62,207,142,0.2)]"
           >
-            <Download className="size-5" />
-            Download for Free
-            <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
+            <Monitor className="size-[18px]" />
+            Download for Windows
           </a>
-          
           <a
-            href="https://github.com/nullxnothing/daemon"
-            className="flex items-center gap-3 border border-border px-8 py-4 rounded-[var(--radius)] font-medium text-lg text-muted transition-all hover:border-muted hover:text-foreground hover:bg-card"
+            href={RELEASE_URL}
+            className="group flex items-center gap-2.5 border border-border bg-card px-6 py-3 rounded-xl font-medium text-[15px] text-muted transition-all duration-200 hover:border-muted hover:text-foreground hover:bg-card-hover"
           >
-            <Github className="size-5" />
-            View on GitHub
+            <Apple className="size-[18px]" />
+            Download for Mac
           </a>
         </div>
 
-        {/* Tech badges */}
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-3">
-          {["Electron", "React", "Monaco", "TypeScript", "MIT License"].map((tech) => (
-            <span
-              key={tech}
-              className="px-4 py-2 text-sm text-muted-foreground border border-border-subtle rounded-full"
-            >
-              {tech}
-            </span>
-          ))}
+        {/* Terminal mockup */}
+        <div
+          className="animate-fade-up mt-16 sm:mt-20"
+          style={{ animationDelay: "450ms" }}
+        >
+          <TerminalMockup />
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-muted-foreground rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-muted-foreground rounded-full" />
-        </div>
-      </div>
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 }

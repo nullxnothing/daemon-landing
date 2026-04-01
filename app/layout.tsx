@@ -1,21 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
-});
-
 export const metadata: Metadata = {
-  title: "Daemon - The AI-Native IDE",
+  title: "DAEMON - AI-Native IDE",
   description:
-    "A standalone IDE built for AI-native development. Monaco editor, integrated terminals, Claude Code agent spawning, MCP management, Git panel, Solana wallet, and plugin system.",
+    "The IDE built for AI-native development. Monaco editor, Claude AI integration, built-in terminal, Solana wallet, and one-click deploys. Open source.",
   keywords: [
     "IDE",
     "AI",
@@ -23,26 +12,28 @@ export const metadata: Metadata = {
     "Monaco Editor",
     "Electron",
     "Developer Tools",
-    "MCP",
     "Solana",
+    "Open Source",
   ],
   authors: [{ name: "nullxnothing" }],
   openGraph: {
-    title: "Daemon - The AI-Native IDE",
-    description: "A standalone IDE built for AI-native development.",
+    title: "DAEMON - AI-Native IDE",
+    description:
+      "The IDE built for AI-native development. Monaco editor, Claude AI integration, built-in terminal, and more.",
     type: "website",
     images: ["/images/daemon-banner.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Daemon - The AI-Native IDE",
-    description: "A standalone IDE built for AI-native development.",
+    title: "DAEMON - AI-Native IDE",
+    description:
+      "The IDE built for AI-native development. Open source, built from scratch.",
     images: ["/images/daemon-banner.png"],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#0a0a0a",
   colorScheme: "dark",
 };
 
@@ -53,9 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans`}>
-        {children}
-      </body>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }
