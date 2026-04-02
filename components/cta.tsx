@@ -2,8 +2,10 @@
 
 import { Monitor, Apple, Github } from "lucide-react";
 
-const RELEASE_URL =
-  "https://github.com/nullxnothing/daemon/releases/latest";
+const WINDOWS_URL =
+  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe";
+const MAC_URL =
+  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe";
 
 export function CTA() {
   return (
@@ -20,14 +22,16 @@ export function CTA() {
         {/* Download buttons */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
-            href={RELEASE_URL}
+            href={WINDOWS_URL}
+            download
             className="group flex items-center gap-2.5 bg-foreground text-background px-6 py-3.5 rounded-xl font-medium text-[15px] transition-all duration-200 hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_30px_rgba(62,207,142,0.2)]"
           >
             <Monitor className="size-[18px]" />
             Download for Windows
           </a>
           <a
-            href={RELEASE_URL}
+            href={MAC_URL}
+            download
             className="group flex items-center gap-2.5 border border-border bg-card px-6 py-3.5 rounded-xl font-medium text-[15px] text-muted transition-all duration-200 hover:border-muted hover:text-foreground hover:bg-card-hover"
           >
             <Apple className="size-[18px]" />
