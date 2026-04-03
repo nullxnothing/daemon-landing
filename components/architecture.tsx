@@ -1,37 +1,37 @@
 "use client";
 
 const techStack = [
-  { layer: "Shell", tech: "Electron 33", detail: "Native OS integration" },
-  { layer: "Build", tech: "Vite", detail: "Fast HMR, ESM-native" },
-  { layer: "UI", tech: "React 18 + TypeScript", detail: "Type-safe components" },
-  { layer: "Editor", tech: "Monaco Editor", detail: "Offline via custom protocol" },
-  { layer: "Terminal", tech: "node-pty + xterm.js", detail: "Real PTY sessions" },
-  { layer: "State", tech: "Zustand", detail: "Minimal, fast stores" },
+  { layer: "Shell", tech: "Electron 33", detail: "Chromium + Node in one process" },
+  { layer: "Build", tech: "Vite", detail: "Sub-second HMR" },
+  { layer: "UI", tech: "React 18 + TypeScript", detail: "Strict types, zero any" },
+  { layer: "Editor", tech: "Monaco Editor", detail: "Custom protocol, fully offline" },
+  { layer: "Terminal", tech: "node-pty + xterm.js", detail: "Real PTY, not emulated" },
+  { layer: "State", tech: "Zustand", detail: "One store per domain" },
   { layer: "Database", tech: "better-sqlite3", detail: "WAL mode, main process only" },
-  { layer: "Git", tech: "simple-git", detail: "Full git operations" },
-  { layer: "Package", tech: "electron-builder", detail: ".exe + .dmg output" },
+  { layer: "Git", tech: "simple-git", detail: "Branch, stash, tag, push" },
+  { layer: "Package", tech: "electron-builder", detail: ".exe + .dmg, auto-update" },
 ];
 
 const principles = [
   {
     number: "01",
     title: "Process Isolation",
-    description: "All database access in the main process. Renderer communicates via typed IPC only.",
+    description: "All database and filesystem access runs in the main process. The renderer never touches SQLite directly — everything flows through typed IPC handlers.",
   },
   {
     number: "02",
-    title: "Consistent IPC Contract",
-    description: "Every handler returns { ok, data } or { ok, error }. No raw throws across the bridge.",
+    title: "Typed IPC Contract",
+    description: "Every handler returns { ok, data } or { ok, error }. No raw throws across the bridge. 20 IPC modules covering agents, wallet, git, terminals, and more.",
   },
   {
     number: "03",
     title: "Offline First",
-    description: "Monaco runs through a custom protocol. Zero network requests required for core editing.",
+    description: "Monaco editor runs through a custom protocol handler. Zero network requests for core editing. Your code stays on your machine.",
   },
   {
     number: "04",
-    title: "Native Module Support",
-    description: "better-sqlite3 and node-pty unpacked from ASAR for production builds.",
+    title: "Native Modules",
+    description: "better-sqlite3 and node-pty unpacked from ASAR for production builds. Real PTY sessions, real database — not browser polyfills pretending to be native.",
   },
 ];
 
@@ -45,11 +45,11 @@ export function Architecture() {
             Architecture
           </p>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight gradient-text text-balance">
-            Built right from day one
+            Not a wrapper. Not a fork.
           </h2>
           <p className="mt-5 text-muted leading-relaxed">
-            Clean architecture with clear separation of concerns. Every decision
-            made intentionally.
+            Standalone Electron app with process isolation, typed IPC, and
+            native modules. Every layer built intentionally.
           </p>
         </div>
 
@@ -124,12 +124,12 @@ export function Architecture() {
               <pre className="font-mono text-[12px] text-muted leading-[1.8] overflow-x-auto">
 {`electron/
   main/       App entry, windows, protocols
-  ipc/        One handler per domain (14 modules)
+  ipc/        One handler per domain (20 modules)
   services/   Business logic layer
   db/         SQLite schema, migrations, WAL
 
 src/
-  panels/     One directory per UI panel (~30)
+  panels/     One directory per UI panel (21)
   store/      Zustand state management
   plugins/    Plugin registry + lazy loading
   components/ Shared UI primitives`}

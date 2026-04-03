@@ -13,10 +13,11 @@ export function CTA() {
       <div className="max-w-3xl mx-auto text-center">
         {/* Heading */}
         <h2 className="text-3xl md:text-5xl font-bold tracking-tight gradient-text text-balance">
-          Ready to ship faster?
+          Stop tabbing between 12 apps
         </h2>
         <p className="mt-5 text-lg text-muted max-w-xl mx-auto leading-relaxed">
-          Free, open source, and built for developers who work alone and move fast.
+          Free, open source, and built for the solo dev who runs agents, ships
+          tokens, and deploys before the thread goes viral.
         </p>
 
         {/* Download buttons */}
@@ -62,26 +63,26 @@ export function CTA() {
           <div className="grid grid-cols-3 gap-8 max-w-md mx-auto">
             <div>
               <div className="text-2xl md:text-3xl font-bold text-foreground">
-                30+
+                4
               </div>
               <div className="mt-1 text-[13px] text-muted-foreground">
-                Panels
+                Parallel agents
               </div>
             </div>
             <div>
               <div className="text-2xl md:text-3xl font-bold text-foreground">
-                14
+                21
               </div>
               <div className="mt-1 text-[13px] text-muted-foreground">
-                IPC Modules
+                Built-in panels
               </div>
             </div>
             <div>
               <div className="text-2xl md:text-3xl font-bold text-foreground">
-                10
+                109
               </div>
               <div className="mt-1 text-[13px] text-muted-foreground">
-                Services
+                Tests passing
               </div>
             </div>
           </div>

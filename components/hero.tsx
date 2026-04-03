@@ -33,36 +33,45 @@ function TerminalMockup() {
         <div className="p-5 font-mono text-[13px] leading-relaxed space-y-1">
           <div className="flex items-center gap-2">
             <span className="text-accent">~</span>
-            <span className="text-muted">claude --model claude-opus-4-20250514</span>
+            <span className="text-muted">grind-mode --agents 4</span>
           </div>
           <div className="text-muted-foreground mt-3 space-y-0.5">
             <p>
-              <span className="text-accent">agent</span> analyzing project
-              structure...
+              <span className="text-accent">agent-1</span> scaffolding anchor
+              program...
             </p>
             <p>
-              <span className="text-accent">agent</span> found 23 files across
-              4 modules
+              <span className="text-accent">agent-2</span> wiring Jupiter swap
+              integration
             </p>
             <p>
-              <span className="text-accent">agent</span> implementing auth
-              middleware with rate limiting
+              <span className="text-accent">agent-3</span> writing token launch
+              tests
             </p>
             <p>
-              <span className="text-accent">agent</span>{" "}
+              <span className="text-accent">agent-4</span> building the frontend
+            </p>
+            <p className="mt-2">
+              <span className="text-accent">agent-1</span>{" "}
               <span className="text-foreground">
-                created src/middleware/auth.ts
+                created programs/vault/lib.rs
               </span>
             </p>
             <p>
-              <span className="text-accent">agent</span>{" "}
+              <span className="text-accent">agent-2</span>{" "}
               <span className="text-foreground">
-                created src/middleware/rateLimit.ts
+                created src/hooks/useSwap.ts
               </span>
             </p>
             <p>
-              <span className="text-accent">agent</span> running tests...{" "}
-              <span className="text-accent">12 passed</span>
+              <span className="text-accent">agent-3</span>{" "}
+              <span className="text-accent">12 tests passed</span>
+            </p>
+            <p>
+              <span className="text-accent">agent-4</span>{" "}
+              <span className="text-foreground">
+                deployed to vercel — live
+              </span>
             </p>
           </div>
           <div className="flex items-center gap-2 mt-3">
@@ -102,7 +111,7 @@ export function Hero() {
         {/* Version badge */}
         <div className="animate-fade-up inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card text-[13px] text-muted mb-8">
           <span className="size-1.5 rounded-full bg-accent" />
-          v1.1.0 — Now available
+          v1.1.0 — Grind Mode is live
         </div>
 
         {/* Headline */}
@@ -110,9 +119,9 @@ export function Hero() {
           className="animate-fade-up text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.9]"
           style={{ animationDelay: "100ms" }}
         >
-          <span className="gradient-text">Code. Deploy.</span>
+          <span className="gradient-text">Four agents.</span>
           <br />
-          <span className="gradient-text">Ship.</span>
+          <span className="gradient-text">One IDE.</span>
         </h1>
 
         {/* Subtitle */}
@@ -120,9 +129,10 @@ export function Hero() {
           className="animate-fade-up mt-6 text-lg md:text-xl text-muted max-w-xl mx-auto leading-relaxed"
           style={{ animationDelay: "200ms" }}
         >
-          The AI-native IDE built for solo developers who ship fast.
+          The AI-native IDE for solo Solana builders. 4 parallel agents,
+          built-in wallet, token launches — all from one desktop app.
           <br className="hidden sm:block" />
-          Not a fork. Purpose-built from scratch.
+          Not a fork. Built from scratch.
         </p>
 
         {/* CTAs */}

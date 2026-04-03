@@ -2,71 +2,54 @@
 
 import {
   Code2,
-  Terminal,
   Bot,
-  Globe,
   LayoutGrid,
   Wallet,
   Rocket,
   GitBranch,
-  RefreshCw,
 } from "lucide-react";
 
 const features = [
   {
-    icon: Code2,
-    title: "Monaco Editor + Terminal",
-    description:
-      "Full offline Monaco editor with multi-tab support, breadcrumbs, and syntax highlighting. Real PTY terminals powered by node-pty with split panes and tab completion.",
-    accent: true,
-  },
-  {
-    icon: Bot,
-    title: "Claude AI Integration",
-    description:
-      "Spawn Claude Code agents with custom system prompts, model selection, and per-project MCP configs. Multi-agent sessions run as real CLI processes.",
-    accent: true,
-  },
-  {
-    icon: Globe,
-    title: "Browser Mode",
-    description:
-      "Embedded Chromium browser with security sandbox. Preview, test, and interact with your applications without leaving the IDE.",
-    accent: false,
-  },
-  {
     icon: LayoutGrid,
     title: "Grind Mode",
     description:
-      "4-panel agent grid for parallel coding. Run multiple AI agents simultaneously across different tasks in your project.",
+      "4-panel agent grid for parallel coding. Spin up four Claude agents working different parts of your project at the same time. The closest thing to cloning yourself.",
     accent: true,
   },
   {
     icon: Wallet,
-    title: "Solana Wallet",
+    title: "Solana Native",
     description:
-      "Built-in wallet with live portfolio tracking via Helius. SOL balance, SPL token holdings, and PumpFun token launches directly from the IDE.",
+      "Built-in wallet with live portfolio via Helius, SPL token tracking, PumpFun token launches, and Jupiter swaps. No browser extensions, no context switching.",
+    accent: true,
+  },
+  {
+    icon: Bot,
+    title: "Agent System",
+    description:
+      "Spawn Claude Code agents with custom system prompts, model selection, and per-project MCP configs. Every agent runs as a real CLI process with full tool access.",
+    accent: true,
+  },
+  {
+    icon: Code2,
+    title: "Monaco + Terminal",
+    description:
+      "Full offline Monaco editor with multi-tab, breadcrumbs, and syntax highlighting. Real PTY terminals via node-pty with splits and tab completion.",
     accent: false,
   },
   {
     icon: Rocket,
-    title: "Deploy Panel",
+    title: "One-Click Deploy",
     description:
-      "One-click deploys to Vercel and Railway. Connect your accounts and ship straight from the editor.",
+      "Ship to Vercel or Railway straight from the editor. Connect your accounts once and deploy without touching a browser.",
     accent: false,
   },
   {
     icon: GitBranch,
-    title: "Git Panel",
+    title: "Git Built In",
     description:
-      "Branch switching, file staging, commit, push, stash, and tag management. Full visual git workflow without the terminal.",
-    accent: false,
-  },
-  {
-    icon: RefreshCw,
-    title: "Crash Recovery + Auto-Update",
-    description:
-      "Automatic crash recovery preserves your session state. Seamless auto-updates keep you on the latest version.",
+      "Branch, stage, commit, push, stash, tag — all visual. Full git workflow without opening a separate terminal.",
     accent: false,
   },
 ];
@@ -78,14 +61,14 @@ export function Features() {
         {/* Section header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p className="text-accent text-[13px] font-medium tracking-wider uppercase mb-4">
-            Features
+            What&apos;s inside
           </p>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight gradient-text text-balance">
-            Everything you need, nothing you don&apos;t
+            Built for builders who ship alone
           </h2>
           <p className="mt-5 text-muted leading-relaxed">
-            Purpose-built from scratch for AI-native development. Every feature
-            designed to work seamlessly with AI agents.
+            Not a plugin marketplace. Not a wrapper around VS Code. A standalone
+            desktop app where AI agents and Solana tooling are first-class.
           </p>
         </div>
 
