@@ -3,9 +3,9 @@
 import { Monitor, Apple, Github } from "lucide-react";
 
 const WINDOWS_URL =
-  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.1.0-setup.exe";
+  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.2.0-setup.exe";
 const MAC_URL =
-  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.1.0-setup.exe";
+  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.2.0-setup.exe";
 
 export function CTA() {
   return (
@@ -44,7 +44,7 @@ export function CTA() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[13px] text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <span className="size-1.5 rounded-full bg-accent" />
-            v1.1.0
+            v1.2.0
           </span>
           <span>MIT License</span>
           <a

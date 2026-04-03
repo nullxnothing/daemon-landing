@@ -18,6 +18,13 @@ export function Footer() {
               </a>
             </span>
             <span className="text-border">|</span>
+            <a
+              href="/docs"
+              className="text-muted hover:text-foreground transition-colors"
+            >
+              Docs
+            </a>
+            <span className="text-border">|</span>
             <span>MIT License</span>
           </div>
           <a
