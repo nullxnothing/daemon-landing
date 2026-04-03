@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Monitor, Apple } from "lucide-react";
 
 const WINDOWS_URL =
@@ -108,6 +109,18 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 text-center max-w-4xl w-full">
+        {/* Logo */}
+        <div className="animate-fade-up mb-6">
+          <Image
+            src="/images/daemon-icon.png"
+            alt="DAEMON"
+            width={64}
+            height={64}
+            className="mx-auto rounded-2xl"
+            priority
+          />
+        </div>
+
         {/* Version badge */}
         <div className="animate-fade-up inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card text-[13px] text-muted mb-8">
           <span className="size-1.5 rounded-full bg-accent" />

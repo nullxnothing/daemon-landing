@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Github, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -34,9 +35,13 @@ export function Header() {
         <nav className="flex items-center justify-between h-14">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2.5 group">
-            <div className="size-7 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
-              <span className="text-accent font-mono font-bold text-xs">D</span>
-            </div>
+            <Image
+              src="/images/daemon-icon.png"
+              alt="DAEMON"
+              width={28}
+              height={28}
+              className="rounded-lg"
+            />
             <span className="text-sm font-semibold tracking-wide">DAEMON</span>
           </a>
 

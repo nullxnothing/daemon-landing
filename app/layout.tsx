@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "DAEMON - AI-Native IDE",
   description:
     "The IDE built for AI-native development. Monaco editor, Claude AI integration, built-in terminal, Solana wallet, and one-click deploys. Open source.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/images/daemon-icon.png",
+  },
   keywords: [
     "IDE",
     "AI",
