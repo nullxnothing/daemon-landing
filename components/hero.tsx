@@ -3,9 +3,9 @@
 import { Monitor, Apple } from "lucide-react";
 
 const WINDOWS_URL =
-  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe";
+  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.1.0-setup.exe";
 const MAC_URL =
-  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe";
+  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.1.0-setup.exe";
 
 function TerminalMockup() {
   return (
@@ -102,7 +102,7 @@ export function Hero() {
         {/* Version badge */}
         <div className="animate-fade-up inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card text-[13px] text-muted mb-8">
           <span className="size-1.5 rounded-full bg-accent" />
-          v1.0.0 — Now available
+          v1.1.0 — Now available
         </div>
 
         {/* Headline */}
