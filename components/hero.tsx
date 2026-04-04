@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { track } from "@vercel/analytics";
 import { Monitor, Apple } from "lucide-react";
 
 const WINDOWS_URL =
@@ -156,6 +157,7 @@ export function Hero() {
           <a
             href={WINDOWS_URL}
             download
+            onClick={() => track("Download", { os: "windows", location: "hero" })}
             className="group flex items-center gap-2.5 bg-foreground text-background px-6 py-3 rounded-xl font-medium text-[15px] transition-all duration-200 hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_30px_rgba(62,207,142,0.2)]"
           >
             <Monitor className="size-[18px]" />
@@ -164,6 +166,7 @@ export function Hero() {
           <a
             href={MAC_URL}
             download
+            onClick={() => track("Download", { os: "mac", location: "hero" })}
             className="group flex items-center gap-2.5 border border-border bg-card px-6 py-3 rounded-xl font-medium text-[15px] text-muted transition-all duration-200 hover:border-muted hover:text-foreground hover:bg-card-hover"
           >
             <Apple className="size-[18px]" />
