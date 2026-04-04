@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { track } from "@vercel/analytics";
 import { Monitor, Apple } from "lucide-react";
@@ -9,16 +10,121 @@ const WINDOWS_URL =
 const MAC_URL =
   "https://github.com/nullxnothing/daemon/releases/latest";
 
+// Matrix rain canvas component
+function MatrixRain() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Set canvas size
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Matrix characters - mix of katakana, numbers, and symbols
+    const chars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF<>{}[]|/\\";
+    const charArray = chars.split("");
+
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+
+    // Initialize drops at random positions
+    const drops: number[] = [];
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * -100;
+    }
+
+    // Track character brightness for trailing effect
+    const trails: { char: string; opacity: number; y: number }[][] = [];
+    for (let i = 0; i < columns; i++) {
+      trails[i] = [];
+    }
+
+    let animationId: number;
+
+    const draw = () => {
+      // Semi-transparent black to create fade effect
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        // Random character
+        const char = charArray[Math.floor(Math.random() * charArray.length)];
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        // Leading character (brightest - white/green)
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText(char, x, y);
+
+        // Add glow effect for leading character
+        ctx.shadowColor = "#3ecf8e";
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = "#3ecf8e";
+        ctx.fillText(char, x, y);
+        ctx.shadowBlur = 0;
+
+        // Draw trail with fading opacity
+        for (let j = 1; j < 20; j++) {
+          const trailY = y - j * fontSize;
+          if (trailY < 0) continue;
+          
+          const opacity = Math.max(0, 1 - j * 0.08);
+          const green = Math.floor(207 - j * 8);
+          ctx.fillStyle = `rgba(62, ${green}, 142, ${opacity * 0.6})`;
+          const trailChar = charArray[Math.floor(Math.random() * charArray.length)];
+          ctx.fillText(trailChar, x, trailY);
+        }
+
+        // Reset drop when it goes off screen
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        // Move drop down
+        drops[i] += 0.5;
+      }
+
+      animationId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 opacity-40"
+      style={{ mixBlendMode: "screen" }}
+    />
+  );
+}
+
 function TerminalMockup() {
   return (
     <div className="relative w-full max-w-3xl mx-auto">
       {/* Glow behind the terminal */}
-      <div className="absolute -inset-4 bg-accent/5 rounded-3xl blur-3xl animate-glow-pulse" />
+      <div className="absolute -inset-4 bg-accent/10 rounded-3xl blur-3xl animate-glow-pulse" />
 
       {/* Terminal window */}
-      <div className="relative rounded-xl border border-border bg-[#0c0c0c] overflow-hidden shadow-2xl shadow-black/50">
+      <div className="relative rounded-2xl border border-accent/20 bg-[#0a0a0a]/90 overflow-hidden shadow-2xl shadow-accent/5 backdrop-blur-sm">
         {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-[#111111]">
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-accent/10 bg-[#0a0a0a]">
           <div className="flex items-center gap-1.5">
             <div className="size-2.5 rounded-full bg-[#ff5f57]" />
             <div className="size-2.5 rounded-full bg-[#febc2e]" />
@@ -92,21 +198,13 @@ function TerminalMockup() {
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-14 overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0">
-        {/* Radial gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(62,207,142,0.08),transparent)]" />
-        {/* Grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-          }}
-        />
-      </div>
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-14 overflow-hidden bg-black">
+      {/* Matrix rain background */}
+      <MatrixRain />
+
+      {/* Overlay gradients for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_20%,rgba(62,207,142,0.08),transparent)] pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10 text-center max-w-4xl w-full">
@@ -115,16 +213,16 @@ export function Hero() {
           <Image
             src="/images/daemon-icon.png"
             alt="DAEMON"
-            width={64}
-            height={64}
-            className="mx-auto rounded-2xl"
+            width={72}
+            height={72}
+            className="mx-auto rounded-2xl shadow-lg shadow-accent/20"
             priority
           />
         </div>
 
         {/* Version badge */}
-        <div className="animate-fade-up inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card text-[13px] text-muted mb-8">
-          <span className="size-1.5 rounded-full bg-accent" />
+        <div className="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-[13px] text-accent mb-8 backdrop-blur-sm">
+          <span className="size-1.5 rounded-full bg-accent animate-pulse" />
           v1.3.0 — Grind Mode is live
         </div>
 
@@ -133,14 +231,14 @@ export function Hero() {
           className="animate-fade-up text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.9]"
           style={{ animationDelay: "100ms" }}
         >
-          <span className="gradient-text">Four agents.</span>
+          <span className="text-white">Four agents.</span>
           <br />
-          <span className="gradient-text">One IDE.</span>
+          <span className="text-white">One IDE.</span>
         </h1>
 
         {/* Subtitle */}
         <p
-          className="animate-fade-up mt-6 text-lg md:text-xl text-muted max-w-xl mx-auto leading-relaxed"
+          className="animate-fade-up mt-6 text-lg md:text-xl text-neutral-400 max-w-xl mx-auto leading-relaxed"
           style={{ animationDelay: "200ms" }}
         >
           The AI-native IDE for solo Solana builders. 4 parallel agents,
@@ -158,7 +256,7 @@ export function Hero() {
             href={WINDOWS_URL}
             download
             onClick={() => track("Download", { os: "windows", location: "hero" })}
-            className="group flex items-center gap-2.5 bg-foreground text-background px-6 py-3 rounded-xl font-medium text-[15px] transition-all duration-200 hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_30px_rgba(62,207,142,0.2)]"
+            className="group flex items-center gap-2.5 bg-accent text-black px-7 py-3.5 rounded-xl font-semibold text-[15px] transition-all duration-200 hover:bg-accent/90 hover:shadow-[0_0_40px_rgba(62,207,142,0.3)] hover:scale-[1.02]"
           >
             <Monitor className="size-[18px]" />
             Download for Windows
@@ -168,7 +266,7 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track("Download", { os: "mac", location: "hero" })}
-            className="group flex items-center gap-2.5 border border-border bg-card px-6 py-3 rounded-xl font-medium text-[15px] text-muted transition-all duration-200 hover:border-muted hover:text-foreground hover:bg-card-hover"
+            className="group flex items-center gap-2.5 border border-neutral-800 bg-neutral-900/50 px-7 py-3.5 rounded-xl font-medium text-[15px] text-neutral-300 transition-all duration-200 hover:border-neutral-700 hover:text-white hover:bg-neutral-900 backdrop-blur-sm"
           >
             <Apple className="size-[18px]" />
             Install for Mac
@@ -185,7 +283,7 @@ export function Hero() {
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </section>
   );
 }

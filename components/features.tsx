@@ -56,51 +56,47 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="py-24 md:py-32 px-6">
+    <section id="features" className="py-24 md:py-32 px-6 bg-black">
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-accent text-[13px] font-medium tracking-wider uppercase mb-4">
+          <p className="text-accent text-[13px] font-semibold tracking-wider uppercase mb-4">
             What&apos;s inside
           </p>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight gradient-text text-balance">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white text-balance">
             Built for builders who ship alone
           </h2>
-          <p className="mt-5 text-muted leading-relaxed">
+          <p className="mt-5 text-neutral-400 leading-relaxed">
             Not a plugin marketplace. Not a wrapper around VS Code. A standalone
             desktop app where AI agents and Solana tooling are first-class.
           </p>
         </div>
 
-        {/* Feature grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+        {/* Feature grid - 3x2 layout like streamlock */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((feature) => {
             const Icon = feature.icon;
             return (
               <div
                 key={feature.title}
-                className="group relative p-6 rounded-xl border border-border bg-card transition-all duration-300 hover:border-[#222] hover:bg-card-hover"
+                className="group relative p-6 rounded-2xl border border-neutral-800 bg-neutral-900/50 transition-all duration-300 hover:border-accent/30 hover:bg-neutral-900"
               >
                 {/* Icon */}
                 <div
-                  className={`inline-flex items-center justify-center size-10 rounded-lg mb-4 border transition-colors ${
+                  className={`inline-flex items-center justify-center size-11 rounded-xl mb-4 transition-colors ${
                     feature.accent
-                      ? "bg-accent/8 border-accent/15 group-hover:border-accent/25"
-                      : "bg-card border-border group-hover:border-[#222]"
+                      ? "bg-accent/10 text-accent"
+                      : "bg-neutral-800 text-neutral-400"
                   }`}
                 >
-                  <Icon
-                    className={`size-5 ${
-                      feature.accent ? "text-accent" : "text-muted"
-                    }`}
-                  />
+                  <Icon className="size-5" />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-[15px] font-semibold text-foreground mb-2">
+                <h3 className="text-base font-semibold text-white mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-[13px] text-muted leading-relaxed">
+                <p className="text-sm text-neutral-400 leading-relaxed">
                   {feature.description}
                 </p>
               </div>

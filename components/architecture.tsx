@@ -37,17 +37,17 @@ const principles = [
 
 export function Architecture() {
   return (
-    <section id="architecture" className="py-24 md:py-32 px-6">
+    <section id="architecture" className="py-24 md:py-32 px-6 bg-black">
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-accent text-[13px] font-medium tracking-wider uppercase mb-4">
+          <p className="text-accent text-[13px] font-semibold tracking-wider uppercase mb-4">
             Architecture
           </p>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight gradient-text text-balance">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white text-balance">
             Not a wrapper. Not a fork.
           </h2>
-          <p className="mt-5 text-muted leading-relaxed">
+          <p className="mt-5 text-neutral-400 leading-relaxed">
             Standalone Electron app with process isolation, typed IPC, and
             native modules. Every layer built intentionally.
           </p>
@@ -59,16 +59,16 @@ export function Architecture() {
             {principles.map((item) => (
               <div
                 key={item.number}
-                className="group flex items-start gap-4 p-5 rounded-xl border border-border bg-card transition-all duration-200 hover:border-[#222] hover:bg-card-hover"
+                className="group flex items-start gap-4 p-5 rounded-2xl border border-neutral-800 bg-neutral-900/50 transition-all duration-200 hover:border-accent/30 hover:bg-neutral-900"
               >
-                <span className="flex-shrink-0 size-8 flex items-center justify-center rounded-lg bg-accent/8 text-accent text-[13px] font-mono font-medium">
+                <span className="flex-shrink-0 size-9 flex items-center justify-center rounded-xl bg-accent/10 text-accent text-[13px] font-mono font-semibold">
                   {item.number}
                 </span>
                 <div>
-                  <h4 className="text-[15px] font-semibold text-foreground mb-1">
+                  <h4 className="text-[15px] font-semibold text-white mb-1">
                     {item.title}
                   </h4>
-                  <p className="text-[13px] text-muted leading-relaxed">
+                  <p className="text-[13px] text-neutral-400 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -78,17 +78,17 @@ export function Architecture() {
 
           {/* Tech stack table + file tree */}
           <div className="space-y-4">
-            <div className="rounded-xl border border-border overflow-hidden">
+            <div className="rounded-2xl border border-neutral-800 overflow-hidden">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-border bg-card">
-                    <th className="text-left text-[12px] font-medium text-muted-foreground px-5 py-3 uppercase tracking-wider">
+                  <tr className="border-b border-neutral-800 bg-neutral-900/50">
+                    <th className="text-left text-[12px] font-semibold text-neutral-500 px-5 py-3 uppercase tracking-wider">
                       Layer
                     </th>
-                    <th className="text-left text-[12px] font-medium text-muted-foreground px-5 py-3 uppercase tracking-wider">
+                    <th className="text-left text-[12px] font-semibold text-neutral-500 px-5 py-3 uppercase tracking-wider">
                       Technology
                     </th>
-                    <th className="text-left text-[12px] font-medium text-muted-foreground px-5 py-3 uppercase tracking-wider hidden sm:table-cell">
+                    <th className="text-left text-[12px] font-semibold text-neutral-500 px-5 py-3 uppercase tracking-wider hidden sm:table-cell">
                       Note
                     </th>
                   </tr>
@@ -97,17 +97,17 @@ export function Architecture() {
                   {techStack.map((item, index) => (
                     <tr
                       key={item.layer}
-                      className={`border-b border-border last:border-0 ${
-                        index % 2 === 0 ? "bg-background" : "bg-card/50"
+                      className={`border-b border-neutral-800 last:border-0 ${
+                        index % 2 === 0 ? "bg-black" : "bg-neutral-900/30"
                       }`}
                     >
                       <td className="px-5 py-3 font-mono text-[13px] text-accent">
                         {item.layer}
                       </td>
-                      <td className="px-5 py-3 text-[13px] text-foreground">
+                      <td className="px-5 py-3 text-[13px] text-white">
                         {item.tech}
                       </td>
-                      <td className="px-5 py-3 text-[12px] text-muted-foreground hidden sm:table-cell">
+                      <td className="px-5 py-3 text-[12px] text-neutral-500 hidden sm:table-cell">
                         {item.detail}
                       </td>
                     </tr>
@@ -117,11 +117,11 @@ export function Architecture() {
             </div>
 
             {/* File structure */}
-            <div className="rounded-xl border border-border bg-card p-5">
-              <p className="text-[12px] text-muted-foreground uppercase tracking-wider font-medium mb-3">
+            <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-5">
+              <p className="text-[12px] text-neutral-500 uppercase tracking-wider font-semibold mb-3">
                 Project structure
               </p>
-              <pre className="font-mono text-[12px] text-muted leading-[1.8] overflow-x-auto">
+              <pre className="font-mono text-[12px] text-neutral-400 leading-[1.8] overflow-x-auto">
 {`electron/
   main/       App entry, windows, protocols
   ipc/        One handler per domain (20 modules)

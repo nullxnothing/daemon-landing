@@ -60,14 +60,14 @@
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  --color-background: #0a0a0a;
-  --color-foreground: #ededed;
-  --color-muted: #a0a0a0;
-  --color-muted-foreground: #666666;
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-muted: #a1a1a1;
+  --color-muted-foreground: #525252;
   --color-border: #1a1a1a;
-  --color-border-subtle: #141414;
-  --color-card: #0e0e0e;
-  --color-card-hover: #131313;
+  --color-border-subtle: #0f0f0f;
+  --color-card: #0a0a0a;
+  --color-card-hover: #111111;
   --color-accent: #3ecf8e;
   --color-accent-muted: #2a9d68;
   --color-accent-foreground: #000000;
@@ -168,7 +168,7 @@
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #d4d4d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -179,6 +179,15 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Accent glow effect */
+.glow-accent {
+  box-shadow: 0 0 30px rgba(62, 207, 142, 0.15);
+}
+
+.glow-accent-hover:hover {
+  box-shadow: 0 0 40px rgba(62, 207, 142, 0.25);
 }
 
 /* Noise texture overlay */

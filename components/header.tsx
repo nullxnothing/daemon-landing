@@ -27,7 +27,7 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-background/70 backdrop-blur-2xl border-b border-border"
+          ? "bg-black/80 backdrop-blur-xl border-b border-accent/10"
           : "bg-transparent"
       )}
     >
@@ -71,7 +71,7 @@ export function Header() {
             </a>
             <a
               href="https://github.com/nullxnothing/daemon/releases/latest"
-              className="flex items-center gap-2 bg-foreground text-background px-4 py-1.5 rounded-lg text-[13px] font-medium transition-all hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 bg-accent text-black px-4 py-1.5 rounded-lg text-[13px] font-semibold transition-all hover:bg-accent/90 hover:shadow-[0_0_20px_rgba(62,207,142,0.25)]"
             >
               Download
             </a>
