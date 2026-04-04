@@ -6,7 +6,7 @@ import { Monitor, Apple, Github } from "lucide-react";
 const WINDOWS_URL =
   "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.3.0-setup.exe";
 const MAC_URL =
-  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.3.0.dmg";
+  "https://github.com/nullxnothing/daemon#mac-install";
 
 export function CTA() {
   return (
@@ -34,12 +34,13 @@ export function CTA() {
           </a>
           <a
             href={MAC_URL}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => track("Download", { os: "mac", location: "cta" })}
             className="group flex items-center gap-2.5 border border-border bg-card px-6 py-3.5 rounded-xl font-medium text-[15px] text-muted transition-all duration-200 hover:border-muted hover:text-foreground hover:bg-card-hover"
           >
             <Apple className="size-[18px]" />
-            Download for Mac
+            Install for Mac
           </a>
         </div>
 
