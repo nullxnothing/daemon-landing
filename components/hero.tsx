@@ -7,7 +7,7 @@ import { Monitor, Apple } from "lucide-react";
 const WINDOWS_URL =
   "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe";
 const MAC_URL =
-  "https://github.com/nullxnothing/daemon#mac-install";
+  "https://github.com/nullxnothing/daemon/releases/latest";
 
 function TerminalMockup() {
   return (
