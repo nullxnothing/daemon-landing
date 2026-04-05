@@ -17,9 +17,9 @@ function HeroCard() {
         {/* Base dark gradient */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_60%,rgba(62,207,142,0.12),transparent_70%)]" />
 
-        {/* Swirl layers - slow drift animation */}
+        {/* Swirl layers - twinkle animation */}
         <div
-          className="absolute -inset-[20%] opacity-60"
+          className="absolute inset-0"
           style={{
             backgroundImage: `
               radial-gradient(ellipse 60% 50% at 20% 80%, rgba(62,207,142,0.25), transparent 60%),
@@ -27,29 +27,28 @@ function HeroCard() {
               radial-gradient(ellipse 40% 35% at 60% 70%, rgba(42,157,104,0.18), transparent 50%),
               radial-gradient(ellipse 45% 40% at 30% 30%, rgba(62,207,142,0.15), transparent 55%)
             `,
-            animation: "hero-drift-1 20s ease-in-out infinite",
+            animation: "hero-twinkle-1 8s ease-in-out infinite",
           }}
         />
 
-        {/* Second gradient layer drifting opposite */}
+        {/* Second gradient layer twinkle offset */}
         <div
-          className="absolute -inset-[15%] opacity-40"
+          className="absolute inset-0"
           style={{
             backgroundImage: `
               radial-gradient(ellipse 55% 45% at 70% 60%, rgba(62,207,142,0.2), transparent 55%),
               radial-gradient(ellipse 40% 50% at 25% 40%, rgba(42,157,104,0.15), transparent 50%)
             `,
-            animation: "hero-drift-2 25s ease-in-out infinite",
+            animation: "hero-twinkle-2 11s ease-in-out infinite",
           }}
         />
 
-        {/* Flowing organic shapes with rotation */}
+        {/* Flowing organic shapes - twinkle */}
         <svg
-          className="absolute inset-0 w-full h-full opacity-40"
+          className="absolute inset-0 w-full h-full"
           viewBox="0 0 1200 800"
           preserveAspectRatio="xMidYMid slice"
           xmlns="http://www.w3.org/2000/svg"
-          style={{ animation: "hero-rotate 60s linear infinite" }}
         >
           <defs>
             <filter id="turbulence">
@@ -73,39 +72,39 @@ function HeroCard() {
             <path
               d="M-100,400 Q200,100 500,350 T900,250 T1300,400 T1100,600 T600,550 T100,650 Z"
               fill="rgba(62,207,142,0.15)"
-              style={{ animation: "hero-morph-1 15s ease-in-out infinite" }}
+              style={{ animation: "hero-twinkle-3 6s ease-in-out infinite" }}
             />
             <path
               d="M-50,300 Q300,500 600,200 T1000,450 T800,700 T300,600 Z"
               fill="rgba(42,157,104,0.12)"
-              style={{ animation: "hero-morph-2 18s ease-in-out infinite" }}
+              style={{ animation: "hero-twinkle-3 9s ease-in-out infinite 2s" }}
             />
             <path
               d="M100,600 Q400,300 700,500 T1100,300 T1200,600 T700,700 T200,500 Z"
               fill="rgba(62,207,142,0.1)"
-              style={{ animation: "hero-morph-3 22s ease-in-out infinite" }}
+              style={{ animation: "hero-twinkle-4 7s ease-in-out infinite 1s" }}
             />
           </g>
         </svg>
 
-        {/* Halftone dot overlay - subtle drift */}
+        {/* Halftone dot overlay - twinkle */}
         <div
-          className="absolute -inset-[10%] opacity-[0.35]"
+          className="absolute inset-0"
           style={{
             backgroundImage: `radial-gradient(circle, rgba(62,207,142,0.4) 1px, transparent 1px)`,
             backgroundSize: "8px 8px",
-            animation: "hero-dots 30s linear infinite",
+            animation: "hero-dots-twinkle 6s ease-in-out infinite",
           }}
         />
 
-        {/* Second halftone layer, offset for depth */}
+        {/* Second halftone layer */}
         <div
-          className="absolute -inset-[10%] opacity-[0.15]"
+          className="absolute inset-0"
           style={{
             backgroundImage: `radial-gradient(circle, rgba(62,207,142,0.5) 0.5px, transparent 0.5px)`,
             backgroundSize: "4px 4px",
             backgroundPosition: "2px 2px",
-            animation: "hero-dots-2 40s linear infinite reverse",
+            animation: "hero-dots-twinkle-2 9s ease-in-out infinite 1.5s",
           }}
         />
 

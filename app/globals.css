@@ -144,48 +144,40 @@
   50% { opacity: 0; }
 }
 
-/* Hero background movement */
-@keyframes hero-drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(3%, -2%) scale(1.02); }
-  50% { transform: translate(-2%, 3%) scale(0.98); }
-  75% { transform: translate(2%, 1%) scale(1.01); }
+/* Hero background twinkle */
+@keyframes hero-twinkle-1 {
+  0%, 100% { opacity: 0.6; }
+  40% { opacity: 0.35; }
+  80% { opacity: 0.7; }
 }
 
-@keyframes hero-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-3%, 2%) scale(1.03); }
-  66% { transform: translate(2%, -3%) scale(0.97); }
+@keyframes hero-twinkle-2 {
+  0%, 100% { opacity: 0.4; }
+  30% { opacity: 0.55; }
+  70% { opacity: 0.25; }
 }
 
-@keyframes hero-rotate {
-  from { transform: rotate(0deg) scale(1.15); }
-  to { transform: rotate(360deg) scale(1.15); }
+@keyframes hero-twinkle-3 {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.15; }
 }
 
-@keyframes hero-morph-1 {
-  0%, 100% { transform: translateX(0) translateY(0); opacity: 1; }
-  50% { transform: translateX(40px) translateY(-30px); opacity: 0.7; }
+@keyframes hero-twinkle-4 {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.06; }
 }
 
-@keyframes hero-morph-2 {
-  0%, 100% { transform: translateX(0) translateY(0); opacity: 1; }
-  50% { transform: translateX(-35px) translateY(25px); opacity: 0.8; }
+@keyframes hero-dots-twinkle {
+  0%, 100% { opacity: 0.35; }
+  25% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+  75% { opacity: 0.25; }
 }
 
-@keyframes hero-morph-3 {
-  0%, 100% { transform: translateX(0) translateY(0); opacity: 1; }
-  50% { transform: translateX(25px) translateY(35px); opacity: 0.6; }
-}
-
-@keyframes hero-dots {
-  from { transform: translate(0, 0); }
-  to { transform: translate(8px, 8px); }
-}
-
-@keyframes hero-dots-2 {
-  from { transform: translate(0, 0); }
-  to { transform: translate(-4px, 4px); }
+@keyframes hero-dots-twinkle-2 {
+  0%, 100% { opacity: 0.15; }
+  33% { opacity: 0.25; }
+  66% { opacity: 0.08; }
 }
 
 .animate-fade-up {
