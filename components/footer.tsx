@@ -1,4 +1,4 @@
-import { Github } from "lucide-react";
+import { Github, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
@@ -27,15 +27,27 @@ export function Footer() {
             <span className="size-1 rounded-full bg-white/10" />
             <span>MIT License</span>
           </div>
-          <a
-            href="https://github.com/nullxnothing/daemon"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Github className="size-4" />
-            GitHub
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://x.com/DaemonTerminal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Twitter className="size-4" />
+              @DaemonTerminal
+            </a>
+            <span className="size-1 rounded-full bg-white/10" />
+            <a
+              href="https://github.com/nullxnothing/daemon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Github className="size-4" />
+              GitHub
+            </a>
+          </div>
         </div>
       </div>
     </footer>

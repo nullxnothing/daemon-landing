@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Github, Menu, X } from "lucide-react";
+import { Github, Menu, X, Twitter } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -61,6 +61,15 @@ export function Header() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             <a
+              href="https://x.com/DaemonTerminal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              aria-label="Follow on X"
+            >
+              <Twitter className="size-[18px]" />
+            </a>
+            <a
               href="https://github.com/nullxnothing/daemon"
               target="_blank"
               rel="noopener noreferrer"
@@ -106,6 +115,14 @@ export function Header() {
                 </a>
               ))}
               <div className="flex items-center gap-3 pt-3 mt-2 border-t border-border">
+                <a
+                  href="https://x.com/DaemonTerminal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground transition-colors p-2"
+                >
+                  <Twitter className="size-5" />
+                </a>
                 <a
                   href="https://github.com/nullxnothing/daemon"
                   target="_blank"
