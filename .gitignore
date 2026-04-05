@@ -42,6 +42,7 @@ credentials.json
 *.db-shm
 
 # Build artifacts
+.next/
 /test-results/
 /playwright-report/
 /playwright/.cache/
