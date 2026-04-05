@@ -1,5 +1,6 @@
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
+import { ProductTour } from "@/components/product-tour";
 import { Features } from "@/components/features";
 import { Architecture } from "@/components/architecture";
 import { CTA } from "@/components/cta";
@@ -20,6 +21,10 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <SectionDivider />
+        <ScrollReveal>
+          <ProductTour />
+        </ScrollReveal>
         <SectionDivider />
         <ScrollReveal>
           <Features />
