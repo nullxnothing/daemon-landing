@@ -1,98 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const SLIDE_COUNT = 10;
+const AUTO_ADVANCE_MS = 5000;
 
 export function ProductTour() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const slidesRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const dotsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  useEffect(() => {
-    if (!sectionRef.current || !slidesRef.current) return;
-
-    let cleanup: (() => void) | undefined;
-
-    (async () => {
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
-
-      const slides = gsap.utils.toArray<HTMLElement>(
-        slidesRef.current!.querySelectorAll(".tour-slide")
-      );
-
-      // First slide visible, rest hidden
-      slides.forEach((slide, i) => {
-        gsap.set(slide, { opacity: i === 0 ? 1 : 0 });
-      });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: () => `+=${window.innerHeight * (SLIDE_COUNT - 1) * 1.5}`,
-          pin: true,
-          scrub: 1,
-          anticipatePin: 0.5,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      // Build crossfade transitions
-      for (let i = 0; i < SLIDE_COUNT - 1; i++) {
-        tl.to(slides[i], { opacity: 0, duration: 0.5, ease: "none" }, i)
-          .fromTo(
-            slides[i + 1],
-            { opacity: 0 },
-            { opacity: 1, duration: 0.5, ease: "none", immediateRender: false },
-            i
-          );
-
-        if (i < SLIDE_COUNT - 2) {
-          tl.to({}, { duration: 0.5 });
-        }
-      }
-
-      // Progress bar and dots
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: () => `+=${window.innerHeight * (SLIDE_COUNT - 1) * 1.5}`,
-        scrub: true,
-        onUpdate: (self) => {
-          if (progressRef.current) {
-            progressRef.current.style.width = `${self.progress * 100}%`;
-          }
-
-          const activeIndex = Math.min(
-            Math.round(self.progress * (SLIDE_COUNT - 1)),
-            SLIDE_COUNT - 1
-          );
-
-          dotsRef.current.forEach((dot, i) => {
-            if (!dot) return;
-            dot.style.width = i === activeIndex ? "24px" : "6px";
-            dot.style.backgroundColor =
-              i === activeIndex ? "var(--color-accent, #3ecf8e)" : "rgba(255,255,255,0.2)";
-          });
-        },
-      });
-
-      cleanup = () => {
-        tl.kill();
-        ScrollTrigger.getAll().forEach((st) => st.kill());
-      };
-    })();
-
-    return () => cleanup?.();
+  const next = useCallback(() => {
+    setCurrent((c) => (c + 1) % SLIDE_COUNT);
   }, []);
 
+  const prev = useCallback(() => {
+    setCurrent((c) => (c - 1 + SLIDE_COUNT) % SLIDE_COUNT);
+  }, []);
+
+  useEffect(() => {
+    if (paused) return;
+    const timer = setInterval(next, AUTO_ADVANCE_MS);
+    return () => clearInterval(timer);
+  }, [paused, next]);
+
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 px-4 sm:px-6">
+    <section className="py-24 md:py-32 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-accent text-[13px] font-medium tracking-wider uppercase mb-3">
@@ -106,13 +40,18 @@ export function ProductTour() {
           </p>
         </div>
 
-        <div className="relative">
-          <div
-            ref={slidesRef}
-            className="relative rounded-2xl border border-border bg-card overflow-hidden shadow-2xl shadow-black/40 aspect-video"
-          >
+        <div
+          className="relative group"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div className="relative rounded-2xl border border-border bg-card overflow-hidden shadow-2xl shadow-black/40 aspect-video">
             {Array.from({ length: SLIDE_COUNT }, (_, i) => (
-              <div key={i} className="tour-slide absolute inset-0">
+              <div
+                key={i}
+                className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                style={{ opacity: i === current ? 1 : 0 }}
+              >
                 <Image
                   src={`/slides/${i + 1}.webp`}
                   alt={`DAEMON product tour slide ${i + 1}`}
@@ -120,30 +59,46 @@ export function ProductTour() {
                   className="object-contain"
                   sizes="(max-width: 768px) 100vw, 1152px"
                   priority={i === 0}
+                  loading={i === 0 ? "eager" : "lazy"}
                 />
               </div>
             ))}
           </div>
 
+          <button
+            onClick={prev}
+            className="absolute left-3 top-1/2 -translate-y-1/2 size-10 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="size-5" />
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-3 top-1/2 -translate-y-1/2 size-10 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="size-5" />
+          </button>
+
           <div className="flex items-center justify-center gap-1.5 mt-6">
             {Array.from({ length: SLIDE_COUNT }, (_, i) => (
-              <div
+              <button
                 key={i}
-                ref={(el) => { dotsRef.current[i] = el; }}
-                className="rounded-full h-1.5 transition-[width,background-color] duration-300"
-                style={{
-                  width: i === 0 ? "24px" : "6px",
-                  backgroundColor: i === 0 ? "var(--color-accent, #3ecf8e)" : "rgba(255,255,255,0.2)",
-                }}
+                onClick={() => setCurrent(i)}
+                className={`rounded-full transition-all duration-300 ${
+                  i === current
+                    ? "w-6 h-1.5 bg-accent"
+                    : "w-1.5 h-1.5 bg-white/20 hover:bg-white/40"
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
               />
             ))}
           </div>
 
           <div className="mt-3 mx-auto max-w-xs h-[2px] bg-white/[0.06] rounded-full overflow-hidden">
             <div
-              ref={progressRef}
-              className="h-full bg-accent/40 rounded-full"
-              style={{ width: "0%" }}
+              className="h-full bg-accent/40 rounded-full transition-all duration-300"
+              style={{ width: `${((current + 1) / SLIDE_COUNT) * 100}%` }}
             />
           </div>
         </div>
