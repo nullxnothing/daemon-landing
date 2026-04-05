@@ -54,88 +54,85 @@ export function Architecture() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Principles */}
-          <div className="space-y-3">
-            {principles.map((item) => (
-              <div
-                key={item.number}
-                className="group flex items-start gap-4 p-5 rounded-xl border border-border bg-card transition-all duration-200 hover:border-[#222] hover:bg-card-hover"
-              >
-                <span className="flex-shrink-0 size-8 flex items-center justify-center rounded-lg bg-accent/8 text-accent text-[13px] font-mono font-medium">
-                  {item.number}
-                </span>
-                <div>
-                  <h4 className="text-[15px] font-semibold text-foreground mb-1">
-                    {item.title}
-                  </h4>
-                  <p className="text-[13px] text-muted leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
+        {/* Principles — full-width 2x2 grid */}
+        <div className="grid sm:grid-cols-2 gap-3 mb-8">
+          {principles.map((item) => (
+            <div
+              key={item.number}
+              className="group flex items-start gap-4 p-5 rounded-xl border border-border bg-card transition-all duration-200 hover:border-[#222] hover:bg-card-hover"
+            >
+              <span className="flex-shrink-0 size-8 flex items-center justify-center rounded-lg bg-accent/8 text-accent text-[13px] font-mono font-medium">
+                {item.number}
+              </span>
+              <div>
+                <h4 className="text-[15px] font-semibold text-foreground mb-1">
+                  {item.title}
+                </h4>
+                <p className="text-[13px] text-muted leading-relaxed">
+                  {item.description}
+                </p>
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Tech stack + file tree — side by side */}
+        <div className="grid lg:grid-cols-5 gap-4">
+          <div className="lg:col-span-3 rounded-xl border border-border overflow-hidden">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-border bg-card">
+                  <th className="text-left text-[12px] font-medium text-muted-foreground px-5 py-3 uppercase tracking-wider">
+                    Layer
+                  </th>
+                  <th className="text-left text-[12px] font-medium text-muted-foreground px-5 py-3 uppercase tracking-wider">
+                    Technology
+                  </th>
+                  <th className="text-left text-[12px] font-medium text-muted-foreground px-5 py-3 uppercase tracking-wider hidden sm:table-cell">
+                    Note
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {techStack.map((item, index) => (
+                  <tr
+                    key={item.layer}
+                    className={`border-b border-border last:border-0 ${
+                      index % 2 === 0 ? "bg-background" : "bg-card/50"
+                    }`}
+                  >
+                    <td className="px-5 py-3 font-mono text-[13px] text-accent">
+                      {item.layer}
+                    </td>
+                    <td className="px-5 py-3 text-[13px] text-foreground">
+                      {item.tech}
+                    </td>
+                    <td className="px-5 py-3 text-[12px] text-muted-foreground hidden sm:table-cell">
+                      {item.detail}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
-          {/* Tech stack table + file tree */}
-          <div className="space-y-4">
-            <div className="rounded-xl border border-border overflow-hidden">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-border bg-card">
-                    <th className="text-left text-[12px] font-medium text-muted-foreground px-5 py-3 uppercase tracking-wider">
-                      Layer
-                    </th>
-                    <th className="text-left text-[12px] font-medium text-muted-foreground px-5 py-3 uppercase tracking-wider">
-                      Technology
-                    </th>
-                    <th className="text-left text-[12px] font-medium text-muted-foreground px-5 py-3 uppercase tracking-wider hidden sm:table-cell">
-                      Note
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {techStack.map((item, index) => (
-                    <tr
-                      key={item.layer}
-                      className={`border-b border-border last:border-0 ${
-                        index % 2 === 0 ? "bg-background" : "bg-card/50"
-                      }`}
-                    >
-                      <td className="px-5 py-3 font-mono text-[13px] text-accent">
-                        {item.layer}
-                      </td>
-                      <td className="px-5 py-3 text-[13px] text-foreground">
-                        {item.tech}
-                      </td>
-                      <td className="px-5 py-3 text-[12px] text-muted-foreground hidden sm:table-cell">
-                        {item.detail}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* File structure */}
-            <div className="rounded-xl border border-border bg-card p-5">
-              <p className="text-[12px] text-muted-foreground uppercase tracking-wider font-medium mb-3">
-                Project structure
-              </p>
-              <pre className="font-mono text-[12px] text-muted leading-[1.8] overflow-x-auto">
+          <div className="lg:col-span-2 rounded-xl border border-border bg-card p-5">
+            <p className="text-[12px] text-muted-foreground uppercase tracking-wider font-medium mb-3">
+              Project structure
+            </p>
+            <pre className="font-mono text-[12px] text-muted leading-[1.8] overflow-x-auto">
 {`electron/
   main/       App entry, windows, protocols
-  ipc/        One handler per domain (20 modules)
+  ipc/        One handler per domain (20)
   services/   Business logic layer
-  db/         SQLite schema, migrations, WAL
+  db/         SQLite schema, migrations
 
 src/
-  panels/     One directory per UI panel (21)
+  panels/     One dir per UI panel (21)
   store/      Zustand state management
-  plugins/    Plugin registry + lazy loading
+  plugins/    Plugin registry + lazy load
   components/ Shared UI primitives`}
-              </pre>
-            </div>
+            </pre>
           </div>
         </div>
       </div>

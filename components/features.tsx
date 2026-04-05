@@ -36,21 +36,21 @@ const features = [
     title: "Monaco + Terminal",
     description:
       "Full offline Monaco editor with multi-tab, breadcrumbs, and syntax highlighting. Real PTY terminals via node-pty with splits and tab completion.",
-    accent: false,
+    accent: true,
   },
   {
     icon: Rocket,
     title: "One-Click Deploy",
     description:
       "Ship to Vercel or Railway straight from the editor. Connect your accounts once and deploy without touching a browser.",
-    accent: false,
+    accent: true,
   },
   {
     icon: GitBranch,
     title: "Git Built In",
     description:
       "Branch, stage, commit, push, stash, tag — all visual. Full git workflow without opening a separate terminal.",
-    accent: false,
+    accent: true,
   },
 ];
 

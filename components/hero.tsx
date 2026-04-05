@@ -9,82 +9,24 @@ const WINDOWS_URL =
 const MAC_URL =
   "https://github.com/nullxnothing/daemon#mac-install";
 
-function TerminalMockup() {
+function DemoVideo() {
   return (
-    <div className="relative w-full max-w-3xl mx-auto">
-      {/* Glow behind the terminal */}
+    <div className="relative w-full max-w-4xl mx-auto">
+      {/* Glow behind the video */}
       <div className="absolute -inset-4 bg-accent/5 rounded-3xl blur-3xl animate-glow-pulse" />
 
-      {/* Terminal window */}
+      {/* Video window */}
       <div className="relative rounded-xl border border-border bg-[#0c0c0c] overflow-hidden shadow-2xl shadow-black/50">
-        {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-[#111111]">
-          <div className="flex items-center gap-1.5">
-            <div className="size-2.5 rounded-full bg-[#ff5f57]" />
-            <div className="size-2.5 rounded-full bg-[#febc2e]" />
-            <div className="size-2.5 rounded-full bg-[#28c840]" />
-          </div>
-          <div className="flex-1 text-center">
-            <span className="text-[11px] text-muted-foreground font-mono">
-              daemon ~/projects/my-app
-            </span>
-          </div>
-        </div>
-
-        {/* Terminal content */}
-        <div className="p-5 font-mono text-[13px] leading-relaxed space-y-1">
-          <div className="flex items-center gap-2">
-            <span className="text-accent">~</span>
-            <span className="text-muted">grind-mode --agents 4</span>
-          </div>
-          <div className="text-muted-foreground mt-3 space-y-0.5">
-            <p>
-              <span className="text-accent">agent-1</span> scaffolding anchor
-              program...
-            </p>
-            <p>
-              <span className="text-accent">agent-2</span> wiring Jupiter swap
-              integration
-            </p>
-            <p>
-              <span className="text-accent">agent-3</span> writing token launch
-              tests
-            </p>
-            <p>
-              <span className="text-accent">agent-4</span> building the frontend
-            </p>
-            <p className="mt-2">
-              <span className="text-accent">agent-1</span>{" "}
-              <span className="text-foreground">
-                created programs/vault/lib.rs
-              </span>
-            </p>
-            <p>
-              <span className="text-accent">agent-2</span>{" "}
-              <span className="text-foreground">
-                created src/hooks/useSwap.ts
-              </span>
-            </p>
-            <p>
-              <span className="text-accent">agent-3</span>{" "}
-              <span className="text-accent">12 tests passed</span>
-            </p>
-            <p>
-              <span className="text-accent">agent-4</span>{" "}
-              <span className="text-foreground">
-                deployed to vercel — live
-              </span>
-            </p>
-          </div>
-          <div className="flex items-center gap-2 mt-3">
-            <span className="text-accent">~</span>
-            <span className="text-muted-foreground">|</span>
-            <span
-              className="inline-block w-[7px] h-[15px] bg-accent/70"
-              style={{ animation: "cursor-blink 1.2s step-end infinite" }}
-            />
-          </div>
-        </div>
+        <video
+          className="w-full"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+        >
+          <source src="/daemon-demo.mp4" type="video/mp4" />
+        </video>
       </div>
     </div>
   );
@@ -181,7 +123,7 @@ export function Hero() {
           className="animate-fade-up mt-16 sm:mt-20"
           style={{ animationDelay: "450ms" }}
         >
-          <TerminalMockup />
+          <DemoVideo />
         </div>
       </div>
 
