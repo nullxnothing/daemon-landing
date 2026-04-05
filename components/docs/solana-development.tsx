@@ -31,7 +31,7 @@ export function SolanaDevelopmentDoc() {
           "Open the Token Launcher panel",
           <>Set token <strong className="text-foreground">name</strong>, <strong className="text-foreground">symbol</strong>, and <strong className="text-foreground">image</strong></>,
           "Add socials (Twitter, Telegram, website)",
-          <>Click <strong className="text-foreground">Launch</strong> — DAEMON handles the bonding curve interaction</>,
+          <>Click <strong className="text-foreground">Launch</strong> and DAEMON handles the bonding curve interaction</>,
         ]}
       />
       <Hint type="info">
@@ -41,8 +41,8 @@ export function SolanaDevelopmentDoc() {
       <H2 id="import-tokens">Import Tokens</H2>
       <List
         items={[
-          <><strong className="text-foreground">By mint address</strong> — Paste any SPL token&apos;s mint address</>,
-          <><strong className="text-foreground">Auto-detect</strong> — Scan your connected wallet to automatically import all holdings</>,
+          <><strong className="text-foreground">By mint address</strong> to paste any SPL token&apos;s mint address</>,
+          <><strong className="text-foreground">Auto-detect</strong> to scan your connected wallet and automatically import all holdings</>,
         ]}
       />
 

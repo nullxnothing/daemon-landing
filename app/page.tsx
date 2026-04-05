@@ -6,18 +6,29 @@ import { CTA } from "@/components/cta";
 import { Footer } from "@/components/footer";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
+function SectionDivider() {
+  return (
+    <div className="max-w-6xl mx-auto px-6">
+      <div className="h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <>
       <Header />
       <main>
         <Hero />
+        <SectionDivider />
         <ScrollReveal>
           <Features />
         </ScrollReveal>
+        <SectionDivider />
         <ScrollReveal>
           <Architecture />
         </ScrollReveal>
+        <SectionDivider />
         <ScrollReveal>
           <CTA />
         </ScrollReveal>

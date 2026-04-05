@@ -13,7 +13,7 @@ export function ArchitectureDoc() {
       <H3>1. Process Isolation</H3>
       <Paragraph>
         All database and filesystem access runs in the main process. The renderer never touches
-        SQLite directly — everything flows through typed IPC handlers. This ensures stability,
+        SQLite directly. Everything flows through typed IPC handlers. This ensures stability,
         security, and clean separation of concerns.
       </Paragraph>
 
@@ -32,7 +32,7 @@ export function ArchitectureDoc() {
       <H3>4. Native Modules</H3>
       <Paragraph>
         better-sqlite3 and node-pty are unpacked from ASAR for production builds. Real PTY
-        sessions, real database — not browser polyfills pretending to be native.
+        sessions, real database. Not browser polyfills pretending to be native.
       </Paragraph>
 
       <H2 id="tech-stack">Tech Stack</H2>
@@ -89,11 +89,11 @@ tokens.ts       Token tracking and PumpFun integration
       </Paragraph>
       <List
         items={[
-          <><code className="text-accent font-mono text-[13px]">useEditorStore</code> — Open files, active tab, editor state</>,
-          <><code className="text-accent font-mono text-[13px]">useWalletStore</code> — Wallet connection, balances, tokens</>,
-          <><code className="text-accent font-mono text-[13px]">useAgentStore</code> — Active agents, sessions, Grind Mode state</>,
-          <><code className="text-accent font-mono text-[13px]">useGitStore</code> — Branch, status, diff, stash</>,
-          <><code className="text-accent font-mono text-[13px]">useTerminalStore</code> — Terminal sessions, splits, history</>,
+          <><code className="text-accent font-mono text-[13px]">useEditorStore</code> for open files, active tab, and editor state</>,
+          <><code className="text-accent font-mono text-[13px]">useWalletStore</code> for wallet connection, balances, and tokens</>,
+          <><code className="text-accent font-mono text-[13px]">useAgentStore</code> for active agents, sessions, and Grind Mode state</>,
+          <><code className="text-accent font-mono text-[13px]">useGitStore</code> for branch, status, diff, and stash</>,
+          <><code className="text-accent font-mono text-[13px]">useTerminalStore</code> for terminal sessions, splits, and history</>,
         ]}
       />
 

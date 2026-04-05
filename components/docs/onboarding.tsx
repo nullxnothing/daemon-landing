@@ -32,8 +32,8 @@ export function OnboardingDoc() {
       </Paragraph>
       <List
         items={[
-          <><strong className="text-foreground">OAuth sign-in</strong> — Opens a browser window to authenticate with your Anthropic account</>,
-          <><strong className="text-foreground">API key</strong> — Paste your Anthropic API key directly in the settings</>,
+          <><strong className="text-foreground">OAuth sign-in</strong> opens a browser window to authenticate with your Anthropic account</>,
+          <><strong className="text-foreground">API key</strong> lets you paste your Anthropic API key directly in the settings</>,
         ]}
       />
       <Paragraph>
@@ -48,9 +48,9 @@ export function OnboardingDoc() {
       </Paragraph>
       <List
         items={[
-          <><strong className="text-foreground">Gmail</strong> — Email notifications and summaries</>,
-          <><strong className="text-foreground">Vercel</strong> — One-click project deployment</>,
-          <><strong className="text-foreground">Railway</strong> — One-click backend deployment</>,
+          <><strong className="text-foreground">Gmail</strong> for email notifications and summaries</>,
+          <><strong className="text-foreground">Vercel</strong> for one-click project deployment</>,
+          <><strong className="text-foreground">Railway</strong> for one-click backend deployment</>,
         ]}
       />
 

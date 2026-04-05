@@ -5,7 +5,7 @@ export function GrindModeDoc() {
     <>
       <DocHeading>Grind Mode</DocHeading>
       <DocSubheading>
-        Multi-panel agent grid — run multiple Claude agents on different parts of your project simultaneously.
+        Multi-panel agent grid. Run multiple Claude agents on different parts of your project simultaneously.
       </DocSubheading>
 
       <H2 id="how-it-works">How It Works</H2>
@@ -52,10 +52,10 @@ export function GrindModeDoc() {
       <H2 id="tips">Tips</H2>
       <List
         items={[
-          <><strong className="text-foreground">Keep tasks independent</strong> — Agents work best on separate files or modules. Avoid overlapping files.</>,
-          <><strong className="text-foreground">Use specific prompts</strong> — Give each agent a clear, focused task.</>,
-          <><strong className="text-foreground">Monitor progress</strong> — Watch each panel&apos;s output. You can interact with any agent at any time.</>,
-          <><strong className="text-foreground">Scale as needed</strong> — Start with two agents for simpler tasks, scale up for larger projects.</>,
+          <><strong className="text-foreground">Keep tasks independent.</strong> Agents work best on separate files or modules. Avoid overlapping files.</>,
+          <><strong className="text-foreground">Use specific prompts.</strong> Give each agent a clear, focused task.</>,
+          <><strong className="text-foreground">Monitor progress.</strong> Watch each panel&apos;s output. You can interact with any agent at any time.</>,
+          <><strong className="text-foreground">Scale as needed.</strong> Start with two agents for simpler tasks, scale up for larger projects.</>,
         ]}
       />
 

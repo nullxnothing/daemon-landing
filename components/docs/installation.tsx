@@ -31,8 +31,8 @@ export function InstallationDoc() {
       <H2 id="prerequisites">Prerequisites</H2>
       <List
         items={[
-          <><strong className="text-foreground">Node.js 22+</strong> — required for agent spawning and terminal sessions</>,
-          <><strong className="text-foreground">pnpm</strong> (recommended) — faster installs, used internally by DAEMON</>,
+          <><strong className="text-foreground">Node.js 22+</strong>, required for agent spawning and terminal sessions</>,
+          <><strong className="text-foreground">pnpm</strong> (recommended), faster installs and used internally by DAEMON</>,
         ]}
       />
 
@@ -57,7 +57,7 @@ export function InstallationDoc() {
       <H2 id="updating">Updating</H2>
       <Paragraph>
         DAEMON includes auto-update support via electron-builder. When a new version is available,
-        you&apos;ll see a notification in the status bar. Click to download and install — no manual
+        you&apos;ll see a notification in the status bar. Click to download and install with no manual
         steps required.
       </Paragraph>
     </>

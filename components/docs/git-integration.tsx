@@ -5,7 +5,7 @@ export function GitIntegrationDoc() {
     <>
       <DocHeading>Git Integration</DocHeading>
       <DocSubheading>
-        Complete visual git interface powered by simple-git. Branch, commit, push — all without a separate terminal.
+        Complete visual git interface powered by simple-git. Branch, commit, and push, all without a separate terminal.
       </DocSubheading>
 
       <H2 id="git-panel">Visual Git Panel</H2>

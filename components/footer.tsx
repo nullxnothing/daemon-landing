@@ -2,10 +2,10 @@ import { Github } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border">
-      <div className="max-w-6xl mx-auto px-6 py-8">
+    <footer className="border-t border-white/[0.06]">
+      <div className="max-w-6xl mx-auto px-6 py-10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4 text-[13px] text-muted-foreground">
+          <div className="flex items-center gap-5 text-[13px] text-muted-foreground">
             <span>
               Built by{" "}
               <a
@@ -17,14 +17,14 @@ export function Footer() {
                 nullxnothing
               </a>
             </span>
-            <span className="text-border">|</span>
+            <span className="size-1 rounded-full bg-white/10" />
             <a
               href="/docs"
-              className="text-muted hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors"
             >
               Docs
             </a>
-            <span className="text-border">|</span>
+            <span className="size-1 rounded-full bg-white/10" />
             <span>MIT License</span>
           </div>
           <a

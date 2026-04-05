@@ -47,13 +47,13 @@ pnpm run dev`}</CodeBlock>
       <CodeBlock>{`pnpm run rebuild`}</CodeBlock>
 
       <H2 id="architecture">Architecture</H2>
-      <CodeBlock>{`electron/          Main process — IPC handlers, services, database
+      <CodeBlock>{`electron/          Main process - IPC handlers, services, database
   ipc/             One handler file per domain
   services/        Business logic (never imported from renderer)
   db/              SQLite schema + migrations
   shared/          Types shared between main and renderer
 
-src/               Renderer — React 18 + TypeScript
+src/               Renderer - React 18 + TypeScript
   panels/          One directory per panel
   store/           Zustand stores
   components/      Shared UI components
@@ -64,10 +64,10 @@ test/              Vitest test suites`}</CodeBlock>
       <H2 id="rules">Rules</H2>
       <List
         items={[
-          "All DB access stays in the main process — renderer uses IPC only",
+          "All DB access stays in the main process. Renderer uses IPC only",
           <>All IPC handlers use <code className="text-accent font-mono text-[13px]">IpcHandlerFactory</code> and return {"{ ok, data/error }"}</>,
-          "CSS Modules only, no Tailwind — follow existing token system",
-          "No emoji in UI chrome — status via colored dots only",
+          "CSS Modules only, no Tailwind. Follow existing token system",
+          "No emoji in UI chrome. Status via colored dots only",
           "Test with pnpm run package before PRs that touch native modules",
         ]}
       />
@@ -88,7 +88,7 @@ test/              Vitest test suites`}</CodeBlock>
       <H2 id="pull-requests">Pull Requests</H2>
       <List
         items={[
-          "Keep PRs focused — one feature or fix per PR",
+          "Keep PRs focused. One feature or fix per PR",
           "Include screenshots for UI changes",
           "Ensure pnpm run typecheck and pnpm run test pass",
           "Fill out the PR template",

@@ -1,7 +1,7 @@
 "use client";
 
 import { track } from "@vercel/analytics";
-import { Monitor, Apple, Github } from "lucide-react";
+import { Monitor, Apple, Github, ArrowRight } from "lucide-react";
 
 const WINDOWS_URL =
   "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe";
@@ -10,34 +10,54 @@ const MAC_URL =
 
 export function CTA() {
   return (
-    <section id="download" className="py-24 md:py-32 px-6">
-      <div className="max-w-3xl mx-auto text-center">
+    <section id="download" className="relative py-28 md:py-36 px-6 overflow-hidden">
+      {/* Background treatment - echo of hero swirl */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_80%,rgba(62,207,142,0.08),transparent_60%)]" />
+        <div
+          className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage: `radial-gradient(circle, rgba(62,207,142,0.3) 1px, transparent 1px)`,
+            backgroundSize: "10px 10px",
+            maskImage: "radial-gradient(ellipse 70% 50% at 50% 70%, black 0%, transparent 70%)",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 50% at 50% 70%, black 0%, transparent 70%)",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-3xl mx-auto text-center">
         {/* Heading */}
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight gradient-text text-balance">
-          Start building on Solana&apos;s first IDE
+        <p className="text-accent text-[13px] font-semibold tracking-[0.2em] uppercase mb-5">
+          Get Started
+        </p>
+        <h2 className="text-4xl md:text-[3.25rem] font-bold tracking-[-0.02em] leading-[1.1] gradient-text text-balance">
+          Start building on
+          <br />
+          Solana&apos;s first IDE
         </h2>
-        <p className="mt-5 text-lg text-muted max-w-xl mx-auto leading-relaxed">
+        <p className="mt-6 text-[17px] text-muted max-w-xl mx-auto leading-relaxed">
           Free, open source, and purpose-built for Solana. From token launches
           to deploys, everything ships from one app.
         </p>
 
-        {/* Download buttons */}
+        {/* Download buttons - matching hero style */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href={WINDOWS_URL}
             download
             onClick={() => track("Download", { os: "windows", location: "cta" })}
-            className="group flex items-center gap-2.5 bg-foreground text-background px-6 py-3.5 rounded-xl font-medium text-[15px] transition-all duration-200 hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_30px_rgba(62,207,142,0.2)]"
+            className="group flex items-center gap-2.5 bg-accent text-accent-foreground px-7 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_40px_rgba(62,207,142,0.3)]"
           >
             <Monitor className="size-[18px]" />
             Download for Windows
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
           <a
             href={MAC_URL}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track("Download", { os: "mac", location: "cta" })}
-            className="group flex items-center gap-2.5 border border-border bg-card px-6 py-3.5 rounded-xl font-medium text-[15px] text-muted transition-all duration-200 hover:border-muted hover:text-foreground hover:bg-card-hover"
+            className="group flex items-center gap-2.5 border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 rounded-full font-medium text-[15px] text-muted transition-all duration-200 hover:border-white/20 hover:text-foreground hover:bg-white/10"
           >
             <Apple className="size-[18px]" />
             Install for Mac
@@ -62,30 +82,30 @@ export function CTA() {
           </a>
         </div>
 
-        {/* Divider + stats */}
-        <div className="mt-16 pt-12 border-t border-border">
+        {/* Stats */}
+        <div className="mt-16 pt-12 border-t border-white/[0.06]">
           <div className="grid grid-cols-3 gap-8 max-w-md mx-auto">
             <div>
-              <div className="text-2xl md:text-3xl font-bold text-foreground">
+              <div className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
                 4
               </div>
-              <div className="mt-1 text-[13px] text-muted-foreground">
+              <div className="mt-1.5 text-[13px] text-muted-foreground">
                 Parallel agents
               </div>
             </div>
             <div>
-              <div className="text-2xl md:text-3xl font-bold text-foreground">
+              <div className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
                 21
               </div>
-              <div className="mt-1 text-[13px] text-muted-foreground">
+              <div className="mt-1.5 text-[13px] text-muted-foreground">
                 Built-in panels
               </div>
             </div>
             <div>
-              <div className="text-2xl md:text-3xl font-bold text-foreground">
+              <div className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
                 109
               </div>
-              <div className="mt-1 text-[13px] text-muted-foreground">
+              <div className="mt-1.5 text-[13px] text-muted-foreground">
                 Tests passing
               </div>
             </div>

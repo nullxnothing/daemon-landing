@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s — DAEMON Docs",
+    template: "%s | DAEMON Docs",
     default: "DAEMON Docs",
   },
   description:
-    "Documentation for DAEMON — Solana's first IDE. Installation, features, AI agents, Solana development, and more.",
+    "Documentation for DAEMON, Solana's first IDE. Installation, features, AI agents, Solana development, and more.",
 };
 
 export default function DocsLayout({

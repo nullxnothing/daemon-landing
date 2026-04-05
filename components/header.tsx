@@ -71,7 +71,7 @@ export function Header() {
             </a>
             <a
               href="https://github.com/nullxnothing/daemon/releases/latest"
-              className="flex items-center gap-2 bg-foreground text-background px-4 py-1.5 rounded-lg text-[13px] font-medium transition-all hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 bg-accent text-accent-foreground px-4 py-1.5 rounded-full text-[13px] font-semibold transition-all hover:brightness-110 hover:shadow-[0_0_24px_rgba(62,207,142,0.25)]"
             >
               Download
             </a>

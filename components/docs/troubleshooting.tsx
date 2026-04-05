@@ -32,8 +32,8 @@ export function TroubleshootingDoc() {
 
       <H2 id="terminal-paste">Terminal paste not working</H2>
       <Paragraph>
-        Right-click to paste in the terminal. The xterm.js terminal does not show a context menu —
-        right-click triggers paste directly. <Code>Ctrl+V</Code> may not work in all terminal
+        Right-click to paste in the terminal. The xterm.js terminal does not show a context menu.
+        Right-click triggers paste directly. <Code>Ctrl+V</Code> may not work in all terminal
         contexts because the terminal captures keyboard input for the running process.
       </Paragraph>
 
@@ -44,10 +44,10 @@ export function TroubleshootingDoc() {
       </Paragraph>
       <List
         items={[
-          <><strong className="text-foreground">Wallet</strong> — Solana profile only (by default)</>,
-          <><strong className="text-foreground">Token Dashboard</strong> — Solana profile only</>,
-          <><strong className="text-foreground">Jupiter Swap</strong> — Solana profile only</>,
-          <><strong className="text-foreground">Browser</strong> — Web and Custom profiles</>,
+          <><strong className="text-foreground">Wallet</strong> requires Solana profile (by default)</>,
+          <><strong className="text-foreground">Token Dashboard</strong> requires Solana profile</>,
+          <><strong className="text-foreground">Jupiter Swap</strong> requires Solana profile</>,
+          <><strong className="text-foreground">Browser</strong> requires Web or Custom profile</>,
         ]}
       />
       <Hint type="info">

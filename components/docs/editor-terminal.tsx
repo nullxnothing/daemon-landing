@@ -5,7 +5,7 @@ export function EditorTerminalDoc() {
     <>
       <DocHeading>Monaco Editor & Terminal</DocHeading>
       <DocSubheading>
-        Full-featured offline editor and real PTY terminal — both running natively.
+        Full-featured offline editor and real PTY terminal, both running natively.
       </DocSubheading>
 
       <H2 id="editor">Monaco Editor</H2>
@@ -18,14 +18,14 @@ export function EditorTerminalDoc() {
       <H3>Features</H3>
       <List
         items={[
-          <><strong className="text-foreground">Multi-tab editing</strong> — Open multiple files with drag-and-drop reordering</>,
-          <><strong className="text-foreground">Breadcrumb navigation</strong> — Click through the file path to navigate</>,
-          <><strong className="text-foreground">Syntax highlighting</strong> — TypeScript, Rust, Python, JSON, TOML, and more</>,
-          <><strong className="text-foreground">Multi-cursor editing</strong> — Ctrl+D to select next, Ctrl+Shift+L to select all</>,
-          <><strong className="text-foreground">Minimap</strong> — Code overview on the right side</>,
-          <><strong className="text-foreground">Find and replace</strong> — Ctrl+F for search, Ctrl+H for replace</>,
-          <><strong className="text-foreground">Code folding</strong> — Collapse and expand code blocks</>,
-          <><strong className="text-foreground">Auto-indent</strong> — Consistent code formatting</>,
+          <><strong className="text-foreground">Multi-tab editing</strong> with drag-and-drop reordering</>,
+          <><strong className="text-foreground">Breadcrumb navigation</strong> to click through the file path</>,
+          <><strong className="text-foreground">Syntax highlighting</strong> for TypeScript, Rust, Python, JSON, TOML, and more</>,
+          <><strong className="text-foreground">Multi-cursor editing</strong> with Ctrl+D to select next, Ctrl+Shift+L to select all</>,
+          <><strong className="text-foreground">Minimap</strong> for code overview on the right side</>,
+          <><strong className="text-foreground">Find and replace</strong> with Ctrl+F for search, Ctrl+H for replace</>,
+          <><strong className="text-foreground">Code folding</strong> to collapse and expand code blocks</>,
+          <><strong className="text-foreground">Auto-indent</strong> for consistent code formatting</>,
         ]}
       />
 
@@ -38,20 +38,20 @@ export function EditorTerminalDoc() {
 
       <H2 id="terminal">Terminal</H2>
       <Paragraph>
-        DAEMON&apos;s terminal is a real PTY implementation using node-pty and xterm.js — not a
+        DAEMON&apos;s terminal is a real PTY implementation using node-pty and xterm.js, not a
         browser-based emulator.
       </Paragraph>
 
       <H3>Features</H3>
       <List
         items={[
-          <><strong className="text-foreground">Real PTY sessions</strong> — Full shell access with proper signal handling</>,
-          <><strong className="text-foreground">Multiple tabs</strong> — Open as many terminal sessions as you need</>,
-          <><strong className="text-foreground">Split panes</strong> — Divide terminals horizontally or vertically</>,
-          <><strong className="text-foreground">Per-project sessions</strong> — Each project gets its own terminal context</>,
-          <><strong className="text-foreground">Command history</strong> — Ctrl+R for reverse search</>,
-          <><strong className="text-foreground">Tab completion</strong> — Standard shell tab completion</>,
-          <><strong className="text-foreground">Copy/paste</strong> — Select to copy, right-click to paste</>,
+          <><strong className="text-foreground">Real PTY sessions</strong> with full shell access and proper signal handling</>,
+          <><strong className="text-foreground">Multiple tabs</strong> to open as many terminal sessions as you need</>,
+          <><strong className="text-foreground">Split panes</strong> to divide terminals horizontally or vertically</>,
+          <><strong className="text-foreground">Per-project sessions</strong> where each project gets its own terminal context</>,
+          <><strong className="text-foreground">Command history</strong> with Ctrl+R for reverse search</>,
+          <><strong className="text-foreground">Tab completion</strong> with standard shell tab completion</>,
+          <><strong className="text-foreground">Copy/paste</strong> using select to copy and right-click to paste</>,
         ]}
       />
 

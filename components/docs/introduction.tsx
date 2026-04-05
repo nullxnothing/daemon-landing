@@ -10,14 +10,14 @@ export function IntroductionDoc() {
 
       <H2 id="what-is-daemon">What is DAEMON?</H2>
       <Paragraph>
-        DAEMON is <strong className="text-foreground">Solana&apos;s first IDE</strong> — a
+        DAEMON is <strong className="text-foreground">Solana&apos;s first IDE</strong>, a
         standalone desktop application built from scratch for Solana development. It combines a
         full-featured code editor, AI agents, built-in wallet, token launcher, and one-click
         deployment into a single app.
       </Paragraph>
       <Paragraph>
         DAEMON is not a VS Code fork. It is not a plugin or extension. It is a purpose-built
-        Electron application with its own editor, terminal, state management, and database layer —
+        Electron application with its own editor, terminal, state management, and database layer,
         designed from day one for the Solana ecosystem.
       </Paragraph>
 
@@ -31,7 +31,7 @@ export function IntroductionDoc() {
       <List
         items={[
           <><strong className="text-foreground">Write code</strong> in a fully offline Monaco editor with syntax highlighting, multi-tab, and breadcrumbs</>,
-          <><strong className="text-foreground">Run AI agents</strong> that work on your codebase in parallel — debug, review, test, and ship simultaneously</>,
+          <><strong className="text-foreground">Run AI agents</strong> that work on your codebase in parallel to debug, review, test, and ship simultaneously</>,
           <><strong className="text-foreground">Manage your wallet</strong> with live portfolio tracking via Helius, SPL token balances, and real-time prices</>,
           <><strong className="text-foreground">Launch tokens</strong> on PumpFun with a one-click wizard</>,
           <><strong className="text-foreground">Swap tokens</strong> via Jupiter aggregation directly from the wallet panel</>,

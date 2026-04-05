@@ -5,7 +5,7 @@ export function AIAgentsDoc() {
     <>
       <DocHeading>AI Agents</DocHeading>
       <DocSubheading>
-        Spawn Claude Code agents with full tool access — every agent runs as a real CLI process.
+        Spawn Claude Code agents with full tool access. Every agent runs as a real CLI process.
       </DocSubheading>
 
       <H2 id="agent-launcher">Agent Launcher</H2>
@@ -36,14 +36,14 @@ export function AIAgentsDoc() {
       <H2 id="custom-agents">Custom Agents</H2>
       <List
         items={[
-          <><strong className="text-foreground">Custom system prompts</strong> — Define exactly how the agent should behave</>,
-          <><strong className="text-foreground">Model selection</strong> — Choose between Opus, Sonnet, and Haiku based on your task</>,
-          <><strong className="text-foreground">MCP configuration</strong> — Assign project-level or global MCP servers to each agent</>,
+          <><strong className="text-foreground">Custom system prompts</strong> to define exactly how the agent should behave</>,
+          <><strong className="text-foreground">Model selection</strong> to choose between Opus, Sonnet, and Haiku based on your task</>,
+          <><strong className="text-foreground">MCP configuration</strong> to assign project-level or global MCP servers to each agent</>,
         ]}
       />
       <Hint type="info">
         DAEMON includes <strong>41 pre-built Claude agents</strong> available for import from the
-        Agent Launcher — covering web, Solana, testing, and DevOps workflows.
+        Agent Launcher, covering web, Solana, testing, and DevOps workflows.
       </Hint>
 
       <H2 id="mcp">MCP Management</H2>

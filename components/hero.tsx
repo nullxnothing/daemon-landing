@@ -2,21 +2,172 @@
 
 import Image from "next/image";
 import { track } from "@vercel/analytics";
-import { Monitor, Apple } from "lucide-react";
+import { Monitor, Apple, ArrowRight } from "lucide-react";
 
 const WINDOWS_URL =
   "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe";
 const MAC_URL =
   "https://github.com/nullxnothing/daemon#mac-install";
 
+function HeroCard() {
+  return (
+    <div className="relative min-h-[600px] flex flex-col items-center justify-center rounded-[48px] border border-border bg-card overflow-hidden shadow-sm transition-all duration-500">
+      {/* Abstract swirl background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Base dark gradient */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_60%,rgba(62,207,142,0.12),transparent_70%)]" />
+
+        {/* Swirl layers using radial + conic gradients */}
+        <div
+          className="absolute inset-0 opacity-60"
+          style={{
+            backgroundImage: `
+              radial-gradient(ellipse 60% 50% at 20% 80%, rgba(62,207,142,0.25), transparent 60%),
+              radial-gradient(ellipse 50% 60% at 80% 20%, rgba(62,207,142,0.2), transparent 60%),
+              radial-gradient(ellipse 40% 35% at 60% 70%, rgba(42,157,104,0.18), transparent 50%),
+              radial-gradient(ellipse 45% 40% at 30% 30%, rgba(62,207,142,0.15), transparent 55%)
+            `,
+          }}
+        />
+
+        {/* Flowing organic shapes */}
+        <svg
+          className="absolute inset-0 w-full h-full opacity-40"
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="xMidYMid slice"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <filter id="turbulence">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.015"
+                numOctaves="3"
+                seed="5"
+                result="noise"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="80"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+          </defs>
+          <g filter="url(#turbulence)">
+            <path
+              d="M-100,400 Q200,100 500,350 T900,250 T1300,400 T1100,600 T600,550 T100,650 Z"
+              fill="rgba(62,207,142,0.15)"
+            />
+            <path
+              d="M-50,300 Q300,500 600,200 T1000,450 T800,700 T300,600 Z"
+              fill="rgba(42,157,104,0.12)"
+            />
+            <path
+              d="M100,600 Q400,300 700,500 T1100,300 T1200,600 T700,700 T200,500 Z"
+              fill="rgba(62,207,142,0.1)"
+            />
+          </g>
+        </svg>
+
+        {/* Halftone dot overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.35]"
+          style={{
+            backgroundImage: `radial-gradient(circle, rgba(62,207,142,0.4) 1px, transparent 1px)`,
+            backgroundSize: "8px 8px",
+          }}
+        />
+
+        {/* Second halftone layer, offset for depth */}
+        <div
+          className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage: `radial-gradient(circle, rgba(62,207,142,0.5) 0.5px, transparent 0.5px)`,
+            backgroundSize: "4px 4px",
+            backgroundPosition: "2px 2px",
+          }}
+        />
+
+        {/* Vignette for center readability */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_50%,rgba(14,14,14,0.85),transparent_100%)]" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center px-6 py-20 max-w-3xl mx-auto">
+        {/* Logo */}
+        <div className="animate-fade-up mb-6">
+          <Image
+            src="/images/daemon-icon.png"
+            alt="DAEMON"
+            width={56}
+            height={56}
+            className="mx-auto rounded-2xl"
+            priority
+          />
+        </div>
+
+        {/* Version badge */}
+        <div className="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-[13px] text-accent mb-10">
+          <span className="size-1.5 rounded-full bg-accent animate-pulse" />
+          v1.3.0: Grind Mode is live
+        </div>
+
+        {/* Headline */}
+        <h1
+          className="animate-fade-up text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold tracking-[-0.03em] leading-[0.95]"
+          style={{ animationDelay: "100ms" }}
+        >
+          <span className="text-foreground">Solana&apos;s</span>
+          <br />
+          <span className="text-foreground">first IDE.</span>
+        </h1>
+
+        {/* Subtitle */}
+        <p
+          className="animate-fade-up mt-6 text-lg md:text-xl text-muted max-w-md mx-auto leading-relaxed"
+          style={{ animationDelay: "200ms" }}
+        >
+          AI agents, built-in wallet, token launches, and deploys. All from one desktop app.
+        </p>
+
+        {/* CTAs */}
+        <div
+          className="animate-fade-up mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
+          style={{ animationDelay: "300ms" }}
+        >
+          <a
+            href={WINDOWS_URL}
+            download
+            onClick={() => track("Download", { os: "windows", location: "hero" })}
+            className="group flex items-center gap-2.5 bg-accent text-accent-foreground px-7 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_40px_rgba(62,207,142,0.3)]"
+          >
+            <Monitor className="size-[18px]" />
+            Download for Windows
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+          </a>
+          <a
+            href={MAC_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("Download", { os: "mac", location: "hero" })}
+            className="group flex items-center gap-2.5 border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 rounded-full font-medium text-[15px] text-muted transition-all duration-200 hover:border-white/20 hover:text-foreground hover:bg-white/10"
+          >
+            <Apple className="size-[18px]" />
+            Install for Mac
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function DemoVideo() {
   return (
-    <div className="relative w-full max-w-4xl mx-auto">
-      {/* Glow behind the video */}
+    <div className="relative w-full max-w-5xl mx-auto">
       <div className="absolute -inset-4 bg-accent/5 rounded-3xl blur-3xl animate-glow-pulse" />
-
-      {/* Video window */}
-      <div className="relative rounded-xl border border-border bg-[#0c0c0c] overflow-hidden shadow-2xl shadow-black/50">
+      <div className="relative rounded-2xl border border-border bg-[#0c0c0c] overflow-hidden shadow-2xl shadow-black/50">
         <video
           className="w-full"
           autoPlay
@@ -34,101 +185,19 @@ function DemoVideo() {
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-14 overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0">
-        {/* Radial gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(62,207,142,0.08),transparent)]" />
-        {/* Grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-          }}
-        />
+    <section className="relative px-4 sm:px-6 pt-20 pb-16">
+      {/* Hero card */}
+      <div className="max-w-6xl mx-auto">
+        <HeroCard />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl w-full">
-        {/* Logo */}
-        <div className="animate-fade-up mb-6">
-          <Image
-            src="/images/daemon-icon.png"
-            alt="DAEMON"
-            width={64}
-            height={64}
-            className="mx-auto rounded-2xl"
-            priority
-          />
-        </div>
-
-        {/* Version badge */}
-        <div className="animate-fade-up inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card text-[13px] text-muted mb-8">
-          <span className="size-1.5 rounded-full bg-accent" />
-          v1.3.0 — Grind Mode is live
-        </div>
-
-        {/* Headline */}
-        <h1
-          className="animate-fade-up text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.9]"
-          style={{ animationDelay: "100ms" }}
-        >
-          <span className="gradient-text">Solana&apos;s first IDE.</span>
-          <br />
-          <span className="gradient-text">Build. Launch. Deploy.</span>
-        </h1>
-
-        {/* Subtitle */}
-        <p
-          className="animate-fade-up mt-6 text-lg md:text-xl text-muted max-w-xl mx-auto leading-relaxed"
-          style={{ animationDelay: "200ms" }}
-        >
-          The first IDE built specifically for Solana. AI agents, built-in
-          wallet, token launches, Jupiter swaps, and deploys — all from one
-          desktop app.
-          <br className="hidden sm:block" />
-          Not a fork. Not a plugin. Built from scratch.
-        </p>
-
-        {/* CTAs */}
-        <div
-          className="animate-fade-up mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
-          style={{ animationDelay: "300ms" }}
-        >
-          <a
-            href={WINDOWS_URL}
-            download
-            onClick={() => track("Download", { os: "windows", location: "hero" })}
-            className="group flex items-center gap-2.5 bg-foreground text-background px-6 py-3 rounded-xl font-medium text-[15px] transition-all duration-200 hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_30px_rgba(62,207,142,0.2)]"
-          >
-            <Monitor className="size-[18px]" />
-            Download for Windows
-          </a>
-          <a
-            href={MAC_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("Download", { os: "mac", location: "hero" })}
-            className="group flex items-center gap-2.5 border border-border bg-card px-6 py-3 rounded-xl font-medium text-[15px] text-muted transition-all duration-200 hover:border-muted hover:text-foreground hover:bg-card-hover"
-          >
-            <Apple className="size-[18px]" />
-            Install for Mac
-          </a>
-        </div>
-
-        {/* Terminal mockup */}
-        <div
-          className="animate-fade-up mt-16 sm:mt-20"
-          style={{ animationDelay: "450ms" }}
-        >
-          <DemoVideo />
-        </div>
+      {/* Demo video below the card */}
+      <div
+        className="animate-fade-up max-w-6xl mx-auto mt-10"
+        style={{ animationDelay: "450ms" }}
+      >
+        <DemoVideo />
       </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 }

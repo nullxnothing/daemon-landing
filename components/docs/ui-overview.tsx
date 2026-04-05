@@ -28,11 +28,11 @@ export function UIOverviewDoc() {
         The sidebar provides icon-based navigation for all major panels:
       </Paragraph>
       <CardGrid>
-        <InfoCard title="F — Files">File explorer and project tree</InfoCard>
-        <InfoCard title="S — Search">Full-text search across your project</InfoCard>
-        <InfoCard title="G — Git">Visual git interface (branch, commit, push)</InfoCard>
-        <InfoCard title="T — Terminal">Terminal session manager</InfoCard>
-        <InfoCard title="W — Wallet">Solana wallet and token dashboard</InfoCard>
+        <InfoCard title="F - Files">File explorer and project tree</InfoCard>
+        <InfoCard title="S - Search">Full-text search across your project</InfoCard>
+        <InfoCard title="G - Git">Visual git interface (branch, commit, push)</InfoCard>
+        <InfoCard title="T - Terminal">Terminal session manager</InfoCard>
+        <InfoCard title="W - Wallet">Solana wallet and token dashboard</InfoCard>
       </CardGrid>
 
       <H2 id="center">Center Area</H2>
@@ -42,17 +42,17 @@ export function UIOverviewDoc() {
       </Paragraph>
       <List
         items={[
-          <><strong className="text-foreground">Browser</strong> — Built-in browser with security sandbox for previewing your app</>,
-          <><strong className="text-foreground">Dashboard</strong> — Token dashboard with real-time price, holders, and charts</>,
+          <><strong className="text-foreground">Browser</strong> with built-in security sandbox for previewing your app</>,
+          <><strong className="text-foreground">Dashboard</strong> with real-time token price, holders, and charts</>,
         ]}
       />
 
       <H2 id="right-panel">Right Panel</H2>
       <List
         items={[
-          <><strong className="text-foreground">Claude</strong> — Agent connection status, active MCP servers, current model, and available skills</>,
-          <><strong className="text-foreground">Dashboard</strong> — Quick access to token metrics</>,
-          <><strong className="text-foreground">Sessions</strong> — View and manage active agent sessions</>,
+          <><strong className="text-foreground">Claude</strong> showing agent connection status, active MCP servers, current model, and available skills</>,
+          <><strong className="text-foreground">Dashboard</strong> for quick access to token metrics</>,
+          <><strong className="text-foreground">Sessions</strong> to view and manage active agent sessions</>,
         ]}
       />
 

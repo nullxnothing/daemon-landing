@@ -48,7 +48,7 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string }>
     if (!doc) return { title: "Not Found" };
     return {
       title: doc.title,
-      description: `${doc.title} — DAEMON documentation. ${doc.section}.`,
+      description: `${doc.title} | DAEMON documentation. ${doc.section}.`,
     };
   });
 }

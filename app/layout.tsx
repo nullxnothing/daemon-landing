@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DAEMON — Solana's First IDE",
+  title: "DAEMON | Solana's First IDE",
   description:
     "Solana's first IDE. Built from scratch with AI agents, built-in wallet, token launches, Jupiter swaps, and one-click deploys. Free and open source.",
   icons: {
@@ -26,15 +26,15 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "nullxnothing" }],
   openGraph: {
-    title: "DAEMON — Solana's First IDE",
+    title: "DAEMON | Solana's First IDE",
     description:
-      "Solana's first IDE. AI agents, built-in wallet, token launches, and one-click deploys — all from one desktop app.",
+      "Solana's first IDE. AI agents, built-in wallet, token launches, and one-click deploys, all from one desktop app.",
     type: "website",
     images: ["/images/daemon-banner.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DAEMON — Solana's First IDE",
+    title: "DAEMON | Solana's First IDE",
     description:
       "Solana's first IDE. Built from scratch with AI agents, wallet, token launches, and deploys. Free and open source.",
     images: ["/images/daemon-banner.png"],

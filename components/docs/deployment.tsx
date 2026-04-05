@@ -12,9 +12,9 @@ export function DeploymentDoc() {
       <Paragraph>Deploy frontend projects to Vercel with a single click:</Paragraph>
       <List
         items={[
-          <><strong className="text-foreground">Connect once</strong> — Link your Vercel account in Settings &gt; Integrations</>,
-          <><strong className="text-foreground">Deploy</strong> — Click the deploy button in the Command Drawer</>,
-          <><strong className="text-foreground">Monitor</strong> — View deployment status and logs directly in DAEMON</>,
+          <><strong className="text-foreground">Connect once</strong> by linking your Vercel account in Settings &gt; Integrations</>,
+          <><strong className="text-foreground">Deploy</strong> by clicking the deploy button in the Command Drawer</>,
+          <><strong className="text-foreground">Monitor</strong> deployment status and logs directly in DAEMON</>,
         ]}
       />
       <Paragraph>
@@ -26,9 +26,9 @@ export function DeploymentDoc() {
       <Paragraph>Deploy backend services and databases to Railway:</Paragraph>
       <List
         items={[
-          <><strong className="text-foreground">Connect once</strong> — Link your Railway account in Settings &gt; Integrations</>,
-          <><strong className="text-foreground">Deploy</strong> — Select your project and click deploy</>,
-          <><strong className="text-foreground">Monitor</strong> — View logs and service status in DAEMON</>,
+          <><strong className="text-foreground">Connect once</strong> by linking your Railway account in Settings &gt; Integrations</>,
+          <><strong className="text-foreground">Deploy</strong> by selecting your project and clicking deploy</>,
+          <><strong className="text-foreground">Monitor</strong> logs and service status in DAEMON</>,
         ]}
       />
 
@@ -49,7 +49,7 @@ export function DeploymentDoc() {
           "Write and test your code in the Monaco editor",
           "Run tests with an AI agent or the terminal",
           "Commit changes via the visual git panel",
-          "Click deploy — your app is live",
+          "Click deploy and your app is live",
         ]}
       />
       <Paragraph>
