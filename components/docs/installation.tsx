@@ -1,6 +1,6 @@
 import { DocHeading, DocSubheading, H2, H3, Paragraph, List, Table, Hint } from "./primitives";
 
-const WINDOWS_URL = "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe";
+const WINDOWS_URL = "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-2.0.0-setup.exe";
 const MAC_URL = "https://github.com/nullxnothing/daemon#mac-install";
 const LINUX_URL = "https://github.com/nullxnothing/daemon#linux-install";
 
