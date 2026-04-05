@@ -1,11 +1,13 @@
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
+import { DocsSidebar } from "@/components/docs-sidebar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Getting Started - DAEMON",
+  title: {
+    template: "%s — DAEMON Docs",
+    default: "DAEMON Docs",
+  },
   description:
-    "Everything you need to start building with AI agents and Solana tools in DAEMON.",
+    "Documentation for DAEMON — Solana's first IDE. Installation, features, AI agents, Solana development, and more.",
 };
 
 export default function DocsLayout({
@@ -14,10 +16,13 @@ export default function DocsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <Header />
-      <main className="pt-14">{children}</main>
-      <Footer />
-    </>
+    <div className="min-h-screen">
+      <DocsSidebar />
+      <main className="lg:pl-[260px]">
+        <div className="max-w-3xl mx-auto px-6 lg:px-12 py-12 lg:py-16">
+          {children}
+        </div>
+      </main>
+    </div>
   );
 }
