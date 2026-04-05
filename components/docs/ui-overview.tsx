@@ -1,4 +1,5 @@
-import { DocHeading, DocSubheading, H2, Paragraph, CodeBlock, CardGrid, InfoCard, List } from "./primitives";
+import Image from "next/image";
+import { DocHeading, DocSubheading, H2, Paragraph, CardGrid, InfoCard, List } from "./primitives";
 
 export function UIOverviewDoc() {
   return (
@@ -9,19 +10,15 @@ export function UIOverviewDoc() {
       </DocSubheading>
 
       <H2 id="layout">Layout</H2>
-      <CodeBlock>{`┌──────┬────────────────────────────┬──────────┐
-│      │  index.ts  browser  dash   │  Claude  │
-│  F   │                            │  status  │
-│  S   │  ┌──────────────────────┐  │  MCPs    │
-│  G   │  │  Monaco Editor       │  │  model   │
-│  T   │  │                      │  │          │
-│  W   │  └──────────────────────┘  │          │
-│      ├────────────────────────────┤          │
-│      │  ~ pnpm run dev            │          │
-│      │  terminal                  │          │
-└──────┴────────────────────────────┴──────────┘
-│  main ─ git branch ─ ticker ─ wallet balance │
-└──────────────────────────────────────────────┘`}</CodeBlock>
+      <div className="my-6 rounded-xl border border-border overflow-hidden">
+        <Image
+          src="/images/ui-overview.webp"
+          alt="DAEMON UI layout showing sidebar, editor, terminal, and right panel"
+          width={1920}
+          height={1080}
+          className="w-full"
+        />
+      </div>
 
       <H2 id="sidebar">Left Sidebar</H2>
       <Paragraph>

@@ -1,4 +1,5 @@
-import { DocHeading, DocSubheading, H2, Paragraph, CodeBlock, List, Table, Code } from "./primitives";
+import Image from "next/image";
+import { DocHeading, DocSubheading, H2, Paragraph, List, Table, Code } from "./primitives";
 
 export function GrindModeDoc() {
   return (
@@ -16,24 +17,19 @@ export function GrindModeDoc() {
       </Paragraph>
 
       <H2 id="example">Example Workflow</H2>
-      <CodeBlock>{`┌─────────────────────┬─────────────────────┐
-│  Agent 1            │  Agent 2            │
-│  Scaffolding an     │  Wiring Jupiter     │
-│  Anchor program     │  swap integration   │
-├─────────────────────┼─────────────────────┤
-│  Agent 3            │  Agent 4            │
-│  Writing token      │  Building the       │
-│  launch tests       │  frontend           │
-└─────────────────────┴─────────────────────┘`}</CodeBlock>
-
-      <List
-        items={[
-          <><strong className="text-foreground">Agent 1</strong> scaffolds the on-chain program in Rust</>,
-          <><strong className="text-foreground">Agent 2</strong> builds the swap integration hooks</>,
-          <><strong className="text-foreground">Agent 3</strong> writes and runs test suites</>,
-          <><strong className="text-foreground">Agent 4</strong> creates the frontend components</>,
-        ]}
-      />
+      <div className="my-6 rounded-xl border border-border overflow-hidden">
+        <Image
+          src="/images/grind-mode-example.webp"
+          alt="Grind Mode with 4 agents running in parallel"
+          width={1920}
+          height={1080}
+          className="w-full"
+        />
+      </div>
+      <Paragraph>
+        Four agents working simultaneously on the same project, each handling a different task.
+        Every panel has its own Claude session with full tool access.
+      </Paragraph>
 
       <H2 id="when-to-use">When to Use Grind Mode</H2>
       <Paragraph>
