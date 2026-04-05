@@ -1,0 +1,923 @@
+/* ── DAEMON Demo — scoped replica of the real app's styles ── */
+/* All rules scoped under .daemon-demo to avoid Tailwind conflicts */
+
+.daemon-demo {
+  /* DAEMON token system — exact copy from styles/tokens.css */
+  --bg:    #0a0a0a;
+  --s1:    #141414;
+  --s2:    #1a1a1a;
+  --s3:    #222222;
+  --s4:    #2a2a2a;
+  --s5:    #333333;
+  --s6:    #3a3a3a;
+
+  --t1:    #f0f0f0;
+  --t2:    #a0a0a0;
+  --t3:    #888888;
+  --t4:    #666666;
+
+  --green:       #3ecf8e;
+  --green-dim:   #2a9d6a;
+  --green-glow:  rgba(62, 207, 142, 0.15);
+
+  --amber:       #f0b429;
+  --amber-dim:   #c99a22;
+  --amber-glow:  rgba(240, 180, 41, 0.15);
+
+  --red:         #ef5350;
+  --red-dim:     #c94442;
+  --red-glow:    rgba(239, 83, 80, 0.15);
+
+  --blue:        #60a5fa;
+  --blue-dim:    #4a8ad4;
+  --blue-glow:   rgba(96, 165, 250, 0.15);
+
+  --border:        #2a2a2a;
+  --border-hover:  #3a3a3a;
+  --border-glass:  rgba(255, 255, 255, 0.04);
+  --hover-overlay: rgba(255, 255, 255, 0.04);
+  --active-overlay: rgba(255, 255, 255, 0.08);
+
+  --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-code: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  --titlebar-h: 38px;
+  --sidebar-w: 48px;
+  --left-panel-w: 210px;
+  --right-panel-w: 262px;
+  --statusbar-h: 22px;
+
+  --shadow-lifted: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-float: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 1px rgba(255, 255, 255, 0.04);
+
+  /* Reset for this scope */
+  font-family: var(--font-ui);
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--t1);
+  background: var(--bg);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+  /* Outer dimensions */
+  width: 100%;
+  max-width: 1100px;
+  aspect-ratio: 16 / 10;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  position: relative;
+}
+
+.daemon-demo *,
+.daemon-demo *::before,
+.daemon-demo *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.daemon-demo button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* ── Titlebar ── */
+.dd-titlebar {
+  height: var(--titlebar-h);
+  background: var(--s1);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.dd-titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dd-titlebar-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+}
+
+.dd-titlebar-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--t2);
+  letter-spacing: 0.5px;
+}
+
+.dd-project-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 8px;
+}
+
+.dd-project-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--t3);
+  transition: color 0.15s, background 0.15s;
+}
+
+.dd-project-tab:hover {
+  color: var(--t2);
+  background: var(--hover-overlay);
+}
+
+.dd-project-tab.active {
+  color: var(--t1);
+  background: var(--s3);
+}
+
+.dd-project-tab-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--t4);
+  flex-shrink: 0;
+}
+
+.dd-project-tab-dot.live {
+  background: var(--green);
+  box-shadow: 0 0 6px rgba(62, 207, 142, 0.4);
+}
+
+.dd-titlebar-traffic {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.dd-traffic-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ── Body (sidebar + panels) ── */
+.dd-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ── Sidebar ── */
+.dd-sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  gap: 2px;
+}
+
+.dd-sidebar-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--t4);
+  border-radius: 4px;
+  position: relative;
+  transition: color 0.15s, background 0.12s;
+}
+
+.dd-sidebar-icon:hover {
+  color: var(--t2);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.dd-sidebar-icon.active {
+  color: var(--t1);
+  box-shadow: 0 0 8px rgba(62, 207, 142, 0.06);
+}
+
+.dd-sidebar-icon.active::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--green);
+  border-radius: 1px;
+}
+
+.dd-sidebar-icon.toggle.active {
+  background: var(--s3);
+}
+
+.dd-sidebar-icon.toggle.active::before {
+  display: none;
+}
+
+.dd-sidebar-divider {
+  width: 24px;
+  height: 1px;
+  background: var(--s4);
+  margin: 6px auto;
+  flex-shrink: 0;
+}
+
+.dd-sidebar-spacer {
+  flex: 1;
+}
+
+/* ── Left panel (file explorer) ── */
+.dd-left-panel {
+  width: var(--left-panel-w);
+  background: var(--s1);
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dd-left-header {
+  padding: 10px 12px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--t3);
+}
+
+.dd-file-tree {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 4px;
+}
+
+.dd-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  color: var(--t2);
+  cursor: pointer;
+  transition: background 0.1s;
+  white-space: nowrap;
+}
+
+.dd-tree-item:hover {
+  background: var(--hover-overlay);
+}
+
+.dd-tree-item.active {
+  background: var(--s3);
+  color: var(--t1);
+}
+
+.dd-tree-item.folder {
+  color: var(--t3);
+  font-weight: 500;
+}
+
+.dd-tree-chevron {
+  width: 12px;
+  height: 12px;
+  color: var(--t4);
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+
+.dd-tree-chevron.open {
+  transform: rotate(90deg);
+}
+
+.dd-tree-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.dd-tree-children {
+  padding-left: 12px;
+}
+
+/* ── Center panel ── */
+.dd-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ── Editor panel ── */
+.dd-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.dd-editor-tabs {
+  display: flex;
+  align-items: center;
+  background: var(--s1);
+  border-bottom: 1px solid var(--border);
+  padding: 0 4px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.dd-editor-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  height: 100%;
+  font-size: 11px;
+  color: var(--t3);
+  border-right: 1px solid var(--border);
+  transition: color 0.15s, background 0.15s;
+}
+
+.dd-editor-tab:hover {
+  color: var(--t2);
+}
+
+.dd-editor-tab.active {
+  color: var(--t1);
+  background: var(--bg);
+}
+
+.dd-editor-content {
+  flex: 1;
+  background: var(--bg);
+  overflow: hidden;
+  position: relative;
+}
+
+.dd-code-block {
+  font-family: var(--font-code);
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 12px 16px;
+  color: var(--t2);
+  overflow: hidden;
+  height: 100%;
+}
+
+.dd-line-numbers {
+  display: inline-block;
+  width: 36px;
+  text-align: right;
+  color: var(--t4);
+  margin-right: 16px;
+  user-select: none;
+}
+
+/* Syntax highlighting tokens */
+.dd-code-block .tok-keyword { color: #c792ea; }
+.dd-code-block .tok-string { color: #c3e88d; }
+.dd-code-block .tok-comment { color: #546e7a; font-style: italic; }
+.dd-code-block .tok-function { color: #82aaff; }
+.dd-code-block .tok-type { color: #ffcb6b; }
+.dd-code-block .tok-number { color: #f78c6c; }
+.dd-code-block .tok-operator { color: #89ddff; }
+.dd-code-block .tok-punctuation { color: #89ddff; }
+.dd-code-block .tok-property { color: #f0f0f0; }
+.dd-code-block .tok-variable { color: #f07178; }
+.dd-code-block .tok-decorator { color: #ffcb6b; }
+
+/* ── Splitter ── */
+.dd-splitter {
+  height: 3px;
+  background: var(--border);
+  cursor: row-resize;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.dd-splitter:hover {
+  background: var(--green);
+}
+
+/* ── Terminal panel ── */
+.dd-terminal {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.dd-terminal-tabs {
+  display: flex;
+  align-items: center;
+  background: var(--s1);
+  border-bottom: 1px solid var(--border);
+  padding: 0 8px;
+  height: 30px;
+  flex-shrink: 0;
+  gap: 2px;
+}
+
+.dd-terminal-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  height: 100%;
+  font-size: 10px;
+  color: var(--t3);
+  border-radius: 3px 3px 0 0;
+  transition: color 0.15s;
+}
+
+.dd-terminal-tab:hover {
+  color: var(--t2);
+}
+
+.dd-terminal-tab.active {
+  color: var(--t1);
+  background: var(--bg);
+}
+
+.dd-terminal-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dd-terminal-content {
+  flex: 1;
+  background: var(--bg);
+  font-family: var(--font-code);
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 12px;
+  color: var(--t2);
+  overflow: hidden;
+}
+
+/* ── Right panel ── */
+.dd-right-panel {
+  width: var(--right-panel-w);
+  background: var(--s1);
+  border-left: 1px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dd-right-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.dd-right-tab {
+  flex: 1;
+  padding: 8px 0;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--t3);
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.dd-right-tab:hover {
+  color: var(--t2);
+}
+
+.dd-right-tab.active {
+  color: var(--t1);
+  border-bottom-color: var(--green);
+}
+
+.dd-right-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+/* Claude chat mockup */
+.dd-chat-message {
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.dd-chat-message.user {
+  background: var(--s3);
+  color: var(--t1);
+}
+
+.dd-chat-message.assistant {
+  background: var(--s2);
+  color: var(--t2);
+}
+
+.dd-chat-message .msg-role {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--t4);
+  margin-bottom: 4px;
+}
+
+.dd-chat-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.dd-chat-input-field {
+  flex: 1;
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 11px;
+  color: var(--t3);
+  font-family: var(--font-ui);
+}
+
+/* ── Status bar ── */
+.dd-statusbar {
+  height: var(--statusbar-h);
+  background: var(--s1);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 10px;
+  color: var(--t3);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.dd-statusbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dd-statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.dd-status-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dd-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+/* ── Settings panel (replaces center when active) ── */
+.dd-settings {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+}
+
+.dd-settings-header {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--t1);
+  margin-bottom: 16px;
+}
+
+.dd-settings-section {
+  margin-bottom: 20px;
+}
+
+.dd-settings-section-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--t3);
+  margin-bottom: 10px;
+}
+
+.dd-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.dd-settings-label {
+  font-size: 11px;
+  color: var(--t2);
+}
+
+.dd-settings-desc {
+  font-size: 10px;
+  color: var(--t4);
+  margin-top: 2px;
+}
+
+/* Toggle switch */
+.dd-toggle {
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--s4);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.dd-toggle.on {
+  background: var(--green);
+}
+
+.dd-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s;
+}
+
+.dd-toggle.on::after {
+  transform: translateX(14px);
+}
+
+/* ── Tools panel ── */
+.dd-tools {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+}
+
+.dd-tools-header {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--t1);
+  margin-bottom: 16px;
+}
+
+.dd-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.dd-tool-card {
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.dd-tool-card:hover {
+  border-color: var(--border-hover);
+  background: var(--s3);
+}
+
+.dd-tool-card-name {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--t1);
+  margin-bottom: 2px;
+}
+
+.dd-tool-card-desc {
+  font-size: 10px;
+  color: var(--t4);
+}
+
+/* ── Wallet panel ── */
+.dd-wallet {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+}
+
+.dd-wallet-header {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--t1);
+  margin-bottom: 16px;
+}
+
+.dd-wallet-balance {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.dd-wallet-sol {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--t1);
+  font-family: var(--font-code);
+}
+
+.dd-wallet-usd {
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.dd-wallet-address {
+  font-family: var(--font-code);
+  font-size: 10px;
+  color: var(--t4);
+  background: var(--s2);
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.dd-wallet-tx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dd-wallet-tx {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: var(--s2);
+  font-size: 10px;
+}
+
+.dd-wallet-tx-type {
+  color: var(--t3);
+}
+
+.dd-wallet-tx-amount {
+  font-family: var(--font-code);
+}
+
+.dd-wallet-tx-amount.positive { color: var(--green); }
+.dd-wallet-tx-amount.negative { color: var(--red); }
+
+/* ── Agent launcher panel ── */
+.dd-agents {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+}
+
+.dd-agents-header {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--t1);
+  margin-bottom: 16px;
+}
+
+.dd-agent-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.dd-agent-card:hover {
+  border-color: var(--border-hover);
+  background: var(--s3);
+}
+
+.dd-agent-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dd-agent-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.dd-agent-name {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--t1);
+}
+
+.dd-agent-model {
+  font-size: 10px;
+  color: var(--t4);
+  font-family: var(--font-code);
+}
+
+/* ── Typing animation for terminal ── */
+@keyframes dd-cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.dd-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: var(--green);
+  vertical-align: text-bottom;
+  animation: dd-cursor-blink 1s step-end infinite;
+  margin-left: 1px;
+}
+
+.dd-typing-line {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ── Panel transition ── */
+.dd-panel-enter {
+  animation: dd-panel-fade 0.15s ease-out;
+}
+
+@keyframes dd-panel-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .daemon-demo {
+    aspect-ratio: auto;
+    height: 500px;
+    border-radius: 8px;
+  }
+  .dd-left-panel {
+    display: none;
+  }
+  .dd-right-panel {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .daemon-demo {
+    height: 400px;
+  }
+  .dd-sidebar {
+    width: 38px;
+  }
+  .dd-sidebar-icon {
+    width: 30px;
+    height: 30px;
+  }
+}

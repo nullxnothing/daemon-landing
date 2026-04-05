@@ -1,8 +1,9 @@
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
-import { ProductTour } from "@/components/product-tour";
+import { DaemonDemo } from "@/components/daemon-demo/DaemonDemo";
 import { Features } from "@/components/features";
 import { Architecture } from "@/components/architecture";
+import { ProductTour } from "@/components/product-tour";
 import { CTA } from "@/components/cta";
 import { Footer } from "@/components/footer";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -23,7 +24,7 @@ export default function Home() {
         <Hero />
         <SectionDivider />
         <ScrollReveal>
-          <ProductTour />
+          <DaemonDemo />
         </ScrollReveal>
         <SectionDivider />
         <ScrollReveal>
@@ -33,6 +34,8 @@ export default function Home() {
         <ScrollReveal>
           <Architecture />
         </ScrollReveal>
+        <SectionDivider />
+        <ProductTour />
         <SectionDivider />
         <ScrollReveal>
           <CTA />
