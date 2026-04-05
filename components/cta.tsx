@@ -14,11 +14,11 @@ export function CTA() {
       <div className="max-w-3xl mx-auto text-center">
         {/* Heading */}
         <h2 className="text-3xl md:text-5xl font-bold tracking-tight gradient-text text-balance">
-          Stop tabbing between 12 apps
+          Start building on Solana&apos;s first IDE
         </h2>
         <p className="mt-5 text-lg text-muted max-w-xl mx-auto leading-relaxed">
-          Free, open source, and built for the solo dev who runs agents, ships
-          tokens, and deploys before the thread goes viral.
+          Free, open source, and purpose-built for Solana. From token launches
+          to deploys, everything ships from one app.
         </p>
 
         {/* Download buttons */}

@@ -3,14 +3,16 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DAEMON - AI-Native IDE",
+  title: "DAEMON — Solana's First IDE",
   description:
-    "The IDE built for AI-native development. Monaco editor, Claude AI integration, built-in terminal, Solana wallet, and one-click deploys. Open source.",
+    "Solana's first IDE. Built from scratch with AI agents, built-in wallet, token launches, Jupiter swaps, and one-click deploys. Free and open source.",
   icons: {
     icon: "/favicon.ico",
     apple: "/images/daemon-icon.png",
   },
   keywords: [
+    "Solana IDE",
+    "Solana Development",
     "IDE",
     "AI",
     "Claude",
@@ -18,21 +20,23 @@ export const metadata: Metadata = {
     "Electron",
     "Developer Tools",
     "Solana",
+    "DeFi",
+    "Token Launch",
     "Open Source",
   ],
   authors: [{ name: "nullxnothing" }],
   openGraph: {
-    title: "DAEMON - AI-Native IDE",
+    title: "DAEMON — Solana's First IDE",
     description:
-      "The IDE built for AI-native development. Monaco editor, Claude AI integration, built-in terminal, and more.",
+      "Solana's first IDE. AI agents, built-in wallet, token launches, and one-click deploys — all from one desktop app.",
     type: "website",
     images: ["/images/daemon-banner.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DAEMON - AI-Native IDE",
+    title: "DAEMON — Solana's First IDE",
     description:
-      "The IDE built for AI-native development. Open source, built from scratch.",
+      "Solana's first IDE. Built from scratch with AI agents, wallet, token launches, and deploys. Free and open source.",
     images: ["/images/daemon-banner.png"],
   },
 };

@@ -48,8 +48,9 @@ export function Architecture() {
             Not a wrapper. Not a fork.
           </h2>
           <p className="mt-5 text-muted leading-relaxed">
-            Standalone Electron app with process isolation, typed IPC, and
-            native modules. Every layer built intentionally.
+            A standalone Electron app built from scratch for Solana development.
+            Process isolation, typed IPC, and native modules — every layer built
+            intentionally.
           </p>
         </div>
 

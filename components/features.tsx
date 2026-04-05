@@ -11,17 +11,17 @@ import {
 
 const features = [
   {
-    icon: LayoutGrid,
-    title: "Grind Mode",
-    description:
-      "4-panel agent grid for parallel coding. Spin up four Claude agents working different parts of your project at the same time. The closest thing to cloning yourself.",
-    accent: true,
-  },
-  {
     icon: Wallet,
     title: "Solana Native",
     description:
       "Built-in wallet with live portfolio via Helius, SPL token tracking, PumpFun token launches, and Jupiter swaps. No browser extensions, no context switching.",
+    accent: true,
+  },
+  {
+    icon: LayoutGrid,
+    title: "Grind Mode",
+    description:
+      "Multi-panel agent grid for parallel coding. Spin up Claude agents working different parts of your project at the same time. The closest thing to cloning yourself.",
     accent: true,
   },
   {
@@ -61,14 +61,14 @@ export function Features() {
         {/* Section header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p className="text-accent text-[13px] font-medium tracking-wider uppercase mb-4">
-            What&apos;s inside
+            Built for Solana
           </p>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight gradient-text text-balance">
-            Built for builders who ship alone
+            Everything you need in one app
           </h2>
           <p className="mt-5 text-muted leading-relaxed">
-            Not a plugin marketplace. Not a wrapper around VS Code. A standalone
-            desktop app where AI agents and Solana tooling are first-class.
+            The first IDE where Solana tooling, AI agents, and deployment are
+            native — not plugins bolted on after the fact.
           </p>
         </div>
 

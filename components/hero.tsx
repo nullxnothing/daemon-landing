@@ -133,9 +133,9 @@ export function Hero() {
           className="animate-fade-up text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.9]"
           style={{ animationDelay: "100ms" }}
         >
-          <span className="gradient-text">Four agents.</span>
+          <span className="gradient-text">Solana&apos;s first IDE.</span>
           <br />
-          <span className="gradient-text">One IDE.</span>
+          <span className="gradient-text">Build. Launch. Deploy.</span>
         </h1>
 
         {/* Subtitle */}
@@ -143,10 +143,11 @@ export function Hero() {
           className="animate-fade-up mt-6 text-lg md:text-xl text-muted max-w-xl mx-auto leading-relaxed"
           style={{ animationDelay: "200ms" }}
         >
-          The AI-native IDE for solo Solana builders. 4 parallel agents,
-          built-in wallet, token launches — all from one desktop app.
+          The first IDE built specifically for Solana. AI agents, built-in
+          wallet, token launches, Jupiter swaps, and deploys — all from one
+          desktop app.
           <br className="hidden sm:block" />
-          Not a fork. Built from scratch.
+          Not a fork. Not a plugin. Built from scratch.
         </p>
 
         {/* CTAs */}
