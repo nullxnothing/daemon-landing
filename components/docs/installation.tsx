@@ -2,6 +2,7 @@ import { DocHeading, DocSubheading, H2, H3, Paragraph, List, Table, Hint } from 
 
 const WINDOWS_URL = "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe";
 const MAC_URL = "https://github.com/nullxnothing/daemon#mac-install";
+const LINUX_URL = "https://github.com/nullxnothing/daemon#linux-install";
 
 export function InstallationDoc() {
   return (
@@ -24,7 +25,15 @@ export function InstallationDoc() {
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2.5 border border-border bg-card px-5 py-3 rounded-xl font-medium text-[15px] text-muted transition-all hover:border-muted hover:text-foreground"
         >
-          macOS (.dmg)
+          macOS (build from source)
+        </a>
+        <a
+          href={LINUX_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2.5 border border-border bg-card px-5 py-3 rounded-xl font-medium text-[15px] text-muted transition-all hover:border-muted hover:text-foreground"
+        >
+          Linux (build from source)
         </a>
       </div>
 
@@ -47,7 +56,7 @@ export function InstallationDoc() {
       <Table
         headers={["Requirement", "Minimum"]}
         rows={[
-          ["OS", "Windows 10+ or macOS 12+"],
+          ["OS", "Windows 10+, macOS 12+, or Linux (Ubuntu 20.04+)"],
           ["Node.js", "v22 or higher"],
           ["RAM", "4 GB (8 GB recommended)"],
           ["Disk", "~500 MB for installation"],

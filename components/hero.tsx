@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import { track } from "@vercel/analytics";
-import { Monitor, Apple, ArrowRight } from "lucide-react";
+import { Monitor, Apple, ArrowRight, Terminal } from "lucide-react";
 
 const WINDOWS_URL =
   "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe";
 const MAC_URL =
   "https://github.com/nullxnothing/daemon#mac-install";
+const LINUX_URL =
+  "https://github.com/nullxnothing/daemon#linux-install";
 
 function HeroCard() {
   return (
@@ -174,6 +176,16 @@ function HeroCard() {
           >
             <Apple className="size-[18px]" />
             Install for Mac
+          </a>
+          <a
+            href={LINUX_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("Download", { os: "linux", location: "hero" })}
+            className="group flex items-center gap-2.5 border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 rounded-full font-medium text-[15px] text-muted transition-all duration-200 hover:border-white/20 hover:text-foreground hover:bg-white/10"
+          >
+            <Terminal className="size-[18px]" />
+            Install for Linux
           </a>
         </div>
       </div>
