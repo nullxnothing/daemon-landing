@@ -71,6 +71,18 @@ export function BrandKitDoc() {
           label="Primary — White on dark"
         />
         <LogoCard
+          src="/images/daemon-mark-white.png"
+          alt="White mark — transparent background"
+          bg="#141414"
+          label="White — Transparent background"
+        />
+        <LogoCard
+          src="/images/daemon-mark-dark.png"
+          alt="Dark mark — transparent background"
+          bg="#f0f0f0"
+          label="Dark — For light backgrounds"
+        />
+        <LogoCard
           src="/images/daemon-icon.png"
           alt="Mark on surface"
           bg="#141414"
