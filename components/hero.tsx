@@ -218,6 +218,7 @@ function DemoVideo() {
           muted
           playsInline
           preload="metadata"
+          poster="/images/ui-overview.webp"
         >
           <source src="/daemon-demo.mp4" type="video/mp4" />
         </video>
