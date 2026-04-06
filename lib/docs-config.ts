@@ -38,6 +38,7 @@ export const docsConfig: DocSection[] = [
     title: "Reference",
     items: [
       { title: "Architecture", slug: "architecture" },
+      { title: "Brand Kit", slug: "brand-kit" },
       { title: "Keyboard Shortcuts", slug: "keyboard-shortcuts" },
       { title: "Troubleshooting", slug: "troubleshooting" },
     ],

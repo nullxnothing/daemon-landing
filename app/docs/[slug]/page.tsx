@@ -18,6 +18,7 @@ import { KeyboardShortcutsDoc } from "@/components/docs/keyboard-shortcuts";
 import { TroubleshootingDoc } from "@/components/docs/troubleshooting";
 import { RoadmapDoc } from "@/components/docs/roadmap";
 import { ContributingDoc } from "@/components/docs/contributing";
+import { BrandKitDoc } from "@/components/docs/brand-kit";
 
 const contentMap: Record<string, React.ComponentType> = {
   introduction: IntroductionDoc,
@@ -32,6 +33,7 @@ const contentMap: Record<string, React.ComponentType> = {
   deployment: DeploymentDoc,
   architecture: ArchitectureDoc,
   "keyboard-shortcuts": KeyboardShortcutsDoc,
+  "brand-kit": BrandKitDoc,
   troubleshooting: TroubleshootingDoc,
   roadmap: RoadmapDoc,
   contributing: ContributingDoc,
