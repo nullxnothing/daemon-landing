@@ -51,7 +51,6 @@ export function Architecture() {
           </h2>
           <p className="mt-6 text-[17px] text-muted leading-relaxed max-w-lg mx-auto">
             A standalone Electron app built from scratch for Solana development.
-            A standalone Electron app built from scratch for Solana development.
             Process isolation, typed IPC, and native modules, with every layer built intentionally.
           </p>
         </div>

@@ -131,7 +131,7 @@ function HeroCard() {
         {/* Version badge */}
         <div className="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-[13px] text-accent mb-10">
           <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-          v1.3.0: Grind Mode is live
+          v2.0.0: Grind Mode is live
         </div>
 
         {/* Headline */}

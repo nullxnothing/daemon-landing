@@ -80,7 +80,7 @@ export function CTA() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[13px] text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <span className="size-1.5 rounded-full bg-accent" />
-            v1.3.0
+            v2.0.0
           </span>
           <span>MIT License</span>
           <a
