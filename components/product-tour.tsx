@@ -7,6 +7,19 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const SLIDE_COUNT = 10;
 const AUTO_ADVANCE_MS = 5000;
 
+const CAPTIONS: { title: string; description: string }[] = [
+  { title: "Launch Screen", description: "DAEMON boots into a minimal, focused workspace." },
+  { title: "Code Editor", description: "Monaco editor with an integrated file tree and terminal." },
+  { title: "Agent Launcher", description: "Spin up AI agents with your preferred model." },
+  { title: "Claude Panel", description: "Chat with Claude directly inside your IDE." },
+  { title: "Git Integration", description: "Stage, commit, and diff without leaving the editor." },
+  { title: "Solana Wallet", description: "View token balances and manage wallets natively." },
+  { title: "Settings", description: "Configure API keys and provider preferences." },
+  { title: "Process Manager", description: "Monitor and control all running tasks at a glance." },
+  { title: "Multi-Terminal", description: "Tabbed terminals for parallel workflows." },
+  { title: "Full Workspace", description: "Every panel working together in one view." },
+];
+
 export function ProductTour() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -80,7 +93,16 @@ export function ProductTour() {
             <ChevronRight className="size-5" />
           </button>
 
-          <div className="flex items-center justify-center gap-1.5 mt-6">
+          <div className="mt-6 text-center min-h-[3.5rem]">
+            <p className="text-foreground text-[14px] font-semibold tracking-tight">
+              {CAPTIONS[current].title}
+            </p>
+            <p className="text-muted text-[13px] mt-1">
+              {CAPTIONS[current].description}
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center gap-1.5 mt-4">
             {Array.from({ length: SLIDE_COUNT }, (_, i) => (
               <button
                 key={i}

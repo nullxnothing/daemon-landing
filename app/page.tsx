@@ -3,6 +3,7 @@ import { Hero } from "@/components/hero";
 import { DaemonDemo } from "@/components/daemon-demo/DaemonDemo";
 import { Features } from "@/components/features";
 import { Architecture } from "@/components/architecture";
+import { Comparison } from "@/components/comparison";
 import { ProductTour } from "@/components/product-tour";
 import { CTA } from "@/components/cta";
 import { Footer } from "@/components/footer";
@@ -33,6 +34,10 @@ export default function Home() {
         <SectionDivider />
         <ScrollReveal>
           <Architecture />
+        </ScrollReveal>
+        <SectionDivider />
+        <ScrollReveal>
+          <Comparison />
         </ScrollReveal>
         <SectionDivider />
         <ProductTour />
