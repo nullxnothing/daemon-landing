@@ -30,14 +30,12 @@ export const metadata: Metadata = {
     description:
       "Solana's first IDE. AI agents, built-in wallet, token launches, and one-click deploys, all from one desktop app.",
     type: "website",
-    images: ["/images/daemon-banner.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "DAEMON | Solana's First IDE",
     description:
       "Solana's first IDE. Built from scratch with AI agents, wallet, token launches, and deploys. Free and open source.",
-    images: ["/images/daemon-banner.png"],
   },
 };
 
