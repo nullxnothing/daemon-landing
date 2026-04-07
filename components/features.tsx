@@ -7,6 +7,7 @@ import {
   Wallet,
   Rocket,
   GitBranch,
+  Shield,
 } from "lucide-react";
 
 const features = [
@@ -15,6 +16,13 @@ const features = [
     title: "Solana Native",
     description:
       "Built-in wallet with live portfolio via Helius, SPL token tracking, PumpFun token launches, and Jupiter swaps. No browser extensions, no context switching.",
+  },
+  {
+    icon: Shield,
+    title: "Enterprise Signing",
+    description:
+      "Pluggable signing backends via Solana Keychain. AWS KMS, Fireblocks, Turnkey, HashiCorp Vault — swap your signing infrastructure without changing your workflow.",
+    accent: true,
   },
   {
     icon: LayoutGrid,

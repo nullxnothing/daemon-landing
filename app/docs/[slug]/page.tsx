@@ -10,6 +10,7 @@ import { UIOverviewDoc } from "@/components/docs/ui-overview";
 import { AIAgentsDoc } from "@/components/docs/ai-agents";
 import { GrindModeDoc } from "@/components/docs/grind-mode";
 import { SolanaDevelopmentDoc } from "@/components/docs/solana-development";
+import { SolanaKeychainDoc } from "@/components/docs/solana-keychain";
 import { EditorTerminalDoc } from "@/components/docs/editor-terminal";
 import { GitIntegrationDoc } from "@/components/docs/git-integration";
 import { DeploymentDoc } from "@/components/docs/deployment";
@@ -28,6 +29,7 @@ const contentMap: Record<string, React.ComponentType> = {
   "ai-agents": AIAgentsDoc,
   "grind-mode": GrindModeDoc,
   "solana-development": SolanaDevelopmentDoc,
+  "solana-keychain": SolanaKeychainDoc,
   "editor-terminal": EditorTerminalDoc,
   "git-integration": GitIntegrationDoc,
   deployment: DeploymentDoc,
