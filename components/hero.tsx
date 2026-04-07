@@ -2,7 +2,36 @@
 
 import Image from "next/image";
 import { track } from "@vercel/analytics";
-import { Monitor, Apple, ArrowRight, Terminal } from "lucide-react";
+import { Monitor, Apple, ArrowRight, Terminal, Copy, Check } from "lucide-react";
+import { useState } from "react";
+
+const DAEMON_CA = "4vpf4qNtNVkvz2dm5qL2mT6jBXH9gDY8qH2QsHN5pump";
+
+function CaPill() {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(DAEMON_CA);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch {}
+  };
+  return (
+    <button
+      onClick={handleCopy}
+      className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-[12px] font-mono text-muted-foreground hover:text-foreground hover:border-accent/50 transition-colors"
+      title="Copy $DAEMON contract address"
+    >
+      <span className="text-accent font-semibold">$DAEMON</span>
+      <span className="truncate max-w-[180px] sm:max-w-none">{DAEMON_CA}</span>
+      {copied ? (
+        <Check className="size-3.5 text-accent shrink-0" />
+      ) : (
+        <Copy className="size-3.5 opacity-60 group-hover:opacity-100 shrink-0" />
+      )}
+    </button>
+  );
+}
 
 const WINDOWS_URL =
   "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-2.0.1-setup.exe";
@@ -200,6 +229,14 @@ function HeroCard() {
             <Terminal className="size-[18px]" />
             Install for Linux
           </a>
+        </div>
+
+        {/* Contract address */}
+        <div
+          className="animate-fade-up mt-8 flex justify-center"
+          style={{ animationDelay: "400ms" }}
+        >
+          <CaPill />
         </div>
       </div>
     </div>
