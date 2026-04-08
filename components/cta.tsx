@@ -7,6 +7,7 @@ import type { ReleaseInfo } from "@/lib/downloads";
 export function CTA({ release }: { release: ReleaseInfo }) {
   const WINDOWS_URL = release.downloads.windows;
   const MAC_URL = release.downloads.mac;
+  const MAC_INTEL_URL = release.downloads.macIntel;
   const LINUX_URL = release.downloads.linux;
 
   return (
@@ -56,11 +57,11 @@ export function CTA({ release }: { release: ReleaseInfo }) {
             href={MAC_URL}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => track("Download", { os: "mac", location: "cta" })}
+            onClick={() => track("Download", { os: "mac-arm64", location: "cta" })}
             className="group flex items-center gap-2.5 border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 rounded-full font-medium text-[15px] text-muted transition-all duration-200 hover:border-white/20 hover:text-foreground hover:bg-white/10"
           >
             <Apple className="size-[18px]" />
-            Install for Mac
+            Mac (Apple Silicon)
           </a>
           <a
             href={LINUX_URL}
@@ -73,6 +74,18 @@ export function CTA({ release }: { release: ReleaseInfo }) {
             Install for Linux
           </a>
         </div>
+        <p className="mt-4 text-[13px] text-muted-foreground">
+          Intel Mac?{" "}
+          <a
+            href={MAC_INTEL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("Download", { os: "mac-x64", location: "cta" })}
+            className="text-accent hover:text-accent/80 transition-colors"
+          >
+            Download the x64 build
+          </a>
+        </p>
 
         {/* Meta info */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[13px] text-muted-foreground">

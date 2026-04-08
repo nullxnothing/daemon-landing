@@ -37,6 +37,7 @@ function CaPill() {
 function HeroCard({ release }: { release: ReleaseInfo }) {
   const WINDOWS_URL = release.downloads.windows;
   const MAC_URL = release.downloads.mac;
+  const MAC_INTEL_URL = release.downloads.macIntel;
   const LINUX_URL = release.downloads.linux;
 
   return (
@@ -211,11 +212,11 @@ function HeroCard({ release }: { release: ReleaseInfo }) {
             href={MAC_URL}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => track("Download", { os: "mac", location: "hero" })}
+            onClick={() => track("Download", { os: "mac-arm64", location: "hero" })}
             className="group flex items-center gap-2.5 border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 rounded-full font-medium text-[15px] text-muted transition-all duration-200 hover:border-white/20 hover:text-foreground hover:bg-white/10"
           >
             <Apple className="size-[18px]" />
-            Install for Mac
+            Mac (Apple Silicon)
           </a>
           <a
             href={LINUX_URL}
@@ -226,6 +227,21 @@ function HeroCard({ release }: { release: ReleaseInfo }) {
           >
             <Terminal className="size-[18px]" />
             Install for Linux
+          </a>
+        </div>
+        <div
+          className="animate-fade-up mt-4 flex items-center justify-center gap-2 text-[13px] text-muted-foreground"
+          style={{ animationDelay: "340ms" }}
+        >
+          <span>Intel Mac?</span>
+          <a
+            href={MAC_INTEL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("Download", { os: "mac-x64", location: "hero" })}
+            className="text-accent hover:text-accent/80 transition-colors"
+          >
+            Download the x64 build
           </a>
         </div>
 

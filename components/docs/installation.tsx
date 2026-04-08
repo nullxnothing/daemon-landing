@@ -4,6 +4,7 @@ import type { ReleaseInfo } from "@/lib/downloads";
 export function InstallationDoc({ release }: { release: ReleaseInfo }) {
   const WINDOWS_URL = release.downloads.windows;
   const MAC_URL = release.downloads.mac;
+  const MAC_INTEL_URL = release.downloads.macIntel;
   const LINUX_URL = release.downloads.linux;
 
   return (
@@ -12,7 +13,7 @@ export function InstallationDoc({ release }: { release: ReleaseInfo }) {
       <DocSubheading>Download DAEMON and get set up in under 2 minutes.</DocSubheading>
 
       <H2 id="download">Download</H2>
-      <div className="flex flex-col sm:flex-row gap-3 my-4">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-3 my-4">
         <a
           href={WINDOWS_URL}
           download
@@ -26,7 +27,15 @@ export function InstallationDoc({ release }: { release: ReleaseInfo }) {
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2.5 border border-border bg-card px-5 py-3 rounded-xl font-medium text-[15px] text-muted transition-all hover:border-muted hover:text-foreground"
         >
-          macOS (.dmg)
+          macOS (Apple Silicon)
+        </a>
+        <a
+          href={MAC_INTEL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2.5 border border-border bg-card px-5 py-3 rounded-xl font-medium text-[15px] text-muted transition-all hover:border-muted hover:text-foreground"
+        >
+          macOS (Intel)
         </a>
         <a
           href={LINUX_URL}

@@ -5,7 +5,8 @@
 | Platform | Link |
 | --- | --- |
 | Windows (.exe) | [Download DAEMON for Windows](https://github.com/nullxnothing/daemon/releases/latest/download/DAEMON-setup.exe) |
-| macOS (.dmg) | [Install for Mac](https://github.com/nullxnothing/daemon/releases/latest/download/DAEMON-arm64.dmg) |
+| macOS (Apple Silicon) | [Install for Mac](https://github.com/nullxnothing/daemon/releases/latest/download/DAEMON-arm64.dmg) |
+| macOS (Intel) | [Install for Intel Mac](https://github.com/nullxnothing/daemon/releases/latest/download/DAEMON-x64.dmg) |
 | Linux (AppImage) | [Install for Linux](https://github.com/nullxnothing/daemon/releases/latest/download/DAEMON.AppImage) |
 
 ## Prerequisites
