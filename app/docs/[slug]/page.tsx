@@ -11,6 +11,7 @@ import { UIOverviewDoc } from "@/components/docs/ui-overview";
 import { AIAgentsDoc } from "@/components/docs/ai-agents";
 import { GrindModeDoc } from "@/components/docs/grind-mode";
 import { SolanaDevelopmentDoc } from "@/components/docs/solana-development";
+import { DaemonProDoc } from "@/components/docs/daemon-pro";
 import { EditorTerminalDoc } from "@/components/docs/editor-terminal";
 import { GitIntegrationDoc } from "@/components/docs/git-integration";
 import { DeploymentDoc } from "@/components/docs/deployment";
@@ -29,6 +30,7 @@ const contentMap: Record<string, React.ComponentType<{ release: ReleaseInfo }>> 
   "ai-agents": AIAgentsDoc,
   "grind-mode": GrindModeDoc,
   "solana-development": SolanaDevelopmentDoc,
+  "daemon-pro": DaemonProDoc,
   "editor-terminal": EditorTerminalDoc,
   "git-integration": GitIntegrationDoc,
   deployment: DeploymentDoc,

@@ -3,6 +3,7 @@ import { Github, Twitter } from "lucide-react";
 const FOOTER_LINKS = {
   Product: [
     { label: "Download", href: "/docs/installation#download" },
+    { label: "Arena", href: "/arena" },
     { label: "Features", href: "/#features" },
     { label: "Docs", href: "/docs" },
     { label: "Roadmap", href: "/docs/roadmap" },
