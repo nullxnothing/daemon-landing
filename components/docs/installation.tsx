@@ -1,10 +1,11 @@
 import { DocHeading, DocSubheading, H2, H3, Paragraph, List, Table, Hint } from "./primitives";
+import type { ReleaseInfo } from "@/lib/downloads";
 
-const WINDOWS_URL = "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-2.0.1-setup.exe";
-const MAC_URL = "https://github.com/nullxnothing/daemon#mac-install";
-const LINUX_URL = "https://github.com/nullxnothing/daemon#linux-install";
+export function InstallationDoc({ release }: { release: ReleaseInfo }) {
+  const WINDOWS_URL = release.downloads.windows;
+  const MAC_URL = release.downloads.mac;
+  const LINUX_URL = release.downloads.linux;
 
-export function InstallationDoc() {
   return (
     <>
       <DocHeading>Installation</DocHeading>
@@ -25,7 +26,7 @@ export function InstallationDoc() {
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2.5 border border-border bg-card px-5 py-3 rounded-xl font-medium text-[15px] text-muted transition-all hover:border-muted hover:text-foreground"
         >
-          macOS (build from source)
+          macOS (.dmg)
         </a>
         <a
           href={LINUX_URL}
@@ -33,7 +34,7 @@ export function InstallationDoc() {
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2.5 border border-border bg-card px-5 py-3 rounded-xl font-medium text-[15px] text-muted transition-all hover:border-muted hover:text-foreground"
         >
-          Linux (build from source)
+          Linux (AppImage)
         </a>
       </div>
 

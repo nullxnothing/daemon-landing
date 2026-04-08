@@ -4,8 +4,9 @@
 
 | Platform | Link |
 | --- | --- |
-| Windows (.exe) | [Download DAEMON for Windows](https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-1.0.0-setup.exe) |
-| macOS (.dmg) | [Install for Mac](https://github.com/nullxnothing/daemon#mac-install) |
+| Windows (.exe) | [Download DAEMON for Windows](https://github.com/nullxnothing/daemon/releases/latest/download/DAEMON-setup.exe) |
+| macOS (.dmg) | [Install for Mac](https://github.com/nullxnothing/daemon/releases/latest/download/DAEMON-arm64.dmg) |
+| Linux (AppImage) | [Install for Linux](https://github.com/nullxnothing/daemon/releases/latest/download/DAEMON.AppImage) |
 
 ## Prerequisites
 
@@ -28,7 +29,7 @@ The entire process takes about 2 minutes.
 
 | Requirement | Minimum |
 | --- | --- |
-| OS | Windows 10+ or macOS 12+ |
+| OS | Windows 10+, macOS 12+, or modern Linux |
 | Node.js | v22 or higher |
 | RAM | 4 GB (8 GB recommended) |
 | Disk | ~500 MB for installation |

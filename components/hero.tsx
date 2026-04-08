@@ -4,6 +4,7 @@ import Image from "next/image";
 import { track } from "@vercel/analytics";
 import { Monitor, Apple, ArrowRight, Terminal, Copy, Check } from "lucide-react";
 import { useState } from "react";
+import type { ReleaseInfo } from "@/lib/downloads";
 
 const DAEMON_CA = "4vpf4qNtNVkvz2dm5qL2mT6jBXH9gDY8qH2QsHN5pump";
 
@@ -33,14 +34,11 @@ function CaPill() {
   );
 }
 
-const WINDOWS_URL =
-  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-2.0.1-setup.exe";
-const MAC_URL =
-  "https://github.com/nullxnothing/daemon#mac-install";
-const LINUX_URL =
-  "https://github.com/nullxnothing/daemon#linux-install";
+function HeroCard({ release }: { release: ReleaseInfo }) {
+  const WINDOWS_URL = release.downloads.windows;
+  const MAC_URL = release.downloads.mac;
+  const LINUX_URL = release.downloads.linux;
 
-function HeroCard() {
   return (
     <div className="relative min-h-[600px] flex flex-col items-center justify-center rounded-[48px] border border-border bg-card overflow-hidden shadow-sm transition-all duration-500">
       {/* Abstract swirl background */}
@@ -161,7 +159,7 @@ function HeroCard() {
         <div className="animate-fade-up flex items-center justify-center gap-3 mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-[13px] text-accent">
             <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-            v2.0.0: Grind Mode is live
+            v{release.version}: GitHub release is live
           </div>
           <a
             href="https://github.com/nullxnothing/daemon"
@@ -264,12 +262,12 @@ function DemoVideo() {
   );
 }
 
-export function Hero() {
+export function Hero({ release }: { release: ReleaseInfo }) {
   return (
     <section className="relative px-4 sm:px-6 pt-20 pb-16">
       {/* Hero card */}
       <div className="max-w-6xl mx-auto">
-        <HeroCard />
+        <HeroCard release={release} />
       </div>
 
       {/* Demo video below the card */}

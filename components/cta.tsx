@@ -2,15 +2,13 @@
 
 import { track } from "@vercel/analytics";
 import { Monitor, Apple, Github, ArrowRight, Terminal } from "lucide-react";
+import type { ReleaseInfo } from "@/lib/downloads";
 
-const WINDOWS_URL =
-  "https://pub-1996550623c84fbeb15c66144b09e41e.r2.dev/DAEMON-2.0.1-setup.exe";
-const MAC_URL =
-  "https://github.com/nullxnothing/daemon#mac-install";
-const LINUX_URL =
-  "https://github.com/nullxnothing/daemon#linux-install";
+export function CTA({ release }: { release: ReleaseInfo }) {
+  const WINDOWS_URL = release.downloads.windows;
+  const MAC_URL = release.downloads.mac;
+  const LINUX_URL = release.downloads.linux;
 
-export function CTA() {
   return (
     <section id="download" className="relative py-28 md:py-36 px-6 overflow-hidden">
       {/* Background treatment - echo of hero swirl */}
@@ -80,7 +78,7 @@ export function CTA() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[13px] text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <span className="size-1.5 rounded-full bg-accent" />
-            v2.0.0
+            v{release.version}
           </span>
           <span>MIT License</span>
           <a

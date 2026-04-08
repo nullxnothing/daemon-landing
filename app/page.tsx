@@ -8,6 +8,7 @@ import { ProductTour } from "@/components/product-tour";
 import { CTA } from "@/components/cta";
 import { Footer } from "@/components/footer";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { getReleaseInfo } from "@/lib/downloads";
 
 function SectionDivider() {
   return (
@@ -17,12 +18,14 @@ function SectionDivider() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const release = await getReleaseInfo();
+
   return (
     <>
       <Header />
       <main>
-        <Hero />
+        <Hero release={release} />
         <SectionDivider />
         <ScrollReveal>
           <DaemonDemo />
@@ -43,7 +46,7 @@ export default function Home() {
         <ProductTour />
         <SectionDivider />
         <ScrollReveal>
-          <CTA />
+          <CTA release={release} />
         </ScrollReveal>
       </main>
       <Footer />

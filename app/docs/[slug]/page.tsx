@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { getAllSlugs, getDocBySlug, getPrevNext } from "@/lib/docs-config";
+import { getReleaseInfo, type ReleaseInfo } from "@/lib/downloads";
 
 import { IntroductionDoc } from "@/components/docs/introduction";
 import { InstallationDoc } from "@/components/docs/installation";
@@ -20,7 +21,7 @@ import { RoadmapDoc } from "@/components/docs/roadmap";
 import { ContributingDoc } from "@/components/docs/contributing";
 import { BrandKitDoc } from "@/components/docs/brand-kit";
 
-const contentMap: Record<string, React.ComponentType> = {
+const contentMap: Record<string, React.ComponentType<{ release: ReleaseInfo }>> = {
   introduction: IntroductionDoc,
   installation: InstallationDoc,
   onboarding: OnboardingDoc,
@@ -63,12 +64,13 @@ export default async function DocPage({
   const { slug } = await params;
   const Content = contentMap[slug];
   if (!Content) notFound();
+  const release = await getReleaseInfo();
 
   const { prev, next } = getPrevNext(slug);
 
   return (
     <>
-      <Content />
+      <Content release={release} />
 
       {/* Prev / Next navigation */}
       <div className="mt-16 pt-8 border-t border-border flex items-center justify-between gap-4">
