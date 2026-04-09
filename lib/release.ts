@@ -53,8 +53,11 @@ export async function getReleaseInfo(): Promise<ReleaseInfo> {
     const res = await fetch(
       "https://api.github.com/repos/nullxnothing/daemon/releases/latest",
       {
-        headers: { Accept: "application/vnd.github+json" },
-        next: { revalidate: 300 },
+        headers: {
+          Accept: "application/vnd.github+json",
+          "User-Agent": "daemonide.tech",
+        },
+        cache: "no-store",
       },
     );
 

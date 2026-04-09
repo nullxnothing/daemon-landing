@@ -10,6 +10,8 @@ import { Footer } from "@/components/footer";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { getReleaseInfo } from "@/lib/downloads";
 
+export const dynamic = "force-dynamic";
+
 function SectionDivider() {
   return (
     <div className="max-w-6xl mx-auto px-6">

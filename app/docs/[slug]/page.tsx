@@ -22,6 +22,8 @@ import { RoadmapDoc } from "@/components/docs/roadmap";
 import { ContributingDoc } from "@/components/docs/contributing";
 import { BrandKitDoc } from "@/components/docs/brand-kit";
 
+export const dynamic = "force-dynamic";
+
 const contentMap: Record<string, React.ComponentType<{ release: ReleaseInfo }>> = {
   introduction: IntroductionDoc,
   installation: InstallationDoc,
