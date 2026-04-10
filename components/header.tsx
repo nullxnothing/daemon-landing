@@ -6,11 +6,10 @@ import { Github, Menu, X, Twitter } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Features", href: "#features" },
+  { label: "Product", href: "#features" },
   { label: "Arena", href: "/arena" },
   { label: "Docs", href: "/docs" },
-  { label: "Architecture", href: "#architecture" },
-  { label: "Download", href: "/docs/installation#download" },
+  { label: "Why Daemon", href: "#architecture" },
 ];
 
 export function Header() {
@@ -32,8 +31,8 @@ export function Header() {
           : "bg-transparent"
       )}
     >
-      <div className="max-w-6xl mx-auto px-6">
-        <nav className="flex items-center justify-between h-14">
+      <div className="w-full px-5 sm:px-7 lg:px-10">
+        <nav className="mx-auto flex h-18 w-full max-w-[88rem] items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2.5 group">
             <Image
@@ -43,7 +42,7 @@ export function Header() {
               height={28}
               className="rounded-lg"
             />
-            <span className="text-sm font-semibold tracking-wide">DAEMON</span>
+            <span className="text-sm font-semibold tracking-wide">Daemon</span>
           </a>
 
           {/* Desktop nav */}
@@ -52,7 +51,7 @@ export function Header() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+                className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
               </a>
@@ -60,7 +59,7 @@ export function Header() {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2">
             <a
               href="https://x.com/DaemonTerminal"
               target="_blank"
@@ -90,7 +89,7 @@ export function Header() {
             </a>
             <a
               href="/docs/installation#download"
-              className="flex items-center gap-2 bg-accent text-accent-foreground px-4 py-1.5 rounded-full text-[13px] font-semibold transition-all hover:brightness-110 hover:shadow-[0_0_24px_rgba(62,207,142,0.25)]"
+              className="ml-3 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent px-5 py-2.5 text-[13px] font-semibold text-accent-foreground transition-all hover:brightness-110 hover:shadow-[0_0_24px_rgba(62,207,142,0.25)]"
             >
               Download
             </a>

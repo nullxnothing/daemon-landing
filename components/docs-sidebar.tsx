@@ -28,7 +28,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
             height={22}
             className="rounded-md"
           />
-          <span className="font-semibold text-foreground tracking-wide text-sm">DAEMON</span>
+          <span className="font-semibold text-foreground tracking-wide text-sm">Daemon</span>
         </Link>
       </div>
 

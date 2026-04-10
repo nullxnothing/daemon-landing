@@ -59,7 +59,7 @@ export function Comparison() {
             Comparison
           </p>
           <h2 className="text-4xl md:text-[3.25rem] font-bold tracking-[-0.02em] leading-[1.1] gradient-text text-balance">
-            Why DAEMON?
+            Why Daemon?
           </h2>
           <p className="mt-6 text-[17px] text-muted leading-relaxed max-w-lg mx-auto">
             One purpose-built app vs. a general-purpose editor held together by extensions.
@@ -76,7 +76,7 @@ export function Comparison() {
                     Feature
                   </th>
                   <th className="text-center text-[13px] font-bold text-accent px-6 py-4 tracking-[-0.01em] min-w-[100px]">
-                    DAEMON
+                    Daemon
                   </th>
                   <th className="text-center text-[11px] font-semibold text-muted-foreground/80 px-6 py-4 uppercase tracking-[0.15em] min-w-[100px]">
                     VS Code
@@ -122,7 +122,7 @@ export function Comparison() {
         {/* Bottom callouts */}
         <div className="grid sm:grid-cols-3 gap-4 mt-6">
           <div className="p-6 rounded-2xl card-premium">
-            <p className="text-accent font-mono text-[13px] font-semibold mb-2">DAEMON</p>
+            <p className="text-accent font-mono text-[13px] font-semibold mb-2">Daemon</p>
             <p className="text-[13px] text-muted leading-[1.7]">
               Purpose-built for Solana. Wallet, agents, token launches, and deploys ship as first-class features, not afterthoughts.
             </p>

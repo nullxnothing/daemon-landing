@@ -144,6 +144,11 @@
   50% { opacity: 0; }
 }
 
+@keyframes ecosystem-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 /* Hero background twinkle */
 @keyframes hero-twinkle-1 {
   0%, 100% { opacity: 0.6; }
@@ -190,6 +195,91 @@
 
 .animate-glow-pulse {
   animation: glow-pulse 4s ease-in-out infinite;
+}
+
+.ecosystem-rail {
+  margin: 0 auto;
+  width: min(100%, 1000px);
+}
+
+.ecosystem-rail-label {
+  color: var(--color-muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin-bottom: 0.65rem;
+  text-transform: uppercase;
+}
+
+.ecosystem-rail-window {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 12px 36px rgba(0,0,0,0.16);
+  padding: 0.55rem 0.75rem;
+}
+
+.ecosystem-rail-track {
+  align-items: center;
+  animation: ecosystem-marquee 36s linear infinite;
+  display: flex;
+  gap: 0.7rem;
+  padding-right: 0.7rem;
+  width: max-content;
+}
+
+.ecosystem-rail-window:hover .ecosystem-rail-track {
+  animation-play-state: paused;
+}
+
+.ecosystem-pill {
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 999px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.72rem 1rem;
+}
+
+.ecosystem-pill-icon {
+  align-items: center;
+  display: inline-flex;
+  height: 1.45rem;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 4rem;
+}
+
+.ecosystem-pill-icon img {
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .ecosystem-rail {
+    width: 100%;
+  }
+
+  .ecosystem-rail-track {
+    animation-duration: 32s;
+  }
+
+  .ecosystem-pill {
+    min-height: 2.7rem;
+    padding: 0.58rem 0.82rem;
+  }
+
+  .ecosystem-pill-icon {
+    height: 1.2rem;
+    min-width: 3.2rem;
+  }
 }
 
 /* Scroll-triggered animations */
@@ -270,6 +360,7 @@
   .animate-fade-up,
   .animate-fade-in,
   .animate-glow-pulse,
+  .ecosystem-rail-track,
   .reveal {
     animation: none !important;
     transition: none !important;

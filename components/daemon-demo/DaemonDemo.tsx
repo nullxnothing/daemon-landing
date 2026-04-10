@@ -47,11 +47,11 @@ export function DaemonDemo() {
   const isEditorMode = activePanel === "editor";
 
   return (
-    <section className="py-24 md:py-32 px-4 sm:px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[88rem] mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-4">
-            Inside DAEMON
+            Inside Daemon
           </h2>
           <p className="text-[var(--color-muted)] max-w-2xl mx-auto text-lg">
             Click around. Explore the panels, settings, and tools — just like the real app.
@@ -67,7 +67,7 @@ export function DaemonDemo() {
                   background: "linear-gradient(135deg, #3ecf8e, #2a9d6a)",
                 }}
               />
-              <span className="dd-titlebar-title">DAEMON</span>
+              <span className="dd-titlebar-title">Daemon</span>
             </div>
             <div className="dd-project-tabs">
               <button className="dd-project-tab active">
@@ -173,7 +173,7 @@ export function DaemonDemo() {
           {/* Status bar */}
           <div className="dd-statusbar">
             <div className="dd-statusbar-left">
-              <span className="dd-status-item">DAEMON</span>
+              <span className="dd-status-item">Daemon</span>
               <span className="dd-status-item">
                 <GitBranch size={10} />
                 main

@@ -8,7 +8,7 @@ const SLIDE_COUNT = 10;
 const AUTO_ADVANCE_MS = 5000;
 
 const CAPTIONS: { title: string; description: string }[] = [
-  { title: "Launch Screen", description: "DAEMON boots into a minimal, focused workspace." },
+  { title: "Launch Screen", description: "Daemon boots into a minimal, focused workspace." },
   { title: "Code Editor", description: "Monaco editor with an integrated file tree and terminal." },
   { title: "Agent Launcher", description: "Spin up AI agents with your preferred model." },
   { title: "Claude Panel", description: "Chat with Claude directly inside your IDE." },
@@ -39,14 +39,14 @@ export function ProductTour() {
   }, [paused, next]);
 
   return (
-    <section className="py-24 md:py-32 px-4 sm:px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[88rem] mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-accent text-[13px] font-medium tracking-wider uppercase mb-3">
             Product Tour
           </p>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight gradient-text text-balance">
-            Inside DAEMON
+            Inside Daemon
           </h2>
           <p className="mt-5 text-muted leading-relaxed">
             A walkthrough of every layer, from the editor to the wallet.
@@ -58,7 +58,7 @@ export function ProductTour() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <div className="relative rounded-2xl border border-border bg-card overflow-hidden shadow-2xl shadow-black/40 aspect-video">
+          <div className="relative rounded-[28px] border border-border bg-card overflow-hidden shadow-2xl shadow-black/40 aspect-[16/9]">
             {Array.from({ length: SLIDE_COUNT }, (_, i) => (
               <div
                 key={i}

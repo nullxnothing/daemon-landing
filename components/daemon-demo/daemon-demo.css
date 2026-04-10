@@ -1,8 +1,8 @@
-/* ── DAEMON Demo — scoped replica of the real app's styles ── */
+/* ── Daemon Demo — scoped replica of the real app's styles ── */
 /* All rules scoped under .daemon-demo to avoid Tailwind conflicts */
 
 .daemon-demo {
-  /* DAEMON token system — exact copy from styles/tokens.css */
+  /* Daemon token system — exact copy from styles/tokens.css */
   --bg:    #0a0a0a;
   --s1:    #141414;
   --s2:    #1a1a1a;
@@ -63,7 +63,7 @@
 
   /* Outer dimensions */
   width: 100%;
-  max-width: 1100px;
+  max-width: 1280px;
   aspect-ratio: 16 / 10;
   margin: 0 auto;
   display: flex;
@@ -118,9 +118,8 @@
   font-size: 11px;
   font-weight: 600;
   color: var(--green);
-  opacity: 0.3;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  opacity: 0.82;
+  letter-spacing: 0.4px;
 }
 
 .dd-project-tabs {
