@@ -249,8 +249,15 @@
   animation: ecosystem-marquee 42s linear infinite;
   display: flex;
   gap: 0.5rem;
-  padding-right: 0.5rem;
   width: max-content;
+  will-change: transform;
+}
+
+.ecosystem-rail-group {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.5rem;
 }
 
 .ecosystem-rail-window:hover .ecosystem-rail-track {
@@ -289,26 +296,24 @@
     width: 100%;
   }
 
-  .ecosystem-rail-window {
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-
   .ecosystem-rail-track {
-    animation: none;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
+    animation-duration: 30s;
   }
 
   .ecosystem-pill {
-    min-height: 2.7rem;
-    padding: 0.58rem 0.82rem;
+    min-height: 2.5rem;
+    padding: 0.52rem 0.72rem;
   }
 
   .ecosystem-pill-icon {
-    height: 1.5rem;
-    min-width: 1.5rem;
+    height: 1.35rem;
+    min-width: 1.35rem;
+  }
+}
+
+@media (hover: none) {
+  .ecosystem-rail-window:hover .ecosystem-rail-track {
+    animation-play-state: running;
   }
 }
 

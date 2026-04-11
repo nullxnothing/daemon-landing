@@ -23,8 +23,6 @@ function LogoPill({ logo }: { logo: (typeof ecosystemLogos)[number] }) {
 }
 
 export function EcosystemRail() {
-  const logos = [...ecosystemLogos, ...ecosystemLogos];
-
   return (
     <div className="ecosystem-rail animate-fade-up" style={{ animationDelay: "220ms" }}>
       <div className="ecosystem-rail-label">
@@ -32,9 +30,16 @@ export function EcosystemRail() {
       </div>
       <div className="ecosystem-rail-window" aria-label="Supported Solana ecosystem tools">
         <div className="ecosystem-rail-track">
-          {logos.map((logo, index) => (
-            <LogoPill key={`${logo.name}-${index}`} logo={logo} />
-          ))}
+          <div className="ecosystem-rail-group">
+            {ecosystemLogos.map((logo) => (
+              <LogoPill key={logo.name} logo={logo} />
+            ))}
+          </div>
+          <div className="ecosystem-rail-group" aria-hidden="true">
+            {ecosystemLogos.map((logo) => (
+              <LogoPill key={`${logo.name}-duplicate`} logo={logo} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
