@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description:
     "Solana's first IDE. Built from scratch with AI agents, built-in wallet, token launches, Jupiter swaps, and one-click deploys. Free and open source.",
   icons: {
-    icon: "/favicon.ico",
-    apple: "/images/daemon-icon.png",
+    icon: "/images/daemon-mark-white.png",
+    apple: "/images/daemon-mark-white.png",
   },
   keywords: [
     "Solana IDE",
@@ -40,8 +40,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
-  colorScheme: "dark",
+  themeColor: "#121413",
 };
 
 export default function RootLayout({

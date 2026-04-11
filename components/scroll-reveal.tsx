@@ -16,12 +16,11 @@ export function ScrollReveal({ children }: { children: React.ReactNode }) {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
-        { opacity: 0, y: 48, scale: 0.985 },
+        { opacity: 0, y: 28 },
         {
           opacity: 1,
           y: 0,
-          scale: 1,
-          duration: 1,
+          duration: 0.72,
           ease: "power3.out",
           scrollTrigger: {
             trigger: el,

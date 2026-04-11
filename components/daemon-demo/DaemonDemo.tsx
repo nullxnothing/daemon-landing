@@ -64,7 +64,7 @@ export function DaemonDemo() {
               <div
                 className="dd-titlebar-icon"
                 style={{
-                  background: "linear-gradient(135deg, #3ecf8e, #2a9d6a)",
+                  background: "linear-gradient(135deg, #58c88a, #3f9f6d)",
                 }}
               />
               <span className="dd-titlebar-title">Daemon</span>
@@ -82,7 +82,7 @@ export function DaemonDemo() {
             <div className="dd-titlebar-traffic">
               <div className="dd-traffic-dot" style={{ background: "#ef5350" }} />
               <div className="dd-traffic-dot" style={{ background: "#f0b429" }} />
-              <div className="dd-traffic-dot" style={{ background: "#3ecf8e" }} />
+              <div className="dd-traffic-dot" style={{ background: "#58c88a" }} />
             </div>
           </div>
 
@@ -187,14 +187,14 @@ export function DaemonDemo() {
               <span className="dd-status-item">
                 <span
                   className="dd-status-dot"
-                  style={{ background: "#3ecf8e" }}
+                  style={{ background: "#58c88a" }}
                 />
                 Claude
               </span>
               <span className="dd-status-item">
                 <span
                   className="dd-status-dot"
-                  style={{ background: "#3ecf8e" }}
+                  style={{ background: "#58c88a" }}
                 />
                 RPC
               </span>

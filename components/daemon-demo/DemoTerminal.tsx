@@ -6,14 +6,14 @@ const TERMINAL_LINES = [
   { text: "$ claude --model claude-opus-4-20250514", delay: 0, color: "#f0f0f0" },
   { text: "", delay: 300, color: "" },
   { text: "╭─────────────────────────────────────────╮", delay: 400, color: "#333" },
-  { text: "│  Claude Code          claude-opus-4      │", delay: 450, color: "#3ecf8e" },
+  { text: "│  Claude Code          claude-opus-4      │", delay: 450, color: "#58c88a" },
   { text: "╰─────────────────────────────────────────╯", delay: 500, color: "#333" },
   { text: "", delay: 550, color: "" },
   { text: "> Analyzing project structure...", delay: 800, color: "#a0a0a0" },
   { text: "  Found 14 source files across 3 directories", delay: 1200, color: "#a0a0a0" },
   { text: "  Detected: Anchor program + React frontend", delay: 1600, color: "#a0a0a0" },
   { text: "", delay: 1800, color: "" },
-  { text: "> Ready. What would you like to build?", delay: 2200, color: "#3ecf8e" },
+  { text: "> Ready. What would you like to build?", delay: 2200, color: "#58c88a" },
 ];
 
 export function DemoTerminal() {
@@ -47,7 +47,7 @@ export function DemoTerminal() {
     <div className="dd-terminal">
       <div className="dd-terminal-tabs">
         <button className="dd-terminal-tab active">
-          <span className="dd-terminal-dot" style={{ background: "#3ecf8e" }} />
+          <span className="dd-terminal-dot" style={{ background: "#58c88a" }} />
           Claude
         </button>
         <button className="dd-terminal-tab">

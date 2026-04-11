@@ -39,7 +39,7 @@ export function ProductTour() {
   }, [paused, next]);
 
   return (
-    <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8">
+    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-[88rem] mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-accent text-[13px] font-medium tracking-wider uppercase mb-3">
@@ -58,7 +58,7 @@ export function ProductTour() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <div className="relative rounded-[28px] border border-border bg-card overflow-hidden shadow-2xl shadow-black/40 aspect-[16/9]">
+          <div className="relative rounded-lg border border-border bg-card overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.28)] aspect-[16/9]">
             {Array.from({ length: SLIDE_COUNT }, (_, i) => (
               <div
                 key={i}
@@ -67,7 +67,7 @@ export function ProductTour() {
               >
                 <Image
                   src={`/slides/${i + 1}.webp`}
-                  alt={`DAEMON product tour slide ${i + 1}`}
+                  alt={`${CAPTIONS[i].title}: ${CAPTIONS[i].description}`}
                   fill
                   className="object-contain"
                   sizes="(max-width: 768px) 100vw, 1152px"
@@ -80,14 +80,14 @@ export function ProductTour() {
 
           <button
             onClick={prev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 size-10 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100"
+            className="absolute left-3 top-1/2 -translate-y-1/2 size-10 rounded-lg bg-black/60 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100"
             aria-label="Previous slide"
           >
             <ChevronLeft className="size-5" />
           </button>
           <button
             onClick={next}
-            className="absolute right-3 top-1/2 -translate-y-1/2 size-10 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100"
+            className="absolute right-3 top-1/2 -translate-y-1/2 size-10 rounded-lg bg-black/60 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100"
             aria-label="Next slide"
           >
             <ChevronRight className="size-5" />

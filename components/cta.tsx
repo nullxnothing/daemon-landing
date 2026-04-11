@@ -1,24 +1,19 @@
 "use client";
 
 import { track } from "@vercel/analytics";
-import { Monitor, Apple, Github, ArrowRight, Terminal } from "lucide-react";
+import { Github, ArrowRight } from "lucide-react";
 import type { ReleaseInfo } from "@/lib/downloads";
 
 export function CTA({ release }: { release: ReleaseInfo }) {
-  const WINDOWS_URL = release.downloads.windows;
-  const MAC_URL = release.downloads.mac;
-  const MAC_INTEL_URL = release.downloads.macIntel;
-  const LINUX_URL = release.downloads.linux;
-
   return (
-    <section id="download" className="relative py-28 md:py-36 px-6 overflow-hidden">
+    <section id="download" className="relative py-24 md:py-30 px-6 overflow-hidden">
       {/* Background treatment - echo of hero swirl */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_80%,rgba(62,207,142,0.08),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_80%,rgba(88,200,138,0.07),transparent_60%)]" />
         <div
-          className="absolute inset-0 opacity-[0.15]"
+          className="absolute inset-0 opacity-[0.12]"
           style={{
-            backgroundImage: `radial-gradient(circle, rgba(62,207,142,0.3) 1px, transparent 1px)`,
+            backgroundImage: `radial-gradient(circle, rgba(88,200,138,0.24) 1px, transparent 1px)`,
             backgroundSize: "10px 10px",
             maskImage: "radial-gradient(ellipse 70% 50% at 50% 70%, black 0%, transparent 70%)",
             WebkitMaskImage: "radial-gradient(ellipse 70% 50% at 50% 70%, black 0%, transparent 70%)",
@@ -32,58 +27,36 @@ export function CTA({ release }: { release: ReleaseInfo }) {
           Get Started
         </p>
         <h2 className="text-4xl md:text-[3.25rem] font-bold tracking-[-0.02em] leading-[1.1] gradient-text text-balance">
-          Start building on
-          <br />
-          Solana&apos;s first IDE
+          Download the workspace.
         </h2>
         <p className="mt-6 text-[17px] text-muted max-w-xl mx-auto leading-relaxed">
-          Free, open source, and purpose-built for Solana. From token launches
-          to deploys, everything ships from one app.
+          Free, open source, and purpose-built for Solana development from first edit to deploy.
         </p>
 
-        {/* Download buttons - matching hero style */}
+        {/* Keep the decision simple here; platform choices live on the installation page. */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
-            href={WINDOWS_URL}
-            download
-            onClick={() => track("Download", { os: "windows", location: "cta" })}
-            className="group flex items-center gap-2.5 bg-accent text-accent-foreground px-7 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_40px_rgba(62,207,142,0.3)]"
+            href="/docs/installation#download"
+            onClick={() => track("Download", { location: "cta" })}
+            className="group flex items-center gap-2.5 bg-accent text-accent-foreground px-7 py-3.5 rounded-lg font-semibold text-[15px] transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_32px_rgba(88,200,138,0.22)]"
           >
-            <Monitor className="size-[18px]" />
-            Download for Windows
+            Download Daemon
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
           <a
-            href={MAC_URL}
+            href="https://pump.fun/coin/4vpf4qNtNVkvz2dm5qL2mT6jBXH9gDY8qH2QsHN5pump"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => track("Download", { os: "mac-arm64", location: "cta" })}
-            className="group flex items-center gap-2.5 border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 rounded-full font-medium text-[15px] text-muted transition-all duration-200 hover:border-white/20 hover:text-foreground hover:bg-white/10"
+            onClick={() => track("BuyDaemon", { location: "cta" })}
+            className="group flex items-center gap-2.5 border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 rounded-lg font-medium text-[15px] text-muted transition-all duration-200 hover:border-white/20 hover:text-foreground hover:bg-white/10"
           >
-            <Apple className="size-[18px]" />
-            Mac (Apple Silicon)
-          </a>
-          <a
-            href={LINUX_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("Download", { os: "linux", location: "cta" })}
-            className="group flex items-center gap-2.5 border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 rounded-full font-medium text-[15px] text-muted transition-all duration-200 hover:border-white/20 hover:text-foreground hover:bg-white/10"
-          >
-            <Terminal className="size-[18px]" />
-            Install for Linux
+            Buy $DAEMON
           </a>
         </div>
         <p className="mt-4 text-[13px] text-muted-foreground">
-          Intel Mac?{" "}
-          <a
-            href={MAC_INTEL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("Download", { os: "mac-x64", location: "cta" })}
-            className="text-accent hover:text-accent/80 transition-colors"
-          >
-            Download the x64 build
+          Windows, macOS Apple Silicon, macOS Intel, and Linux builds are available.{" "}
+          <a href="/docs/installation" className="hover:text-foreground transition-colors">
+            See platform options.
           </a>
         </p>
 
@@ -105,35 +78,6 @@ export function CTA({ release }: { release: ReleaseInfo }) {
           </a>
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 pt-12 border-t border-white/[0.06]">
-          <div className="grid grid-cols-3 gap-8 max-w-md mx-auto">
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
-                4
-              </div>
-              <div className="mt-1.5 text-[13px] text-muted-foreground">
-                Parallel agents
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
-                21
-              </div>
-              <div className="mt-1.5 text-[13px] text-muted-foreground">
-                Built-in panels
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
-                109
-              </div>
-              <div className="mt-1.5 text-[13px] text-muted-foreground">
-                Tests passing
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

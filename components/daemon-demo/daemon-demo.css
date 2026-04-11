@@ -2,23 +2,22 @@
 /* All rules scoped under .daemon-demo to avoid Tailwind conflicts */
 
 .daemon-demo {
-  /* Daemon token system — exact copy from styles/tokens.css */
-  --bg:    #0a0a0a;
-  --s1:    #141414;
-  --s2:    #1a1a1a;
-  --s3:    #222222;
-  --s4:    #2a2a2a;
-  --s5:    #333333;
-  --s6:    #3a3a3a;
+  --bg:    #121413;
+  --s1:    #171a18;
+  --s2:    #1d221f;
+  --s3:    #252b27;
+  --s4:    #303832;
+  --s5:    #3a453d;
+  --s6:    #465149;
 
-  --t1:    #f0f0f0;
-  --t2:    #a0a0a0;
-  --t3:    #888888;
-  --t4:    #666666;
+  --t1:    #e8ece6;
+  --t2:    #b8beb7;
+  --t3:    #919a92;
+  --t4:    #7f887f;
 
-  --green:       #3ecf8e;
-  --green-dim:   #2a9d6a;
-  --green-glow:  rgba(62, 207, 142, 0.15);
+  --green:       #58c88a;
+  --green-dim:   #3f9f6d;
+  --green-glow:  rgba(88, 200, 138, 0.13);
 
   --amber:       #f0b429;
   --amber-dim:   #c99a22;
@@ -94,7 +93,7 @@
   height: var(--titlebar-h);
   background: var(--s1);
   border-bottom: 1px solid var(--border);
-  background-image: linear-gradient(to right, rgba(62, 207, 142, 0.03), transparent 40%);
+  background-image: linear-gradient(to right, rgba(88, 200, 138, 0.03), transparent 40%);
   display: flex;
   align-items: center;
   padding: 0 12px;
@@ -148,7 +147,7 @@
 .dd-project-tab.active {
   color: var(--t1);
   border-bottom-color: var(--green);
-  box-shadow: 0 1px 4px rgba(62, 207, 142, 0.1);
+  box-shadow: 0 1px 4px rgba(88, 200, 138, 0.1);
 }
 
 .dd-project-tab-dot {
@@ -161,7 +160,7 @@
 
 .dd-project-tab-dot.live {
   background: var(--green);
-  box-shadow: 0 0 6px rgba(62, 207, 142, 0.4);
+  box-shadow: 0 0 6px rgba(88, 200, 138, 0.4);
 }
 
 .dd-titlebar-traffic {
@@ -217,7 +216,7 @@
 
 .dd-sidebar-icon.active {
   color: var(--t1);
-  box-shadow: 0 0 8px rgba(62, 207, 142, 0.06);
+  box-shadow: 0 0 8px rgba(88, 200, 138, 0.06);
 }
 
 .dd-sidebar-icon.active::before {
@@ -380,7 +379,7 @@
 .dd-editor-tab.active {
   color: var(--t1);
   border-bottom-color: var(--green);
-  box-shadow: 0 1px 4px rgba(62, 207, 142, 0.1);
+  box-shadow: 0 1px 4px rgba(88, 200, 138, 0.1);
 }
 
 .dd-editor-content {
@@ -538,7 +537,7 @@
 .dd-right-tab.active {
   color: var(--t1);
   border-bottom-color: var(--green);
-  box-shadow: 0 1px 4px rgba(62, 207, 142, 0.08);
+  box-shadow: 0 1px 4px rgba(88, 200, 138, 0.08);
 }
 
 .dd-right-content {
@@ -600,7 +599,7 @@
   height: var(--statusbar-h);
   background: var(--s1);
   border-top: 1px solid var(--border);
-  background-image: linear-gradient(to right, rgba(62, 207, 142, 0.02), transparent 30%);
+  background-image: linear-gradient(to right, rgba(88, 200, 138, 0.02), transparent 30%);
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -674,7 +673,7 @@
 .dd-settings-tab.active {
   color: var(--green);
   border-bottom-color: var(--green);
-  text-shadow: 0 0 8px rgba(62, 207, 142, 0.3);
+  text-shadow: 0 0 8px rgba(88, 200, 138, 0.3);
 }
 
 .dd-settings-body {
@@ -729,7 +728,7 @@
 
 .dd-toggle.on {
   background: var(--green);
-  box-shadow: 0 0 8px rgba(62, 207, 142, 0.15);
+  box-shadow: 0 0 8px rgba(88, 200, 138, 0.15);
 }
 
 .dd-toggle::after {
