@@ -1,4 +1,9 @@
 const API_BASE = "https://daemon-pro-api-production.up.railway.app";
+const DEXSCREENER_TOKEN_URL =
+  "https://api.dexscreener.com/latest/dex/tokens/4vpf4qNtNVkvz2dm5qL2mT6jBXH9gDY8qH2QsHN5pump";
+
+export const ARENA_TARGET_MARKET_CAP = 100_000;
+export const DAEMON_ARENA_TOKEN_MINT = "4vpf4qNtNVkvz2dm5qL2mT6jBXH9gDY8qH2QsHN5pump";
 
 export type ArenaContest = {
   slug: string;
@@ -34,6 +39,21 @@ export type ArenaPrice = {
   holderMinAmount?: number;
 };
 
+type DexScreenerPair = {
+  marketCap?: number;
+  liquidity?: {
+    usd?: number;
+  };
+  url?: string;
+};
+
+export type ArenaMarketCap = {
+  tokenMint: string;
+  marketCap: number | null;
+  targetMarketCap: number;
+  trackerUrl: string | null;
+};
+
 async function fetchJson<T>(path: string): Promise<T | null> {
   try {
     const res = await fetch(`${API_BASE}${path}`, {
@@ -63,4 +83,36 @@ export async function getArenaData() {
 export async function getArenaPrice() {
   const price = await fetchJson<{ ok: boolean; data: ArenaPrice }>("/v1/subscribe/price");
   return price?.data ?? null;
+}
+
+export async function getArenaMarketCap(): Promise<ArenaMarketCap> {
+  try {
+    const res = await fetch(DEXSCREENER_TOKEN_URL, {
+      next: { revalidate: 30 },
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) {
+      throw new Error(`DexScreener returned ${res.status}`);
+    }
+
+    const data = (await res.json()) as { pairs?: DexScreenerPair[] };
+    const bestPair =
+      data.pairs?.sort(
+        (a, b) => (b.liquidity?.usd ?? b.marketCap ?? 0) - (a.liquidity?.usd ?? a.marketCap ?? 0),
+      )[0] ?? null;
+
+    return {
+      tokenMint: DAEMON_ARENA_TOKEN_MINT,
+      marketCap: bestPair?.marketCap ?? null,
+      targetMarketCap: ARENA_TARGET_MARKET_CAP,
+      trackerUrl: bestPair?.url ?? null,
+    };
+  } catch {
+    return {
+      tokenMint: DAEMON_ARENA_TOKEN_MINT,
+      marketCap: null,
+      targetMarketCap: ARENA_TARGET_MARKET_CAP,
+      trackerUrl: null,
+    };
+  }
 }

@@ -2,12 +2,12 @@ import Image from "next/image";
 import { ArrowRight, Github } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { getArenaData, getArenaPrice } from "@/lib/arena";
+import { getArenaData, getArenaMarketCap, getArenaPrice } from "@/lib/arena";
 
 export const metadata = {
   title: "DAEMON Arena",
   description:
-    "Build Week 01 for DAEMON Pro. Submit projects in-app, get on the live board, and compete for USDC, lifetime Pro, and founding Discord access.",
+    "Submit projects in DAEMON Arena and compete for a $10,000 prize pool. Winners are finalized when DAEMON reaches a $100,000 market cap.",
 };
 
 function formatRelative(ts: number) {
@@ -19,12 +19,33 @@ function formatRelative(ts: number) {
   return new Date(ts).toLocaleDateString();
 }
 
+function formatUsd(value: number) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
 export default async function ArenaPage() {
-  const [{ contest, submissions }, price] = await Promise.all([getArenaData(), getArenaPrice()]);
+  const [{ contest, submissions }, price, marketCap] = await Promise.all([
+    getArenaData(),
+    getArenaPrice(),
+    getArenaMarketCap(),
+  ]);
   const holderText =
     price?.holderMinAmount && price?.holderMint
       ? `Hold ${Number(price.holderMinAmount).toLocaleString()} DAEMON in a local wallet to claim Pro in-app. Everyone else can subscribe with ${price.priceUsdc} USDC via x402.`
       : "Holder access is enabled inside the app for qualified DAEMON wallets.";
+  const currentMarketCap = marketCap.marketCap;
+  const remainingMarketCap =
+    currentMarketCap === null
+      ? null
+      : Math.max(marketCap.targetMarketCap - currentMarketCap, 0);
+  const marketCapProgress =
+    currentMarketCap === null
+      ? 0
+      : Math.min((currentMarketCap / marketCap.targetMarketCap) * 100, 100);
 
   return (
     <>
@@ -49,9 +70,9 @@ export default async function ArenaPage() {
                 Build something that deserves to ship inside DAEMON.
               </h1>
               <p className="mt-6 max-w-2xl text-lg text-muted leading-relaxed">
-                Submit your tool, agent, skill, or MCP workflow in-app. The public board
-                pulls from the same live backend as the desktop app, so what gets submitted
-                in DAEMON is what appears here.
+                Submit your tool, agent, skill, or MCP workflow in-app. The top three
+                winners split a $10,000 pool, and submissions stay open until the DAEMON
+                token reaches a $100,000 market cap.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -72,30 +93,96 @@ export default async function ArenaPage() {
 
             <div className="rounded-[36px] border border-border bg-card/70 p-8 md:p-10">
               <div className="text-[12px] uppercase tracking-[0.18em] text-yellow-300/90">
-                {contest?.slug?.replaceAll("-", " ") ?? "Build Week 01"}
+                {contest?.slug?.replaceAll("-", " ") ?? "Live competition"}
               </div>
               <h2 className="mt-3 text-3xl font-semibold leading-tight">
-                {contest?.name ?? "DAEMON Arena: Build Week 01"}
+                {contest?.name ?? "DAEMON Arena: $10,000 builder pool"}
               </h2>
               <div className="mt-4 text-sm text-muted leading-7">
-                <div>{contest?.duration ?? "3 weeks"}.</div>
-                <div>{contest?.submissionWindow ?? "Open now"}.</div>
+                <div>Top 3 split $10,000 in prizes.</div>
+                <div>Submissions finalize when DAEMON reaches $100,000 market cap.</div>
               </div>
               <div className="mt-6 space-y-3">
-                {(contest?.prizes ?? [
-                  "1st place: 250 USDC + lifetime Pro + Founding Builder Discord access",
-                  "2nd place: 150 USDC + lifetime Pro + Founding Builder Discord access",
-                  "3rd place: 100 USDC + lifetime Pro + Founding Builder Discord access",
-                ]).map((prize) => (
+                {[
+                  "1st place: $5,000",
+                  "2nd place: $3,000",
+                  "3rd place: $2,000",
+                ].map((prize) => (
                   <div key={prize} className="rounded-2xl border border-border bg-background/60 px-4 py-3 text-sm text-muted">
                     {prize}
                   </div>
                 ))}
               </div>
               <div className="mt-6 rounded-2xl border border-accent/20 bg-accent/5 px-4 py-4 text-sm text-muted leading-7">
-                {contest?.judging ??
-                  "Community voting informs ranking. Final winners are selected by the DAEMON team."}
+                Community voting informs ranking. Final winners are selected by the DAEMON
+                team once the DAEMON token crosses the target market cap.
               </div>
+            </div>
+          </section>
+
+          <section className="mt-6 rounded-[28px] border border-border bg-card/60 p-6 md:p-8">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <div className="text-[11px] uppercase tracking-[0.18em] text-accent">
+                  Live market cap trigger
+                </div>
+                <h3 className="mt-3 text-2xl md:text-3xl font-semibold leading-tight">
+                  Arena submissions lock when DAEMON hits $100,000 market cap.
+                </h3>
+                <p className="mt-3 text-[15px] text-muted leading-7">
+                  This page tracks the live DAEMON token market cap from DexScreener using
+                  the public mint you provided.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-border bg-background/70 px-4 py-3 text-sm text-muted">
+                Mint: <span className="text-foreground">{marketCap.tokenMint}</span>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              <MetricCard
+                label="Current market cap"
+                value={currentMarketCap === null ? "Loading" : formatUsd(currentMarketCap)}
+              />
+              <MetricCard label="Target market cap" value={formatUsd(marketCap.targetMarketCap)} />
+              <MetricCard
+                label="Remaining to unlock"
+                value={remainingMarketCap === null ? "Loading" : formatUsd(remainingMarketCap)}
+              />
+            </div>
+
+            <div className="mt-6">
+              <div className="flex items-center justify-between gap-4 text-sm text-muted">
+                <span>Progress to submission cutoff</span>
+                <span>{marketCapProgress.toFixed(1)}%</span>
+              </div>
+              <div className="mt-2 h-3 overflow-hidden rounded-full bg-background">
+                <div
+                  className="h-full rounded-full bg-accent transition-all"
+                  style={{ width: `${marketCapProgress}%` }}
+                />
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3 text-sm">
+              {marketCap.trackerUrl ? (
+                <a
+                  href={marketCap.trackerUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-4 py-2 text-muted hover:text-foreground hover:border-accent/40 transition-colors"
+                >
+                  Track token on DexScreener
+                </a>
+              ) : null}
+              <a
+                href={`https://pump.fun/coin/${marketCap.tokenMint}`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-2 text-muted hover:text-foreground transition-colors"
+              >
+                View token on pump.fun
+              </a>
             </div>
           </section>
 
@@ -127,11 +214,11 @@ export default async function ArenaPage() {
             />
             <InfoCard
               title="How winners are picked"
-              copy="Votes matter, but they do not decide the final outcome. The DAEMON team uses the board as signal, then picks the strongest three entries."
+              copy="Votes matter, but they do not decide the final outcome. The DAEMON team uses the board as signal, then picks the strongest three entries when the market-cap trigger is hit."
             />
             <InfoCard
               title="Why it matters"
-              copy="Winning projects get real distribution: shipped features, public credit, lifetime Pro, and direct access to the founding builder community."
+              copy="Winning projects get real distribution and real money: $5,000, $3,000, and $2,000 for the final top three."
             />
           </section>
 
@@ -143,13 +230,13 @@ export default async function ArenaPage() {
             />
             <StepCard
               step="02"
-              title="Votes create signal"
-              copy="The live board surfaces what the community cares about. Votes shape the board, but they do not fully decide winners."
+              title="Votes create signal until the cap is hit"
+              copy="The live board surfaces what the community cares about. Votes shape the board while DAEMON climbs toward the $100,000 market-cap trigger."
             />
             <StepCard
               step="03"
-              title="DAEMON picks what ships"
-              copy="The final three winners get paid, get Pro for life, and get direct access to the founding builder community."
+              title="DAEMON locks the board and picks winners"
+              copy="Once DAEMON hits the target market cap, submissions finalize and the top three winners receive $5,000, $3,000, and $2,000."
             />
           </section>
 
@@ -164,15 +251,14 @@ export default async function ArenaPage() {
                 </h2>
               </div>
               <div className="text-sm text-muted">
-                {contest
-                  ? `${contest.name} · ${contest.duration} · ${submissions.length} live submission${submissions.length === 1 ? "" : "s"}`
-                  : `${submissions.length} live submission${submissions.length === 1 ? "" : "s"}`}
+                {submissions.length} live submission{submissions.length === 1 ? "" : "s"} ·
+                {" "}finalized at $100,000 market cap
               </div>
             </div>
 
             {submissions.length === 0 ? (
               <div className="rounded-[28px] border border-dashed border-border bg-card/40 p-10 text-center text-muted">
-                No submissions yet. Be the first team on the board.
+                No submissions yet. Be the first team on the board before DAEMON hits the target cap.
               </div>
             ) : (
               <div className="grid gap-5 lg:grid-cols-2">
@@ -220,6 +306,15 @@ export default async function ArenaPage() {
       </main>
       <Footer />
     </>
+  );
+}
+
+function MetricCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-border bg-background/60 p-4">
+      <div className="text-[11px] uppercase tracking-[0.16em] text-muted">{label}</div>
+      <div className="mt-2 text-2xl font-semibold">{value}</div>
+    </div>
   );
 }
 
