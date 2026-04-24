@@ -16,7 +16,7 @@ const FOOTER_LINKS = {
     },
     {
       label: "Discord",
-      href: "https://discord.gg/yGj4gtUs",
+      href: "https://discord.gg/98CRP2kjG",
       external: true,
     },
     {
@@ -91,7 +91,7 @@ export function Footer() {
             </a>
             <span className="size-1 rounded-full bg-white/10" />
             <a
-              href="https://discord.gg/yGj4gtUs"
+              href="https://discord.gg/98CRP2kjG"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
