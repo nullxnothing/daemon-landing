@@ -18,6 +18,7 @@ const TAB_SECTIONS: Record<Tab, { title: string; settings: SettingToggle[] }[]> 
       settings: [
         { label: "Helius RPC", desc: "Solana RPC endpoint", defaultOn: true },
         { label: "Jupiter API", desc: "Swap aggregation", defaultOn: true },
+        { label: "Pump.fun API", desc: "Launch and trading actions", defaultOn: true },
         { label: "Birdeye API", desc: "Token analytics", defaultOn: false },
       ],
     },
@@ -27,8 +28,9 @@ const TAB_SECTIONS: Record<Tab, { title: string; settings: SettingToggle[] }[]> 
       title: "MCP Servers",
       settings: [
         { label: "Helius MCP", desc: "On-chain data queries", defaultOn: true },
-        { label: "Playwright MCP", desc: "Browser automation", defaultOn: true },
-        { label: "Firecrawl MCP", desc: "Web scraping", defaultOn: false },
+        { label: "Solana MCP", desc: "Program deploy, account inspect, docs", defaultOn: true },
+        { label: "Phantom Docs MCP", desc: "Wallet connect and signing guidance", defaultOn: true },
+        { label: "x402 MCP", desc: "Machine-payments runtime and paid API flows", defaultOn: true },
       ],
     },
   ],
@@ -67,13 +69,14 @@ const TAB_SECTIONS: Record<Tab, { title: string; settings: SettingToggle[] }[]> 
         { label: "Devnet by default", desc: "New projects target devnet", defaultOn: true },
         { label: "Auto-airdrop", desc: "Request SOL on empty wallet", defaultOn: false },
         { label: "Priority fees", desc: "Auto-set priority fees", defaultOn: true },
+        { label: "Session Registry", desc: "Optionally write agent sessions on-chain", defaultOn: true },
       ],
     },
   ],
 };
 
 export function DemoSettings() {
-  const [activeTab, setActiveTab] = useState<Tab>("Display");
+  const [activeTab, setActiveTab] = useState<Tab>("Integrations");
   const [toggles, setToggles] = useState<Record<string, boolean>>(() => {
     const initial: Record<string, boolean> = {};
     Object.values(TAB_SECTIONS).forEach((sections) =>

@@ -56,6 +56,20 @@ export function DaemonProDoc({ release }: { release: ReleaseInfo }) {
         ]}
       />
 
+      <H2 id="staking-access">Staking access</H2>
+      <Paragraph>
+        DAEMON staking is designed as an optional supporter path, not a requirement to use the
+        IDE. The branded access page at <Code>/access</Code> verifies wallet state against the
+        configured Streamflow pool and shows what the wallet unlocks across DAEMON’s staking tiers.
+      </Paragraph>
+      <List
+        items={[
+          "Use the desktop IDE for free whether you hold DAEMON or not.",
+          "Use holder access if you already qualify by balance.",
+          "Use Streamflow staking if you want earlier access, stronger priority, and supporter status around the project.",
+        ]}
+      />
+
       <H2 id="arena-flow">Arena flow</H2>
       <Paragraph>
         Arena is split into two surfaces. The website is the public showcase and contest wrapper.

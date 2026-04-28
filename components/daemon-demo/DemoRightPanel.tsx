@@ -7,19 +7,19 @@ type Tab = "claude" | "ports" | "processes";
 const CHAT_MESSAGES = [
   {
     role: "user" as const,
-    text: "Add a transfer instruction to the Anchor program that sends SOL from the vault PDA to the recipient",
+    text: "Set up the Solana launch workflow so wallet, validator, and launch adapters all use the same runtime path",
   },
   {
     role: "assistant" as const,
-    text: "I'll add a `transfer` instruction that uses a PDA-signed CPI to the System Program. The vault PDA will be derived from the program ID and a seed, and the instruction will verify the signer is the vault authority.\n\nEditing programs/lib.rs...",
+    text: "I’ll route this through the Solana workspace surface: validator readiness, Helius transport, wallet assignment, and the native launch adapters for Pump.fun, Raydium, and Meteora.\n\nOpening Solana Toolbox...",
   },
   {
     role: "user" as const,
-    text: "Now write the test for it",
+    text: "Make sure the wallet flow shows the signing path before launch",
   },
   {
     role: "assistant" as const,
-    text: "I'll create a test that:\n1. Initializes the vault with 5 SOL\n2. Calls transfer for 2 SOL\n3. Asserts the vault balance decreased and recipient increased\n\nWriting tests/transfer.test.ts...",
+    text: "I’ll keep the preview step visible so quotes, launch actions, and transaction confirmation all share one Solana UX instead of separate tools.",
   },
 ];
 
@@ -30,9 +30,9 @@ const PORTS = [
 ];
 
 const PROCESSES = [
-  { name: "next dev", pid: 12847, cpu: "2.1%", mem: "184MB" },
+  { name: "helius mcp", pid: 12847, cpu: "0.4%", mem: "82MB" },
   { name: "solana-test-validator", pid: 12903, cpu: "8.4%", mem: "312MB" },
-  { name: "anchor build --watch", pid: 13021, cpu: "0.3%", mem: "96MB" },
+  { name: "launch adapter runtime", pid: 13021, cpu: "1.2%", mem: "104MB" },
 ];
 
 export function DemoRightPanel() {
@@ -47,7 +47,7 @@ export function DemoRightPanel() {
             className={`dd-right-tab ${tab === t ? "active" : ""}`}
             onClick={() => setTab(t)}
           >
-            {t === "claude" ? "Claude" : t === "ports" ? "Ports" : "Processes"}
+            {t === "claude" ? "Claude" : t === "ports" ? "Runtime" : "Launches"}
           </button>
         ))}
       </div>

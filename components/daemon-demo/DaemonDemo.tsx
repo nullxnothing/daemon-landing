@@ -11,6 +11,7 @@ import {
   GitBranch,
   Search,
   Globe,
+  Waves,
 } from "lucide-react";
 import { DemoFileTree } from "./DemoFileTree";
 import { DemoEditor } from "./DemoEditor";
@@ -20,11 +21,13 @@ import { DemoTools } from "./DemoTools";
 import { DemoWallet } from "./DemoWallet";
 import { DemoAgents } from "./DemoAgents";
 import { DemoRightPanel } from "./DemoRightPanel";
+import { DemoSolanaWorkspace } from "./DemoSolanaWorkspace";
 import "./daemon-demo.css";
 
-type Panel = "editor" | "settings" | "tools" | "wallet" | "agents";
+type Panel = "editor" | "solana" | "settings" | "tools" | "wallet" | "agents";
 
 const SIDEBAR_ICONS: { id: Panel; icon: typeof Files; tooltip: string; kind: "panel" }[] = [
+  { id: "solana", icon: Waves, tooltip: "Solana Workspace", kind: "panel" },
   { id: "settings", icon: Settings, tooltip: "Settings", kind: "panel" },
   { id: "tools", icon: Wrench, tooltip: "Tools", kind: "panel" },
   { id: "wallet", icon: Wallet, tooltip: "Wallet", kind: "panel" },
@@ -32,7 +35,7 @@ const SIDEBAR_ICONS: { id: Panel; icon: typeof Files; tooltip: string; kind: "pa
 ];
 
 export function DaemonDemo() {
-  const [activePanel, setActivePanel] = useState<Panel>("editor");
+  const [activePanel, setActivePanel] = useState<Panel>("solana");
   const [showExplorer, setShowExplorer] = useState(true);
   const [showRightPanel] = useState(true);
   const [activeFile, setActiveFile] = useState("src/App.tsx");
@@ -54,7 +57,7 @@ export function DaemonDemo() {
             Inside DAEMON
           </h2>
           <p className="text-[var(--color-muted)] max-w-2xl mx-auto text-lg">
-            Click around. Explore the panels, settings, and tools — just like the real app.
+            The same shell, now showing more of DAEMON&apos;s Solana runtime, wallet path, launch flow, and MCP surface.
           </p>
         </div>
         <div className="daemon-demo">
@@ -72,11 +75,11 @@ export function DaemonDemo() {
             <div className="dd-project-tabs">
               <button className="dd-project-tab active">
                 <span className="dd-project-tab-dot live" />
-                <span>my-solana-dapp</span>
+                <span>daemon-registry</span>
               </button>
               <button className="dd-project-tab">
                 <span className="dd-project-tab-dot" />
-                <span>smart-contracts</span>
+                <span>launch-tools</span>
               </button>
             </div>
             <div className="dd-titlebar-traffic">
@@ -137,6 +140,11 @@ export function DaemonDemo() {
 
             {/* Center panel */}
             <div className="dd-center">
+              {activePanel === "solana" && (
+                <div className="dd-panel-enter">
+                  <DemoSolanaWorkspace />
+                </div>
+              )}
               {activePanel === "editor" && (
                 <>
                   <DemoEditor activeFile={activeFile} />
@@ -196,10 +204,12 @@ export function DaemonDemo() {
                   className="dd-status-dot"
                   style={{ background: "#3ecf8e" }}
                 />
-                RPC
+                Helius
               </span>
+              <span className="dd-status-item">Jupiter</span>
+              <span className="dd-status-item">MCP 4</span>
               <span className="dd-status-item" style={{ fontFamily: "var(--font-code)" }}>
-                my-solana-dapp
+                validator :8899
               </span>
             </div>
           </div>
