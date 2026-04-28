@@ -7,7 +7,7 @@ import { getAccessConfig } from "@/lib/access";
 export const metadata = {
   title: "DAEMON Access",
   description:
-    "Optional DAEMON access paths across holder status, Streamflow staking, and Pro utility tiers.",
+    "Optional DAEMON access paths across holder status, Streamflow staking, and Signal, Vector, Apex tiers.",
 };
 
 export const dynamic = "force-dynamic";
@@ -22,15 +22,15 @@ export default async function AccessPage() {
         <div className="max-w-6xl mx-auto">
           <section className="rounded-[36px] border border-border bg-card/70 p-8 md:p-12 shadow-[0_0_80px_rgba(62,207,142,0.08)]">
             <div className="inline-flex items-center gap-3 rounded-full border border-accent/25 bg-accent/10 px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-accent">
-              DAEMON Staking
+              DAEMON Staking is live
             </div>
             <h1 className="mt-6 max-w-4xl text-4xl md:text-6xl font-bold tracking-[-0.04em] leading-[0.95]">
-              Stake DAEMON to get closer to the project.
+              Signal, Vector, and Apex are ready.
             </h1>
             <p className="mt-6 max-w-3xl text-lg text-muted leading-relaxed">
               The base DAEMON app stays free. Streamflow staking is the optional path for
-              supporters who want earlier access, stronger priority, and recognized status across
-              the DAEMON ecosystem.
+              supporters who want earlier access, stronger priority, and visible status across
+              the DAEMON ecosystem as the product moves toward bigger public launches.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -59,11 +59,9 @@ export default async function AccessPage() {
                 copy="No wallet requirement to use the IDE."
               />
               <HeroStat
-                label="Live staking path"
-                value={
-                  config.tiers[0]?.threshold ?? "DAEMON staking"
-                }
-                copy="Stake DAEMON on Streamflow to unlock the first access tier."
+                label="Live tiers"
+                value="Signal / Vector / Apex"
+                copy="All three staking tiers are active in the access API and wallet checker."
               />
               <HeroStat
                 label="Staking provider"
@@ -81,17 +79,17 @@ export default async function AccessPage() {
             <UtilityCard
               icon={<ShieldCheck className="size-5" />}
               title="Early Access"
-              copy="See major updates, launches, and ecosystem opportunities before they reach the public."
+              copy="See major updates, launch surfaces, and ecosystem opportunities before they reach the public."
             />
             <UtilityCard
               icon={<Zap className="size-5" />}
               title="Priority Access"
-              copy="When something limited opens, stakers go first. Beta spots, launches, private activations, and scarce opportunities."
+              copy="When something limited opens, stakers move first. Vector and Apex get stronger priority as scarcity increases."
             />
             <UtilityCard
               icon={<Sparkles className="size-5" />}
               title="Staker Status"
-              copy="Carry visible supporter status as an early backer of DAEMON across community and future ecosystem surfaces."
+              copy="Carry visible Signal, Vector, or Apex status as an early DAEMON backer across community and future ecosystem surfaces."
             />
           </section>
 
@@ -121,7 +119,7 @@ export default async function AccessPage() {
                   Access tiers
                 </div>
                 <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-                  One staking model. Three supporter tiers.
+                  One staking model. Three live supporter tiers.
                 </h2>
               </div>
               <div className="text-sm text-muted">
@@ -155,6 +153,7 @@ export default async function AccessPage() {
                       {tier.status}
                     </span>
                   </div>
+                  <p className="mt-4 text-[14px] text-muted leading-6">{tier.summary}</p>
                   <div className="mt-5 space-y-3">
                     {tier.unlocks.map((unlock) => (
                       <div key={unlock} className="text-[14px] text-muted leading-6">

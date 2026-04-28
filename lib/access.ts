@@ -19,11 +19,12 @@ const DAEMON_TOKEN_MINT =
   process.env.NEXT_PUBLIC_DAEMON_TOKEN_MINT ??
   "4vpf4qNtNVkvz2dm5qL2mT6jBXH9gDY8qH2QsHN5pump";
 
-export type AccessTierId = "pro" | "builder" | "operator";
+export type AccessTierId = "signal" | "vector" | "apex";
 
 export type AccessTier = {
   id: AccessTierId;
   label: string;
+  summary: string;
   threshold: string;
   thresholdAmount: number;
   status: "live" | "planned";
@@ -70,7 +71,7 @@ export type AccessStatus = {
     activeEntries: number;
     qualified: boolean;
     qualifiedTier: AccessTierId | null;
-    tiers: Array<Pick<AccessTier, "id" | "label" | "thresholdAmount" | "status">>;
+    tiers: Array<Pick<AccessTier, "id" | "label" | "summary" | "thresholdAmount" | "status">>;
     minAmount: number | null;
     error: string | null;
   };
@@ -109,16 +110,44 @@ function parsePositiveNumber(value: string | undefined, fallback: number) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
+function parseTierThreshold(primary: string | undefined, legacy: string | undefined, fallback: number) {
+  return parsePositiveNumber(primary ?? legacy, fallback);
+}
+
 function formatThreshold(amount: number) {
   return `${amount.toLocaleString()} DAEMON`;
+}
+
+function toUiTokenAmount(rawAmount: bigint, decimals: number) {
+  if (decimals <= 0) return Number(rawAmount);
+
+  const raw = rawAmount.toString().padStart(decimals + 1, "0");
+  const whole = raw.slice(0, -decimals);
+  const fractional = raw.slice(-decimals).replace(/0+$/, "");
+  const formatted = fractional ? `${whole}.${fractional}` : whole;
+  const amount = Number(formatted);
+
+  return Number.isFinite(amount) ? amount : 0;
 }
 
 function buildStakeTierConfig(holderMinAmount: number | null): StakeTierConfig {
   const baseThreshold = holderMinAmount && holderMinAmount > 0 ? holderMinAmount : 1_000_000;
   return {
-    pro: parsePositiveNumber(process.env.STREAMFLOW_PRO_THRESHOLD, baseThreshold),
-    builder: parsePositiveNumber(process.env.STREAMFLOW_BUILDER_THRESHOLD, baseThreshold * 5),
-    operator: parsePositiveNumber(process.env.STREAMFLOW_OPERATOR_THRESHOLD, baseThreshold * 10),
+    signal: parseTierThreshold(
+      process.env.STREAMFLOW_SIGNAL_THRESHOLD,
+      process.env.STREAMFLOW_PRO_THRESHOLD,
+      baseThreshold,
+    ),
+    vector: parseTierThreshold(
+      process.env.STREAMFLOW_VECTOR_THRESHOLD,
+      process.env.STREAMFLOW_BUILDER_THRESHOLD,
+      baseThreshold * 5,
+    ),
+    apex: parseTierThreshold(
+      process.env.STREAMFLOW_APEX_THRESHOLD,
+      process.env.STREAMFLOW_OPERATOR_THRESHOLD,
+      baseThreshold * 10,
+    ),
   };
 }
 
@@ -126,10 +155,11 @@ function buildAccessTiers(holderMinAmount: number | null): AccessTier[] {
   const thresholds = buildStakeTierConfig(holderMinAmount);
   return [
     {
-      id: "pro",
+      id: "signal",
       label: "Signal",
-      threshold: formatThreshold(thresholds.pro),
-      thresholdAmount: thresholds.pro,
+      summary: "The entry staking tier for supporters who want DAEMON access and early visibility.",
+      threshold: formatThreshold(thresholds.signal),
+      thresholdAmount: thresholds.signal,
       status: "live",
       unlocks: [
         "Guaranteed DAEMON Pro access through staking instead of monthly payment pressure",
@@ -138,27 +168,29 @@ function buildAccessTiers(holderMinAmount: number | null): AccessTier[] {
       ],
     },
     {
-      id: "builder",
+      id: "vector",
       label: "Vector",
-      threshold: formatThreshold(thresholds.builder),
-      thresholdAmount: thresholds.builder,
-      status: "planned",
+      summary: "The priority tier for active backers who want to be closer to launches and limited drops.",
+      threshold: formatThreshold(thresholds.vector),
+      thresholdAmount: thresholds.vector,
+      status: "live",
       unlocks: [
-        "Stronger priority for betas, launches, and limited partner activations",
-        "Higher-value access across premium DAEMON surfaces as they roll out",
-        "Deeper visibility into major roadmap and ecosystem moves before public rollout",
+        "Priority queue for betas, product previews, partner surfaces, and limited activations",
+        "Vector status on future supporter dashboards and public ecosystem surfaces",
+        "Private roadmap briefings focused on what DAEMON is shipping next",
       ],
     },
     {
-      id: "operator",
+      id: "apex",
       label: "Apex",
-      threshold: formatThreshold(thresholds.operator),
-      thresholdAmount: thresholds.operator,
-      status: "planned",
+      summary: "The top supporter tier for the wallets closest to DAEMON's biggest public moments.",
+      threshold: formatThreshold(thresholds.apex),
+      thresholdAmount: thresholds.apex,
+      status: "live",
       unlocks: [
-        "Top staker status closest to the project and its biggest public moments",
-        "Highest-priority access when scarce opportunities or allocations open",
-        "Flagship supporter tier across future DAEMON community and ecosystem surfaces",
+        "Highest-priority access when scarce demos, launches, and partner opportunities open",
+        "Apex recognition as a top DAEMON backer across future community surfaces",
+        "Direct first-look access for major ecosystem pushes before public announcements",
       ],
     },
   ];
@@ -211,7 +243,7 @@ export async function getAccessConfig(): Promise<AccessConfig> {
     },
     utility: [
       "Use the base DAEMON app for free. Staking is for supporters who want to get closer to the project, not a paywall on the IDE.",
-      "Stake DAEMON to unlock earlier access to what ships next, stronger priority when limited opportunities open, and visible status as an early backer.",
+      "Signal, Vector, and Apex staking tiers are live: access gets stronger as supporters stake deeper into the DAEMON ecosystem.",
       "Streamflow gives DAEMON a clean, non-custodial staking path without forcing users into a separate DAEMON-built staking protocol.",
     ],
     tiers,
@@ -229,7 +261,7 @@ async function getStakeSnapshot(
       qualifiedTier: null,
       activeEntries: 0,
       tokenMint: null,
-      minAmount: tiers.find((tier) => tier.id === "pro")?.thresholdAmount ?? 0,
+      minAmount: tiers.find((tier) => tier.id === "signal")?.thresholdAmount ?? 0,
       error: null,
     };
   }
@@ -258,7 +290,7 @@ async function getStakeSnapshot(
       (sum, entry) => sum + BigInt(entry.account.amount.toString()),
       BigInt(0),
     );
-    const uiAmount = Number(rawAmount) / 10 ** decimals;
+    const uiAmount = toUiTokenAmount(rawAmount, decimals);
     const qualifiedTier = getHighestQualifiedTier(uiAmount, tiers);
 
     return {
@@ -267,7 +299,7 @@ async function getStakeSnapshot(
       qualifiedTier,
       activeEntries: activeEntries.length,
       tokenMint: stakePool.mint.toBase58(),
-      minAmount: tiers.find((tier) => tier.id === "pro")?.thresholdAmount ?? 0,
+      minAmount: tiers.find((tier) => tier.id === "signal")?.thresholdAmount ?? 0,
       error: null,
     };
   } catch (error) {
@@ -277,7 +309,7 @@ async function getStakeSnapshot(
       qualifiedTier: null,
       activeEntries: 0,
       tokenMint: null,
-      minAmount: tiers.find((tier) => tier.id === "pro")?.thresholdAmount ?? 0,
+      minAmount: tiers.find((tier) => tier.id === "signal")?.thresholdAmount ?? 0,
       error: error instanceof Error ? error.message : "Stake lookup failed",
     };
   }
@@ -323,9 +355,10 @@ export async function getAccessStatus(wallet: string): Promise<AccessStatus> {
       activeEntries: stake.activeEntries,
       qualified: stake.qualified,
       qualifiedTier: stake.qualifiedTier,
-      tiers: tiers.map(({ id, label, thresholdAmount, status }) => ({
+      tiers: tiers.map(({ id, label, summary, thresholdAmount, status }) => ({
         id,
         label,
+        summary,
         thresholdAmount,
         status,
       })),

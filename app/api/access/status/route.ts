@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
+import { PublicKey } from "@solana/web3.js";
 import { getAccessStatus } from "@/lib/access";
 
 export const dynamic = "force-dynamic";
 
 function isLikelySolanaAddress(value: string) {
-  return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(value);
+  if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(value)) return false;
+
+  try {
+    const key = new PublicKey(value);
+    return key.toBase58() === value;
+  } catch {
+    return false;
+  }
 }
 
 export async function GET(request: NextRequest) {

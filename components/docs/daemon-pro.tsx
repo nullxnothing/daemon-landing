@@ -60,13 +60,14 @@ export function DaemonProDoc({ release }: { release: ReleaseInfo }) {
       <Paragraph>
         DAEMON staking is designed as an optional supporter path, not a requirement to use the
         IDE. The branded access page at <Code>/access</Code> verifies wallet state against the
-        configured Streamflow pool and shows what the wallet unlocks across DAEMON’s staking tiers.
+        configured Streamflow pool and shows what the wallet unlocks across Signal, Vector, and
+        Apex staking tiers.
       </Paragraph>
       <List
         items={[
           "Use the desktop IDE for free whether you hold DAEMON or not.",
           "Use holder access if you already qualify by balance.",
-          "Use Streamflow staking if you want earlier access, stronger priority, and supporter status around the project.",
+          "Use Streamflow staking if you want earlier access, stronger priority, and visible supporter status around the project.",
         ]}
       />
 

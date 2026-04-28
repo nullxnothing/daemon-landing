@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+type AccessTierId = "signal" | "vector" | "apex";
+
 type AccessStatusResponse = {
   wallet: string;
   active: boolean;
@@ -24,10 +26,11 @@ type AccessStatusResponse = {
     currentAmount: number | null;
     activeEntries: number;
     qualified: boolean;
-    qualifiedTier: "pro" | "builder" | "operator" | null;
+    qualifiedTier: AccessTierId | null;
     tiers: Array<{
-      id: "pro" | "builder" | "operator";
+      id: AccessTierId;
       label: string;
+      summary: string;
       thresholdAmount: number;
       status: "live" | "planned";
     }>;
@@ -41,6 +44,9 @@ export function AccessStatusChecker() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<AccessStatusResponse | null>(null);
+  const qualifiedTier = status?.staking.tiers.find(
+    (tier) => tier.id === status.staking.qualifiedTier,
+  );
 
   const handleCheck = async () => {
     if (!wallet.trim()) {
@@ -141,8 +147,8 @@ export function AccessStatusChecker() {
           <StatusCard
             label="Stake tier"
             value={
-              status.staking.qualifiedTier
-                ? status.staking.qualifiedTier[0].toUpperCase() + status.staking.qualifiedTier.slice(1)
+              qualifiedTier
+                ? qualifiedTier.label
                 : status.staking.poolConfigured
                   ? "Not qualified"
                   : "Pool not set"
@@ -154,10 +160,10 @@ export function AccessStatusChecker() {
 
       {status && (
         <div className="mt-4 rounded-2xl border border-border bg-background/60 px-4 py-4 text-sm text-muted leading-7">
-          {status.active
+          {status.staking.qualified
+            ? `This wallet qualifies for ${qualifiedTier?.label ?? "staking"} access through Streamflow. ${qualifiedTier?.summary ?? ""}`
+            : status.active
             ? "This wallet already has an active DAEMON access path."
-            : status.staking.qualified
-              ? `This wallet qualifies through Streamflow staking${status.staking.qualifiedTier ? ` at the ${status.staking.qualifiedTier} tier` : ""}.`
             : status.holderStatus.eligible
               ? "This wallet qualifies for live holder access in DAEMON today."
               : "This wallet does not currently qualify for holder access. The base DAEMON app remains free; staking is intended as an optional upgrade path."}
@@ -184,7 +190,19 @@ export function AccessStatusChecker() {
             </a>
           </div>
           <div className="mt-1">Pool address: {status.staking.poolAddress ?? "Unavailable"}</div>
-          <div className="mt-1">Pro threshold: {formatAmount(status.staking.minAmount)}</div>
+          <div className="mt-3 grid gap-2 md:grid-cols-3">
+            {status.staking.tiers.map((tier) => (
+              <div key={tier.id} className="rounded-xl border border-border bg-card/50 px-3 py-3">
+                <div className="text-[11px] uppercase tracking-[0.14em] text-accent">
+                  {tier.label}
+                </div>
+                <div className="mt-1 text-foreground">
+                  {formatAmount(tier.thresholdAmount)} DAEMON
+                </div>
+                <div className="mt-1 text-xs text-muted">{tier.status}</div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </section>
