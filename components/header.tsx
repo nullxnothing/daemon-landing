@@ -69,7 +69,7 @@ export function Header() {
               <Twitter className="size-[18px]" />
             </a>
             <a
-              href="https://discord.gg/yGj4gtUs"
+              href="https://discord.gg/98CRP2kjG"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors p-2"
@@ -133,7 +133,7 @@ export function Header() {
                   <Twitter className="size-5" />
                 </a>
                 <a
-                  href="https://discord.gg/yGj4gtUs"
+                  href="https://discord.gg/98CRP2kjG"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors p-2"
