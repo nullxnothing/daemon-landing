@@ -104,6 +104,17 @@ type StakeSnapshot = {
 type StakeTierConfig = Record<AccessTierId, number>;
 
 let stakingClient: SolanaStakingClient | null = null;
+let discoveredStakePool: PublicKey | null | undefined;
+
+type SearchStakePoolResult = {
+  publicKey?: PublicKey;
+  pubkey?: PublicKey;
+  address?: PublicKey;
+  account?: {
+    mint?: PublicKey;
+    totalStaked?: { toString(): string };
+  };
+};
 
 function parsePositiveNumber(value: string | undefined, fallback: number) {
   const parsed = Number(value);
@@ -210,6 +221,34 @@ function getStakingClient() {
   return stakingClient;
 }
 
+function readStakePoolAddress(pool: SearchStakePoolResult) {
+  return pool.publicKey ?? pool.pubkey ?? pool.address ?? null;
+}
+
+async function getStakePoolKey() {
+  if (STREAMFLOW_STAKE_POOL) return new PublicKey(STREAMFLOW_STAKE_POOL);
+  if (discoveredStakePool !== undefined) return discoveredStakePool;
+
+  try {
+    const mint = new PublicKey(DAEMON_TOKEN_MINT);
+    const pools = (await getStakingClient().searchStakePools({ mint })) as SearchStakePoolResult[];
+    const sortedPools = pools
+      .map((pool) => ({ pool, key: readStakePoolAddress(pool) }))
+      .filter((item): item is { pool: SearchStakePoolResult; key: PublicKey } => Boolean(item.key))
+      .sort((a, b) => {
+        const aStaked = BigInt(a.pool.account?.totalStaked?.toString() ?? "0");
+        const bStaked = BigInt(b.pool.account?.totalStaked?.toString() ?? "0");
+        return bStaked > aStaked ? 1 : bStaked < aStaked ? -1 : 0;
+      });
+
+    discoveredStakePool = sortedPools[0]?.key ?? null;
+    return discoveredStakePool;
+  } catch {
+    discoveredStakePool = null;
+    return null;
+  }
+}
+
 async function fetchJson<T>(path: string): Promise<T | null> {
   try {
     const res = await fetch(`${PRO_API_BASE}${path}`, {
@@ -225,7 +264,8 @@ async function fetchJson<T>(path: string): Promise<T | null> {
 
 export async function getAccessConfig(): Promise<AccessConfig> {
   const price = await getArenaPrice();
-  const poolConfigured = Boolean(STREAMFLOW_STAKE_POOL);
+  const stakePoolKey = await getStakePoolKey();
+  const poolConfigured = Boolean(stakePoolKey);
   const tiers = buildAccessTiers(price?.holderMinAmount ?? null);
 
   return {
@@ -233,7 +273,7 @@ export async function getAccessConfig(): Promise<AccessConfig> {
     appIsFree: true,
     tokenMint: DAEMON_TOKEN_MINT,
     streamflowUrl: STREAMFLOW_APP_URL,
-    streamflowPoolAddress: STREAMFLOW_STAKE_POOL,
+    streamflowPoolAddress: stakePoolKey?.toBase58() ?? null,
     poolConfigured,
     rpcUrlConfigured: Boolean(SOLANA_RPC_URL),
     pricing: {
@@ -254,7 +294,9 @@ async function getStakeSnapshot(
   wallet: string,
   tiers: AccessTier[],
 ): Promise<StakeSnapshot> {
-  if (!STREAMFLOW_STAKE_POOL) {
+  const stakePoolKey = await getStakePoolKey();
+
+  if (!stakePoolKey) {
     return {
       currentAmount: 0,
       qualified: false,
@@ -268,7 +310,6 @@ async function getStakeSnapshot(
 
   try {
     const walletKey = new PublicKey(wallet);
-    const stakePoolKey = new PublicKey(STREAMFLOW_STAKE_POOL);
     const client = getStakingClient();
     const stakePool = await client.getStakePool(stakePoolKey);
     const entries = await client.searchStakeEntries({
@@ -326,6 +367,7 @@ export async function getAccessStatus(wallet: string): Promise<AccessStatus> {
     holderStatus?: HolderStatusPayload;
   }>(`/v1/subscribe/status?wallet=${encodeURIComponent(wallet)}`);
   const stake = await getStakeSnapshot(wallet, tiers);
+  const stakePoolKey = await getStakePoolKey();
   const payload = data?.data ?? data;
   const activeViaRemote = payload?.active ?? false;
   const stakingActive = stake.qualified;
@@ -346,9 +388,9 @@ export async function getAccessStatus(wallet: string): Promise<AccessStatus> {
     staking: {
       provider: "streamflow",
       available: true,
-      poolConfigured: Boolean(STREAMFLOW_STAKE_POOL),
-      entitlementReady: Boolean(STREAMFLOW_STAKE_POOL && !stake.error),
-      poolAddress: STREAMFLOW_STAKE_POOL,
+      poolConfigured: Boolean(stakePoolKey),
+      entitlementReady: Boolean(stakePoolKey && !stake.error),
+      poolAddress: stakePoolKey?.toBase58() ?? null,
       streamflowUrl: STREAMFLOW_APP_URL,
       tokenMint: stake.tokenMint,
       currentAmount: stake.currentAmount,
