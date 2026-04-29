@@ -1,4 +1,4 @@
-import { Github, Twitter } from "lucide-react";
+import { Github, Send, Twitter } from "lucide-react";
 
 const FOOTER_LINKS = {
   Product: [
@@ -22,6 +22,11 @@ const FOOTER_LINKS = {
     {
       label: "Twitter / X",
       href: "https://x.com/DaemonTerminal",
+      external: true,
+    },
+    {
+      label: "Telegram",
+      href: "https://t.me/daemonide",
       external: true,
     },
   ],
@@ -79,7 +84,7 @@ export function Footer() {
             <span className="size-1 rounded-full bg-white/10" />
             <span>MIT License</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-end">
             <a
               href="https://x.com/DaemonTerminal"
               target="_blank"
@@ -88,6 +93,16 @@ export function Footer() {
             >
               <Twitter className="size-4" />
               @DaemonTerminal
+            </a>
+            <span className="size-1 rounded-full bg-white/10" />
+            <a
+              href="https://t.me/daemonide"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Send className="size-4" />
+              Telegram
             </a>
             <span className="size-1 rounded-full bg-white/10" />
             <a

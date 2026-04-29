@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Github, Menu, X, Twitter } from "lucide-react";
+import { Github, Menu, Send, X, Twitter } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -69,6 +69,15 @@ export function Header() {
               <Twitter className="size-[18px]" />
             </a>
             <a
+              href="https://t.me/daemonide"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              aria-label="Join Telegram"
+            >
+              <Send className="size-[18px]" />
+            </a>
+            <a
               href="https://discord.gg/98CRP2kjG"
               target="_blank"
               rel="noopener noreferrer"
@@ -131,6 +140,15 @@ export function Header() {
                   aria-label="Follow on X"
                 >
                   <Twitter className="size-5" />
+                </a>
+                <a
+                  href="https://t.me/daemonide"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground transition-colors p-2"
+                  aria-label="Join Telegram"
+                >
+                  <Send className="size-5" />
                 </a>
                 <a
                   href="https://discord.gg/98CRP2kjG"
