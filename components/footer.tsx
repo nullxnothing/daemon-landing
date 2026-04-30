@@ -1,4 +1,4 @@
-import { Github, Send, Twitter } from "lucide-react";
+import { ExternalLink, Github, Send, Twitter } from "lucide-react";
 
 const FOOTER_LINKS = {
   Product: [
@@ -27,6 +27,11 @@ const FOOTER_LINKS = {
     {
       label: "Telegram",
       href: "https://t.me/daemonide",
+      external: true,
+    },
+    {
+      label: "Dexscreener",
+      href: "https://dexscreener.com/solana/7dhjuvz2xrafy1kztibhrxtliutj7vkivh9zhwm4tyq9",
       external: true,
     },
   ],
@@ -103,6 +108,16 @@ export function Footer() {
             >
               <Send className="size-4" />
               Telegram
+            </a>
+            <span className="size-1 rounded-full bg-white/10" />
+            <a
+              href="https://dexscreener.com/solana/7dhjuvz2xrafy1kztibhrxtliutj7vkivh9zhwm4tyq9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ExternalLink className="size-4" />
+              Dexscreener
             </a>
             <span className="size-1 rounded-full bg-white/10" />
             <a
