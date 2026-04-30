@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { label: "Product", href: "#features" },
+  { label: "Access", href: "/access" },
   { label: "Arena", href: "/arena" },
   { label: "Docs", href: "/docs" },
   { label: "Why Daemon", href: "#architecture" },
