@@ -86,15 +86,6 @@ export function Hero({ release }: { release: ReleaseInfo }) {
               Download Daemon
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </a>
-            <a
-              href="https://pump.fun/coin/4vpf4qNtNVkvz2dm5qL2mT6jBXH9gDY8qH2QsHN5pump"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => track("BuyDaemon", { location: "hero" })}
-              className="inline-flex items-center justify-center rounded-lg border border-white/12 bg-white/[0.045] px-6 py-3 text-[15px] font-semibold text-muted transition-colors hover:border-white/20 hover:text-foreground"
-            >
-              Buy $DAEMON
-            </a>
           </div>
 
           <div
