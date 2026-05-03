@@ -1,12 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import {
   Bot,
   Check,
-  ChevronRight,
-  Copy,
-  Download,
+  Clock3,
   Globe2,
   LayoutDashboard,
   Lock,
@@ -17,54 +15,12 @@ import {
   Zap,
 } from "lucide-react";
 
-type SolanaProvider = {
-  isPhantom?: boolean;
-  connect: () => Promise<{ publicKey: { toString: () => string } }>;
-  disconnect?: () => Promise<void>;
-};
-
-type WindowWithSolana = Window & {
-  solana?: SolanaProvider;
-};
-
 type BuildType = "Website" | "Dashboard" | "Telegram bot" | "Raid board" | "Token gate" | "Updates";
 
-type AppFactoryModule = {
+type DemoModule = {
   title: string;
   description: string;
-  files: string[];
 };
-
-type AppFactoryBlueprint = {
-  projectName: string;
-  buildType: BuildType;
-  tokenAddress: string;
-  wallet?: string;
-  summary: string;
-  modules: AppFactoryModule[];
-  suggestedStack: string[];
-  nextSteps: string[];
-  openInDaemonPayload: {
-    version: number;
-    source: string;
-    projectName: string;
-    tokenAddress: string;
-    buildType: BuildType;
-    prompt: string;
-    modules: string[];
-  };
-};
-
-type GenerateResponse =
-  | { ok: true; blueprint: AppFactoryBlueprint }
-  | { ok: false; error: string };
-
-const quickPrompts = [
-  "Build my token a clean website with chart, socials, roadmap, and buy button.",
-  "Create a holder dashboard with token stats, top holders, and community links.",
-  "Generate a raid board and Telegram bot plan for my community.",
-  "Create a token-gated page for holders with project updates and resources.",
-];
 
 const buildOptions: { label: BuildType; icon: typeof Globe2 }[] = [
   { label: "Website", icon: Globe2 },
@@ -75,126 +31,96 @@ const buildOptions: { label: BuildType; icon: typeof Globe2 }[] = [
   { label: "Updates", icon: MessageSquareText },
 ];
 
-function shorten(address: string) {
-  if (!address) return "";
-  return `${address.slice(0, 4)}...${address.slice(-4)}`;
-}
-
-function getSolanaProvider() {
-  if (typeof window === "undefined") return undefined;
-  return (window as WindowWithSolana).solana;
-}
-
-function downloadJson(filename: string, data: unknown) {
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
-}
+const demoModules: Record<BuildType, DemoModule[]> = {
+  Website: [
+    {
+      title: "Token website",
+      description: "Hero, chart area, CA copy button, socials, roadmap, buy routing, and community sections.",
+    },
+    {
+      title: "Launch-ready structure",
+      description: "A clean starting project that can be opened inside DAEMON for edits, testing, and deploy prep.",
+    },
+    {
+      title: "Brand pass",
+      description: "AI-assisted copy, layout direction, colors, and page sections built around the token prompt.",
+    },
+  ],
+  Dashboard: [
+    {
+      title: "Holder dashboard",
+      description: "Token stats, holder overview, liquidity card, chart panel, social links, and community actions.",
+    },
+    {
+      title: "Wallet-aware panels",
+      description: "Connect wallet states, holder CTAs, gated sections, and token-specific actions.",
+    },
+    {
+      title: "Data wiring plan",
+      description: "A DAEMON handoff for connecting chart, metadata, holder, and market data providers.",
+    },
+  ],
+  "Telegram bot": [
+    {
+      title: "Bot command map",
+      description: "Price checks, buy alerts, raid reminders, holder checks, project updates, and admin commands.",
+    },
+    {
+      title: "Community automation",
+      description: "A starter flow for alerts, announcements, scheduled posts, and token community prompts.",
+    },
+    {
+      title: "Deploy checklist",
+      description: "Environment variables, bot token setup, hosting notes, and DAEMON project handoff.",
+    },
+  ],
+  "Raid board": [
+    {
+      title: "Raid coordination",
+      description: "Target links, post queue, completion states, community tasks, and leaderboard-ready UI.",
+    },
+    {
+      title: "Content kit",
+      description: "Launch copy, raid messages, pinned posts, announcement snippets, and community CTAs.",
+    },
+    {
+      title: "Community tracker",
+      description: "A structure for tracking pushes, wins, contributors, and follow-up actions.",
+    },
+  ],
+  "Token gate": [
+    {
+      title: "Holder-gated page",
+      description: "Wallet connect, token balance gate, gated content area, and non-holder fallback state.",
+    },
+    {
+      title: "Private resources",
+      description: "Holder-only updates, project files, roadmap notes, links, and community resources.",
+    },
+    {
+      title: "Access handoff",
+      description: "A DAEMON-ready plan for wiring token checks and gated content into the generated app.",
+    },
+  ],
+  Updates: [
+    {
+      title: "Project update hub",
+      description: "Announcement feed, X post drafts, community update cards, and project status sections.",
+    },
+    {
+      title: "AI content kit",
+      description: "Pinned posts, launch threads, daily updates, raid copy, and holder announcements.",
+    },
+    {
+      title: "Publishing workflow",
+      description: "A structured handoff for turning project updates into pages, posts, and community actions.",
+    },
+  ],
+};
 
 export function AppFactory() {
-  const [wallet, setWallet] = useState("");
-  const [tokenAddress, setTokenAddress] = useState("");
-  const [prompt, setPrompt] = useState(quickPrompts[0]);
   const [selected, setSelected] = useState<BuildType>("Website");
-  const [blueprint, setBlueprint] = useState<AppFactoryBlueprint | null>(null);
-  const [copied, setCopied] = useState(false);
-  const [connecting, setConnecting] = useState(false);
-  const [generating, setGenerating] = useState(false);
-  const [error, setError] = useState("");
-
-  const canGenerate = tokenAddress.trim().length > 20 && prompt.trim().length > 12 && !generating;
-
-  const projectName = useMemo(() => {
-    if (blueprint?.projectName) return blueprint.projectName;
-    if (!tokenAddress.trim()) return "Your token";
-    return `${tokenAddress.trim().slice(0, 4).toUpperCase()} ${selected}`;
-  }, [blueprint?.projectName, tokenAddress, selected]);
-
-  const resetGenerated = () => {
-    setBlueprint(null);
-    setError("");
-    setCopied(false);
-  };
-
-  const handleConnect = async () => {
-    const provider = getSolanaProvider();
-    if (!provider) {
-      window.open("https://phantom.app/", "_blank", "noopener,noreferrer");
-      return;
-    }
-
-    setConnecting(true);
-    try {
-      const response = await provider.connect();
-      setWallet(response.publicKey.toString());
-    } catch {
-      setError("Wallet connection was cancelled.");
-    } finally {
-      setConnecting(false);
-    }
-  };
-
-  const handleGenerate = async () => {
-    if (!canGenerate) return;
-
-    setGenerating(true);
-    setError("");
-
-    try {
-      const response = await fetch("/api/app-factory", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          wallet,
-          tokenAddress,
-          prompt,
-          buildType: selected,
-        }),
-      });
-
-      const result = (await response.json()) as GenerateResponse;
-
-      if (!response.ok || !result.ok) {
-        setError(result.ok ? "Generation failed." : result.error);
-        return;
-      }
-
-      setBlueprint(result.blueprint);
-    } catch {
-      setError("Could not generate the project blueprint. Please try again.");
-    } finally {
-      setGenerating(false);
-    }
-  };
-
-  const handleCopy = async () => {
-    const payload = blueprint?.openInDaemonPayload ?? {
-      tokenAddress,
-      buildType: selected,
-      prompt,
-      wallet,
-    };
-
-    try {
-      await navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1400);
-    } catch {
-      setError("Could not copy the generated spec.");
-    }
-  };
-
-  const handleExport = () => {
-    if (!blueprint) return;
-    const filename = `${blueprint.projectName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "daemon-app"}.json`;
-    downloadJson(filename, blueprint);
-  };
+  const Icon = buildOptions.find((option) => option.label === selected)?.icon ?? Globe2;
 
   return (
     <section id="app-factory" className="relative overflow-hidden px-5 py-28 sm:px-7 md:py-36 lg:px-10">
@@ -205,38 +131,35 @@ export function AppFactory() {
         <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/8 px-3 py-1.5 text-[13px] text-accent">
-              <Sparkles className="size-3.5" />
-              App Factory preview
+              <Clock3 className="size-3.5" />
+              Coming soon
             </div>
 
             <h2 className="gradient-text text-4xl font-bold leading-[1.02] tracking-[-0.035em] md:text-6xl">
-              Turn a token CA
+              DAEMON App Factory
               <br />
-              into a starting app.
+              is coming soon.
             </h2>
 
             <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-muted md:text-lg">
-              The DAEMON website is becoming the front door for Solana communities. Connect a wallet, enter a token, describe what the project needs, and generate the first version of a website, dashboard, bot, raid board, or holder tool.
+              This will become the front door for Solana communities. Enter a token CA, describe what your project needs, and DAEMON will generate a starting point for websites, dashboards, bots, raid boards, token gates, and update hubs.
             </p>
 
             <div className="mt-8 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-3">
               {buildOptions.map((option) => {
-                const Icon = option.icon;
+                const OptionIcon = option.icon;
                 const active = selected === option.label;
                 return (
                   <button
                     key={option.label}
-                    onClick={() => {
-                      setSelected(option.label);
-                      resetGenerated();
-                    }}
+                    onClick={() => setSelected(option.label)}
                     className={`group flex items-center gap-2 rounded-2xl border px-4 py-3 text-left transition-all ${
                       active
                         ? "border-accent/35 bg-accent/10 text-foreground"
                         : "border-white/[0.07] bg-white/[0.03] text-muted hover:border-white/15 hover:text-foreground"
                     }`}
                   >
-                    <Icon className={`size-4 ${active ? "text-accent" : "text-muted-foreground group-hover:text-accent"}`} />
+                    <OptionIcon className={`size-4 ${active ? "text-accent" : "text-muted-foreground group-hover:text-accent"}`} />
                     <span className="text-[13px] font-medium">{option.label}</span>
                   </button>
                 );
@@ -253,134 +176,95 @@ export function AppFactory() {
                   <div className="size-2.5 rounded-full bg-yellow-400/70" />
                   <div className="size-2.5 rounded-full bg-accent/80" />
                 </div>
-                <div className="font-mono text-[12px] text-muted-foreground">daemon.app/factory</div>
+                <div className="font-mono text-[12px] text-muted-foreground">daemon.app/factory/demo</div>
               </div>
 
               <div className="p-5 md:p-6">
                 <div className="mb-5 flex items-center justify-between gap-3">
                   <div>
                     <p className="mb-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-accent">
-                      What does your token need?
+                      Demo mode
                     </p>
-                    <h3 className="text-xl font-semibold tracking-[-0.02em]">Generate a community tool</h3>
+                    <h3 className="text-xl font-semibold tracking-[-0.02em]">Preview what it will generate</h3>
                   </div>
                   <button
-                    onClick={handleConnect}
-                    className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-4 py-2 text-[13px] font-medium text-muted transition-colors hover:border-accent/30 hover:text-foreground"
+                    disabled
+                    className="inline-flex shrink-0 cursor-not-allowed items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-4 py-2 text-[13px] font-medium text-muted-foreground opacity-70"
                   >
                     <Wallet className="size-4 text-accent" />
-                    {wallet ? shorten(wallet) : connecting ? "Connecting" : "Connect"}
+                    Wallet soon
                   </button>
                 </div>
 
                 <label className="mb-2 block text-[13px] text-muted">Token contract address</label>
                 <input
-                  value={tokenAddress}
-                  onChange={(event) => {
-                    setTokenAddress(event.target.value);
-                    resetGenerated();
-                  }}
-                  placeholder="Paste Solana token CA"
-                  className="w-full rounded-2xl border border-white/[0.08] bg-black/35 px-4 py-3.5 font-mono text-[14px] text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-accent/40"
+                  disabled
+                  value="Paste Solana token CA"
+                  className="w-full cursor-not-allowed rounded-2xl border border-white/[0.08] bg-black/35 px-4 py-3.5 font-mono text-[14px] text-muted-foreground outline-none"
+                  readOnly
                 />
 
                 <label className="mb-2 mt-5 block text-[13px] text-muted">Prompt</label>
                 <textarea
-                  value={prompt}
-                  onChange={(event) => {
-                    setPrompt(event.target.value);
-                    resetGenerated();
-                  }}
+                  disabled
+                  readOnly
                   rows={4}
-                  className="w-full resize-none rounded-2xl border border-white/[0.08] bg-black/35 px-4 py-3.5 text-[14px] leading-relaxed text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-accent/40"
+                  value={`Build my token a ${selected.toLowerCase()} with community tools, token data, wallet-aware actions, and a DAEMON-ready project handoff.`}
+                  className="w-full cursor-not-allowed resize-none rounded-2xl border border-white/[0.08] bg-black/35 px-4 py-3.5 text-[14px] leading-relaxed text-muted-foreground outline-none"
                 />
 
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {quickPrompts.slice(1).map((item) => (
-                    <button
-                      key={item}
-                      onClick={() => {
-                        setPrompt(item);
-                        resetGenerated();
-                      }}
-                      className="rounded-full border border-white/[0.07] bg-white/[0.03] px-3 py-1.5 text-[12px] text-muted transition-colors hover:border-accent/25 hover:text-foreground"
-                    >
-                      {item.split(" ").slice(0, 4).join(" ")}...
-                    </button>
-                  ))}
-                </div>
-
-                {error ? (
-                  <div className="mt-4 rounded-2xl border border-red-400/20 bg-red-400/5 px-4 py-3 text-[13px] text-red-200">
-                    {error}
-                  </div>
-                ) : null}
-
                 <button
-                  onClick={handleGenerate}
-                  disabled={!canGenerate}
-                  className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-accent px-5 py-3.5 text-[15px] font-semibold text-black transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:brightness-100"
+                  disabled
+                  className="mt-5 inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-2xl bg-accent/45 px-5 py-3.5 text-[15px] font-semibold text-black opacity-70"
                 >
                   <Zap className="size-4" />
-                  {generating ? "Generating blueprint..." : "Generate starting point"}
-                  <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  Project generation coming soon
                 </button>
 
-                <div className="mt-5 min-h-[250px] rounded-2xl border border-white/[0.07] bg-black/30 p-4">
-                  {!blueprint ? (
-                    <div className="flex h-full min-h-[218px] flex-col items-center justify-center px-6 text-center">
-                      <Sparkles className="mb-3 size-8 text-accent/70" />
-                      <p className="max-w-sm text-[14px] leading-relaxed text-muted">
-                        Enter a CA and describe the tool. DAEMON will prepare a launch-ready blueprint that can be opened in the desktop app for deeper editing.
-                      </p>
-                    </div>
-                  ) : (
+                <div className="mt-5 rounded-2xl border border-white/[0.07] bg-black/30 p-4">
+                  <div className="mb-4 flex items-start justify-between gap-3">
                     <div>
-                      <div className="mb-4 flex items-start justify-between gap-3">
-                        <div>
-                          <p className="mb-1 text-[12px] text-muted-foreground">Generated blueprint</p>
-                          <h4 className="text-lg font-semibold tracking-[-0.02em]">{projectName}</h4>
-                        </div>
-                        <button
-                          onClick={handleCopy}
-                          className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3 py-1.5 text-[12px] text-muted transition-colors hover:border-accent/25 hover:text-foreground"
-                        >
-                          {copied ? <Check className="size-3.5 text-accent" /> : <Copy className="size-3.5" />}
-                          {copied ? "Copied" : "Copy spec"}
-                        </button>
-                      </div>
-
-                      <p className="mb-4 text-[13px] leading-relaxed text-muted">{blueprint.summary}</p>
-
-                      <div className="grid gap-2.5">
-                        {blueprint.modules.map((module) => (
-                          <div key={module.title} className="rounded-xl bg-white/[0.035] px-3 py-2.5">
-                            <div className="flex items-center gap-3">
-                              <Check className="size-4 shrink-0 text-accent" />
-                              <span className="text-[13px] font-medium text-foreground">{module.title}</span>
-                            </div>
-                            <p className="mt-1 pl-7 text-[12px] leading-relaxed text-muted">{module.description}</p>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-                        <button
-                          onClick={handleCopy}
-                          className="flex-1 rounded-xl border border-accent/25 bg-accent/10 px-4 py-2.5 text-[13px] font-medium text-accent transition-colors hover:bg-accent/15"
-                        >
-                          Copy DAEMON handoff
-                        </button>
-                        <button
-                          onClick={handleExport}
-                          className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-2.5 text-[13px] font-medium text-muted transition-colors hover:text-foreground"
-                        >
-                          <Download className="size-3.5" />
-                          Export JSON
-                        </button>
-                      </div>
+                      <p className="mb-1 text-[12px] text-muted-foreground">Demo output</p>
+                      <h4 className="flex items-center gap-2 text-lg font-semibold tracking-[-0.02em]">
+                        <Icon className="size-4 text-accent" />
+                        {selected} blueprint
+                      </h4>
                     </div>
-                  )}
+                    <div className="rounded-full border border-accent/20 bg-accent/10 px-3 py-1.5 text-[12px] font-medium text-accent">
+                      Preview only
+                    </div>
+                  </div>
+
+                  <p className="mb-4 text-[13px] leading-relaxed text-muted">
+                    When live, DAEMON will turn the token CA and prompt into a structured project plan, generated modules, and a handoff that can be opened inside the desktop app for editing, testing, and shipping.
+                  </p>
+
+                  <div className="grid gap-2.5">
+                    {demoModules[selected].map((module) => (
+                      <div key={module.title} className="rounded-xl bg-white/[0.035] px-3 py-2.5">
+                        <div className="flex items-center gap-3">
+                          <Check className="size-4 shrink-0 text-accent" />
+                          <span className="text-[13px] font-medium text-foreground">{module.title}</span>
+                        </div>
+                        <p className="mt-1 pl-7 text-[12px] leading-relaxed text-muted">{module.description}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                    <div className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-3 py-3">
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Step 01</p>
+                      <p className="mt-1 text-[13px] font-medium text-foreground">Connect wallet</p>
+                    </div>
+                    <div className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-3 py-3">
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Step 02</p>
+                      <p className="mt-1 text-[13px] font-medium text-foreground">Enter token</p>
+                    </div>
+                    <div className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-3 py-3">
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Step 03</p>
+                      <p className="mt-1 text-[13px] font-medium text-foreground">Open in DAEMON</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
