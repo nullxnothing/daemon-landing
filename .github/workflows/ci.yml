@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [master, redesign/hero-integrations]
   pull_request:
-    branches: [main]
+    branches: [master, redesign/hero-integrations]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
