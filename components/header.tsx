@@ -6,6 +6,7 @@ import { Github, Menu, Send, X, Twitter } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
+  { label: "Factory", href: "/factory" },
   { label: "Product", href: "#features" },
   { label: "Access", href: "/access" },
   { label: "Arena", href: "/arena" },
