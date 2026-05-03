@@ -1,5 +1,6 @@
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
+import { AppFactory } from "@/components/app-factory";
 import { DaemonDemo } from "@/components/daemon-demo/DaemonDemo";
 import { Features } from "@/components/features";
 import { Architecture } from "@/components/architecture";
@@ -28,6 +29,10 @@ export default async function Home() {
       <Header />
       <main>
         <Hero release={release} />
+        <SectionDivider />
+        <ScrollReveal>
+          <AppFactory />
+        </ScrollReveal>
         <SectionDivider />
         <ScrollReveal>
           <DaemonDemo />
