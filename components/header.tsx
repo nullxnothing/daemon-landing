@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ExternalLink, Github, Menu, Send, Twitter, X } from "lucide-react";
+import { Github, Menu, Send, Twitter, X } from "lucide-react";
+import { DexScreenerLogo } from "@/components/dex-screener-logo";
 import { cn } from "@/lib/utils";
 
 const TELEGRAM_URL = "https://t.me/daemonide";
@@ -113,11 +114,11 @@ export function Header() {
               href={DEXSCREENER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              className="text-muted-foreground hover:text-foreground transition-colors p-2 opacity-75 hover:opacity-100"
               aria-label="View on Dex Screener"
               title="Dex Screener"
             >
-              <ExternalLink className="size-[18px]" />
+              <DexScreenerLogo className="size-[18px] rounded-[4px]" />
             </a>
             <a
               href="/docs/installation#download"
@@ -184,7 +185,7 @@ export function Header() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-muted hover:text-foreground transition-colors py-2.5 px-2 rounded-lg hover:bg-card text-sm"
                 >
-                  <ExternalLink className="size-4" />
+                  <DexScreenerLogo className="size-4 rounded-[3px]" />
                   Dex Screener
                 </a>
                 <a
