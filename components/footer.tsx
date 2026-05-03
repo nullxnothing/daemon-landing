@@ -1,4 +1,5 @@
-import { ExternalLink, Github, Send, Twitter } from "lucide-react";
+import { Github, Send, Twitter } from "lucide-react";
+import { DexScreenerLogo } from "@/components/dex-screener-logo";
 
 const TELEGRAM_URL = "https://t.me/daemonide";
 const DISCORD_URL = "https://discord.gg/98CRP2kjG";
@@ -131,7 +132,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ExternalLink className="size-4" />
+              <DexScreenerLogo className="size-4 rounded-[3px]" />
               Dex Screener
             </a>
             <span className="size-1 rounded-full bg-white/10" />
