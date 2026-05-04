@@ -9,6 +9,11 @@ export function RoadmapDoc() {
       <H2 id="in-development">In Development</H2>
 
       <CardGrid>
+        <InfoCard title="Solana Keychain Integration">
+          Enterprise-grade signing with 10 pluggable backends — AWS KMS, Fireblocks, Turnkey,
+          HashiCorp Vault, and more. Built on the Solana Foundation&apos;s official keychain SDK.
+          <a href="/docs/solana-keychain" className="block mt-1 text-accent text-[13px] hover:underline">Read the integration guide &rarr;</a>
+        </InfoCard>
         <InfoCard title="Multi-Agent Orchestration">
           Run multiple AI agents simultaneously with intelligent task distribution and
           coordination. Building on Grind Mode&apos;s foundation with smarter inter-agent

@@ -12,6 +12,7 @@
 * [AI Agents](core-features/ai-agents.md)
 * [Grind Mode](core-features/grind-mode.md)
 * [Solana Development](core-features/solana-development.md)
+* [Solana Keychain](core-features/solana-keychain.md)
 
 ## Editor & Tools
 

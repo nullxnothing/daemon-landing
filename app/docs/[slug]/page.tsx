@@ -11,6 +11,7 @@ import { UIOverviewDoc } from "@/components/docs/ui-overview";
 import { AIAgentsDoc } from "@/components/docs/ai-agents";
 import { GrindModeDoc } from "@/components/docs/grind-mode";
 import { SolanaDevelopmentDoc } from "@/components/docs/solana-development";
+import { SolanaKeychainDoc } from "@/components/docs/solana-keychain";
 import { DaemonProDoc } from "@/components/docs/daemon-pro";
 import { JuiceIntegrationDoc } from "@/components/docs/juice-integration";
 import { EditorTerminalDoc } from "@/components/docs/editor-terminal";
@@ -33,6 +34,7 @@ const contentMap: Record<string, React.ComponentType<{ release: ReleaseInfo }>> 
   "ai-agents": AIAgentsDoc,
   "grind-mode": GrindModeDoc,
   "solana-development": SolanaDevelopmentDoc,
+  "solana-keychain": SolanaKeychainDoc,
   "daemon-pro": DaemonProDoc,
   "juice-integration": JuiceIntegrationDoc,
   "editor-terminal": EditorTerminalDoc,

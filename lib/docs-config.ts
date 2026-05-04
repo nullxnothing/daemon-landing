@@ -24,6 +24,7 @@ export const docsConfig: DocSection[] = [
       { title: "AI Agents", slug: "ai-agents" },
       { title: "Grind Mode", slug: "grind-mode" },
       { title: "Solana Development", slug: "solana-development" },
+      { title: "Solana Keychain", slug: "solana-keychain" },
       { title: "Daemon Pro & Arena", slug: "daemon-pro" },
     ],
   },
