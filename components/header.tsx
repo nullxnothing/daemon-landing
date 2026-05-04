@@ -162,11 +162,7 @@ export function Header() {
                   X
                 </a>
                 <a
-<<<<<<< HEAD
-                  href="https://discord.gg/98CRP2kjG"
-=======
                   href={TELEGRAM_URL}
->>>>>>> origin/redesign/hero-integrations
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-muted hover:text-foreground transition-colors py-2.5 px-2 rounded-lg hover:bg-card text-sm"
