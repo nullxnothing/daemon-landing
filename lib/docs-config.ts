@@ -28,6 +28,12 @@ export const docsConfig: DocSection[] = [
     ],
   },
   {
+    title: "Integrations",
+    items: [
+      { title: "Juice Integration", slug: "juice-integration" },
+    ],
+  },
+  {
     title: "Editor & Tools",
     items: [
       { title: "Monaco Editor & Terminal", slug: "editor-terminal" },
