@@ -1,144 +1,104 @@
 "use client";
 
-import { Check, X, Minus } from "lucide-react";
-
-type Support = "yes" | "no" | "partial";
-
-interface Feature {
-  name: string;
-  daemon: Support;
-  vscode: Support;
-  cursor: Support;
-  note?: string;
-}
-
-const features: Feature[] = [
-  { name: "Built for Solana", daemon: "yes", vscode: "no", cursor: "no" },
-  { name: "Native AI agent spawning", daemon: "yes", vscode: "no", cursor: "partial", note: "Cursor has AI, but no agent spawning" },
-  { name: "Built-in Solana wallet", daemon: "yes", vscode: "no", cursor: "no" },
-  { name: "Live portfolio tracking", daemon: "yes", vscode: "no", cursor: "no" },
-  { name: "MCP server management", daemon: "yes", vscode: "no", cursor: "no" },
-  { name: "On-chain session registry", daemon: "yes", vscode: "no", cursor: "no" },
-  { name: "Integrated PumpFun launches", daemon: "yes", vscode: "no", cursor: "no" },
-  { name: "Real PTY terminals", daemon: "yes", vscode: "yes", cursor: "yes" },
-  { name: "Offline Monaco editor", daemon: "yes", vscode: "partial", cursor: "partial", note: "VS Code/Cursor phone home" },
-  { name: "Zero extensions needed", daemon: "yes", vscode: "no", cursor: "partial" },
-  { name: "No subscription required", daemon: "yes", vscode: "yes", cursor: "no" },
-  { name: "Not a VS Code fork", daemon: "yes", vscode: "yes", cursor: "no" },
+const daemonWins = [
+  "Wallet and on-chain workflows ship in the product.",
+  "Agent work is part of the workspace, not bolted onto it.",
+  "Launches, swaps, reads, terminals, and deploys stay in one loop.",
 ];
 
-function Icon({ support }: { support: Support }) {
-  if (support === "yes") {
-    return (
-      <span className="inline-flex items-center justify-center size-6 rounded-full bg-accent/15">
-        <Check className="size-3.5 text-accent" strokeWidth={3} />
-      </span>
-    );
-  }
-  if (support === "partial") {
-    return (
-      <span className="inline-flex items-center justify-center size-6 rounded-full bg-amber-500/15">
-        <Minus className="size-3.5 text-amber-400" strokeWidth={3} />
-      </span>
-    );
-  }
-  return (
-    <span className="inline-flex items-center justify-center size-6 rounded-full bg-red-500/10">
-      <X className="size-3.5 text-red-400/70" strokeWidth={3} />
-    </span>
-  );
-}
+const competitorNotes = [
+  {
+    name: "VS Code",
+    body: "Strong editor, but Solana workflow depth comes from an extension stack and extra browser tools.",
+  },
+  {
+    name: "Cursor",
+    body: "Better AI ergonomics than a plain editor, but still inherits the same split between coding and chain tooling.",
+  },
+];
+
+const comparisonHeaders = ["", "Daemon", "VS Code", "Cursor"];
+
+const comparisonRows = [
+  ["Solana workflow", "Native", "Extensions + browser", "Extensions + browser"],
+  ["Agent system", "Built in", "No", "Partial"],
+  ["Wallet + portfolio", "Built in", "No", "No"],
+  ["Deploy loop", "In app", "External services", "External services"],
+];
 
 export function Comparison() {
   return (
-    <section id="comparison" className="relative py-28 md:py-36 px-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Section header */}
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <p className="text-accent text-[13px] font-semibold tracking-[0.2em] uppercase mb-5">
-            Comparison
+    <section id="comparison" className="relative px-6 py-24 md:py-30">
+      <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)]">
+        <div className="max-w-[28rem]">
+          <p className="text-accent text-[13px] font-semibold tracking-[0.2em] uppercase">
+            Why Daemon
           </p>
-          <h2 className="text-4xl md:text-[3.25rem] font-bold tracking-[-0.02em] leading-[1.1] gradient-text text-balance">
-            Why DAEMON?
+          <h2 className="mt-5 text-4xl font-bold leading-[1.05] tracking-[-0.03em] gradient-text md:text-[3.1rem]">
+            Fewer seams.
+            <br />
+            More work done.
           </h2>
-          <p className="mt-6 text-[17px] text-muted leading-relaxed max-w-lg mx-auto">
-            One purpose-built app vs. a general-purpose editor held together by extensions.
+          <p className="mt-6 text-[17px] leading-relaxed text-muted">
+            The strongest argument for Daemon is not abstract feature count. It is that the
+            workflow stays intact from code to chain to deploy.
           </p>
         </div>
 
-        {/* Comparison table */}
-        <div className="rounded-2xl overflow-hidden card-premium">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-white/5">
-                  <th className="text-left text-[11px] font-semibold text-muted-foreground/80 px-6 py-4 uppercase tracking-[0.15em] min-w-[200px]">
-                    Feature
-                  </th>
-                  <th className="text-center text-[13px] font-bold text-accent px-6 py-4 tracking-[-0.01em] min-w-[100px]">
-                    DAEMON
-                  </th>
-                  <th className="text-center text-[11px] font-semibold text-muted-foreground/80 px-6 py-4 uppercase tracking-[0.15em] min-w-[100px]">
-                    VS Code
-                  </th>
-                  <th className="text-center text-[11px] font-semibold text-muted-foreground/80 px-6 py-4 uppercase tracking-[0.15em] min-w-[100px]">
-                    Cursor
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {features.map((feature, index) => (
-                  <tr
-                    key={feature.name}
-                    className={`border-b border-white/[0.03] last:border-0 transition-colors hover:bg-white/[0.02] ${
-                      index % 2 === 0 ? "" : "bg-white/[0.01]"
-                    }`}
-                  >
-                    <td className="px-6 py-3.5 text-[13px] text-foreground">
-                      {feature.name}
-                    </td>
-                    <td className="px-6 py-3.5 text-center">
-                      <span className="inline-flex justify-center">
-                        <Icon support={feature.daemon} />
-                      </span>
-                    </td>
-                    <td className="px-6 py-3.5 text-center">
-                      <span className="inline-flex justify-center">
-                        <Icon support={feature.vscode} />
-                      </span>
-                    </td>
-                    <td className="px-6 py-3.5 text-center">
-                      <span className="inline-flex justify-center">
-                        <Icon support={feature.cursor} />
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="grid gap-4 md:grid-cols-3">
+          <section className="rounded-lg border border-accent/14 bg-accent/[0.05] p-6 md:col-span-1">
+            <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-accent">Daemon</p>
+            <ul className="mt-4 space-y-3">
+              {daemonWins.map((point) => (
+                <li key={point} className="text-[14px] leading-[1.72] text-foreground">
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <div className="grid gap-4 md:col-span-2 md:grid-cols-2">
+            {competitorNotes.map((note) => (
+              <section key={note.name} className="rounded-lg border border-white/[0.05] bg-card/65 p-6">
+                <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-muted-foreground">
+                  {note.name}
+                </p>
+                <p className="mt-3 text-[14px] leading-[1.72] text-muted">{note.body}</p>
+              </section>
+            ))}
           </div>
         </div>
+      </div>
 
-        {/* Bottom callouts */}
-        <div className="grid sm:grid-cols-3 gap-4 mt-6">
-          <div className="p-6 rounded-2xl card-premium">
-            <p className="text-accent font-mono text-[13px] font-semibold mb-2">DAEMON</p>
-            <p className="text-[13px] text-muted leading-[1.7]">
-              Purpose-built for Solana. Wallet, agents, token launches, and deploys ship as first-class features, not afterthoughts.
-            </p>
-          </div>
-          <div className="p-6 rounded-2xl card-premium">
-            <p className="text-muted-foreground font-mono text-[13px] font-semibold mb-2">VS Code</p>
-            <p className="text-[13px] text-muted leading-[1.7]">
-              General-purpose editor. Requires 10+ extensions for comparable Solana workflow. Extensions can conflict and degrade performance.
-            </p>
-          </div>
-          <div className="p-6 rounded-2xl card-premium">
-            <p className="text-muted-foreground font-mono text-[13px] font-semibold mb-2">Cursor</p>
-            <p className="text-[13px] text-muted leading-[1.7]">
-              AI-focused but VS Code fork. No wallet, no on-chain integration, no Solana tooling. Subscription required for AI features.
-            </p>
-          </div>
+      <div className="mx-auto mt-14 max-w-6xl rounded-lg border border-white/[0.05] bg-card/70 p-3 md:p-4">
+        <div className="grid gap-px overflow-hidden rounded-md bg-white/[0.04] md:grid-cols-4">
+          {comparisonHeaders.map((cell, index) => (
+            <div
+              key={`header-${index}`}
+              className={`bg-card px-4 py-3 text-[12px] font-mono uppercase tracking-[0.14em] ${
+                index === 1 ? "text-accent" : "text-muted-foreground"
+              }`}
+            >
+              {cell}
+            </div>
+          ))}
+
+          {comparisonRows.flatMap((row) =>
+            row.map((cell, index) => (
+              <div
+                key={`${row[0]}-${index}`}
+                className={`bg-card px-4 py-4 text-[13px] leading-[1.6] ${
+                  index === 0
+                    ? "font-mono uppercase tracking-[0.12em] text-muted-foreground"
+                    : index === 1
+                      ? "font-medium text-accent"
+                      : "text-muted"
+                }`}
+              >
+                {cell}
+              </div>
+            ))
+          )}
         </div>
       </div>
     </section>

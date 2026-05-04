@@ -50,11 +50,11 @@ export function DaemonDemo() {
   const isEditorMode = activePanel === "editor";
 
   return (
-    <section className="py-24 md:py-32 px-4 sm:px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[88rem] mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-4">
-            Inside DAEMON
+            Inside Daemon
           </h2>
           <p className="text-[var(--color-muted)] max-w-2xl mx-auto text-lg">
             The same shell, now showing more of DAEMON&apos;s Solana runtime, wallet path, launch flow, and MCP surface.
@@ -67,10 +67,10 @@ export function DaemonDemo() {
               <div
                 className="dd-titlebar-icon"
                 style={{
-                  background: "linear-gradient(135deg, #3ecf8e, #2a9d6a)",
+                  background: "linear-gradient(135deg, #58c88a, #3f9f6d)",
                 }}
               />
-              <span className="dd-titlebar-title">DAEMON</span>
+              <span className="dd-titlebar-title">Daemon</span>
             </div>
             <div className="dd-project-tabs">
               <button className="dd-project-tab active">
@@ -85,7 +85,7 @@ export function DaemonDemo() {
             <div className="dd-titlebar-traffic">
               <div className="dd-traffic-dot" style={{ background: "#ef5350" }} />
               <div className="dd-traffic-dot" style={{ background: "#f0b429" }} />
-              <div className="dd-traffic-dot" style={{ background: "#3ecf8e" }} />
+              <div className="dd-traffic-dot" style={{ background: "#58c88a" }} />
             </div>
           </div>
 
@@ -181,7 +181,7 @@ export function DaemonDemo() {
           {/* Status bar */}
           <div className="dd-statusbar">
             <div className="dd-statusbar-left">
-              <span className="dd-status-item">DAEMON</span>
+              <span className="dd-status-item">Daemon</span>
               <span className="dd-status-item">
                 <GitBranch size={10} />
                 main
@@ -195,14 +195,14 @@ export function DaemonDemo() {
               <span className="dd-status-item">
                 <span
                   className="dd-status-dot"
-                  style={{ background: "#3ecf8e" }}
+                  style={{ background: "#58c88a" }}
                 />
                 Claude
               </span>
               <span className="dd-status-item">
                 <span
                   className="dd-status-dot"
-                  style={{ background: "#3ecf8e" }}
+                  style={{ background: "#58c88a" }}
                 />
                 Helius
               </span>

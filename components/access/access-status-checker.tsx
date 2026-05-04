@@ -140,10 +140,7 @@ export function AccessStatusChecker() {
             label="Holder threshold"
             value={formatAmount(status.holderStatus.minAmount)}
           />
-          <StatusCard
-            label="Staked DAEMON"
-            value={formatAmount(status.staking.currentAmount)}
-          />
+          <StatusCard label="Staked DAEMON" value={formatAmount(status.staking.currentAmount)} />
           <StatusCard
             label="Stake tier"
             value={
@@ -163,10 +160,10 @@ export function AccessStatusChecker() {
           {status.staking.qualified
             ? `This wallet qualifies for ${qualifiedTier?.label ?? "staking"} access through Streamflow. ${qualifiedTier?.summary ?? ""}`
             : status.active
-            ? "This wallet already has an active DAEMON access path."
-            : status.holderStatus.eligible
-              ? "This wallet qualifies for live holder access in DAEMON today."
-              : "This wallet does not currently qualify for holder access. The base DAEMON app remains free; staking is intended as an optional upgrade path."}
+              ? "This wallet already has an active DAEMON access path."
+              : status.holderStatus.eligible
+                ? "This wallet qualifies for live holder access in DAEMON today."
+                : "This wallet does not currently qualify for holder access. The base DAEMON app remains free; staking is intended as an optional upgrade path."}
         </div>
       )}
 

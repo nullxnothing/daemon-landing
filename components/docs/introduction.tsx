@@ -63,6 +63,7 @@ export function IntroductionDoc() {
         items={[
           <><strong className="text-foreground">GitHub:</strong>{" "}<a href="https://github.com/nullxnothing/daemon" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">github.com/nullxnothing/daemon</a></>,
           <><strong className="text-foreground">Twitter:</strong>{" "}<a href="https://x.com/DaemonTerminal" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">@DaemonTerminal</a></>,
+          <><strong className="text-foreground">Telegram:</strong>{" "}<a href="https://t.me/daemonide" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">t.me/daemonide</a></>,
           <><strong className="text-foreground">Built by:</strong>{" "}<a href="https://github.com/nullxnothing" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">nullxnothing</a></>,
         ]}
       />

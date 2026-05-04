@@ -101,7 +101,7 @@ export function DemoRightPanel() {
                   width: 5,
                   height: 5,
                   borderRadius: "50%",
-                  background: "#3ecf8e",
+                  background: "#58c88a",
                 }}
               />
             </div>

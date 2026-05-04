@@ -22,13 +22,12 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         >
           <ChevronLeft className="size-3.5" />
           <Image
-            src="/images/daemon-icon.png"
+            src="/images/daemon-mark-white.png"
             alt="DAEMON"
             width={22}
             height={22}
-            className="rounded-md"
           />
-          <span className="font-semibold text-foreground tracking-wide text-sm">DAEMON</span>
+          <span className="font-semibold text-foreground tracking-wide text-sm">Daemon</span>
         </Link>
       </div>
 

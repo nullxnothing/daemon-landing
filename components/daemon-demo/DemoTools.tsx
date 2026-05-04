@@ -1,14 +1,14 @@
 "use client";
 
 const TOOLS = [
-  { name: "Solana Toolbox", desc: "One workspace for readiness, launch, transact, and debug", color: "#3ecf8e" },
-  { name: "Project Readiness", desc: "Score wallet, MCP, RPC, and validator setup", color: "#60a5fa" },
-  { name: "Pump.fun Launcher", desc: "Launch tokens through the native protocol adapter", color: "#3ecf8e" },
-  { name: "Raydium LaunchLab", desc: "Run Raydium token launches from the same launch surface", color: "#f0b429" },
-  { name: "Meteora DBC", desc: "Use dynamic bonding curve launch flows inside DAEMON", color: "#60a5fa" },
-  { name: "Session Registry", desc: "Record agent work on-chain when project tracking matters", color: "#c792ea" },
-  { name: "Priority Fee Calculator", desc: "Estimate execution pricing before swap or launch", color: "#f0b429" },
-  { name: "Account Viewer", desc: "Decode on-chain account data without leaving the IDE", color: "#3ecf8e" },
+  { name: "Pump.fun Launcher", desc: "Launch tokens on pump.fun", color: "#58c88a" },
+  { name: "Token Scanner", desc: "Analyze token metadata & holders", color: "#60a5fa" },
+  { name: "Wallet Drainer Detector", desc: "Scan for malicious approvals", color: "#ef5350" },
+  { name: "Anchor Deploy", desc: "Build & deploy Anchor programs", color: "#f0b429" },
+  { name: "RPC Benchmark", desc: "Test RPC endpoint latency", color: "#c792ea" },
+  { name: "ABI Explorer", desc: "Inspect program IDLs", color: "#60a5fa" },
+  { name: "Account Viewer", desc: "Decode on-chain account data", color: "#58c88a" },
+  { name: "Priority Fee Calculator", desc: "Estimate optimal CU pricing", color: "#f0b429" },
 ];
 
 export function DemoTools() {

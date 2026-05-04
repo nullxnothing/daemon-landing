@@ -7,6 +7,7 @@ import { Architecture } from "@/components/architecture";
 import { Comparison } from "@/components/comparison";
 import { ProductTour } from "@/components/product-tour";
 import { CTA } from "@/components/cta";
+import { EcosystemRail } from "@/components/ecosystem-rail";
 import { Footer } from "@/components/footer";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { getReleaseInfo } from "@/lib/downloads";
@@ -21,6 +22,16 @@ function SectionDivider() {
   );
 }
 
+function EcosystemProof() {
+  return (
+    <section className="px-5 pb-16 sm:px-7 lg:px-10">
+      <div className="mx-auto max-w-[88rem]">
+        <EcosystemRail />
+      </div>
+    </section>
+  );
+}
+
 export default async function Home() {
   const release = await getReleaseInfo();
 
@@ -29,6 +40,11 @@ export default async function Home() {
       <Header />
       <main>
         <Hero release={release} />
+        <EcosystemProof />
+        <SectionDivider />
+        <ScrollReveal>
+          <AppFactory />
+        </ScrollReveal>
         <SectionDivider />
         <ScrollReveal>
           <AppFactory />

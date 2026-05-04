@@ -290,10 +290,7 @@ export async function getAccessConfig(): Promise<AccessConfig> {
   };
 }
 
-async function getStakeSnapshot(
-  wallet: string,
-  tiers: AccessTier[],
-): Promise<StakeSnapshot> {
+async function getStakeSnapshot(wallet: string, tiers: AccessTier[]): Promise<StakeSnapshot> {
   const stakePoolKey = await getStakePoolKey();
 
   if (!stakePoolKey) {
@@ -371,8 +368,7 @@ export async function getAccessStatus(wallet: string): Promise<AccessStatus> {
   const payload = data?.data ?? data;
   const activeViaRemote = payload?.active ?? false;
   const stakingActive = stake.qualified;
-  const accessSource =
-    payload?.accessSource ?? (stakingActive ? "staking" : null);
+  const accessSource = payload?.accessSource ?? (stakingActive ? "staking" : null);
 
   return {
     wallet,

@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function ScrollReveal({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -9,22 +13,29 @@ export function ScrollReveal({ children }: { children: React.ReactNode }) {
     const el = ref.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("visible");
-          observer.unobserve(el);
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 28 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.72,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 84%",
+            once: true,
+          },
         }
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
+      );
+    }, el);
 
-    observer.observe(el);
-    return () => observer.disconnect();
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={ref} className="reveal">
+    <div ref={ref}>
       {children}
     </div>
   );

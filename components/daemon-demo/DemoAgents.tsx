@@ -4,7 +4,7 @@ const AGENTS = [
   {
     name: "Claude",
     model: "claude-opus-4-20250514",
-    color: "#3ecf8e",
+    color: "#58c88a",
     desc: "General-purpose AI coding assistant",
   },
   {

@@ -2,268 +2,23 @@
 
 import Image from "next/image";
 import { track } from "@vercel/analytics";
-import { Monitor, Apple, ArrowRight, Terminal, Copy, Check } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 import type { ReleaseInfo } from "@/lib/downloads";
-
-const DAEMON_CA = "4vpf4qNtNVkvz2dm5qL2mT6jBXH9gDY8qH2QsHN5pump";
-
-function CaPill() {
-  const [copied, setCopied] = useState(false);
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(DAEMON_CA);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1600);
-    } catch {}
-  };
-  return (
-    <button
-      onClick={handleCopy}
-      className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-[12px] font-mono text-muted-foreground hover:text-foreground hover:border-accent/50 transition-colors"
-      title="Copy $DAEMON contract address"
-    >
-      <span className="text-accent font-semibold">$DAEMON</span>
-      <span className="truncate max-w-[180px] sm:max-w-none">{DAEMON_CA}</span>
-      {copied ? (
-        <Check className="size-3.5 text-accent shrink-0" />
-      ) : (
-        <Copy className="size-3.5 opacity-60 group-hover:opacity-100 shrink-0" />
-      )}
-    </button>
-  );
-}
-
-function HeroCard({ release }: { release: ReleaseInfo }) {
-  const WINDOWS_URL = release.downloads.windows;
-  const MAC_URL = release.downloads.mac;
-  const MAC_INTEL_URL = release.downloads.macIntel;
-  const LINUX_URL = release.downloads.linux;
-
-  return (
-    <div className="relative min-h-[600px] flex flex-col items-center justify-center rounded-[48px] border border-border bg-card overflow-hidden shadow-sm transition-all duration-500">
-      {/* Abstract swirl background */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Base dark gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_60%,rgba(62,207,142,0.12),transparent_70%)]" />
-
-        {/* Swirl layers - twinkle animation */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              radial-gradient(ellipse 60% 50% at 20% 80%, rgba(62,207,142,0.25), transparent 60%),
-              radial-gradient(ellipse 50% 60% at 80% 20%, rgba(62,207,142,0.2), transparent 60%),
-              radial-gradient(ellipse 40% 35% at 60% 70%, rgba(42,157,104,0.18), transparent 50%),
-              radial-gradient(ellipse 45% 40% at 30% 30%, rgba(62,207,142,0.15), transparent 55%)
-            `,
-            animation: "hero-twinkle-1 8s ease-in-out infinite",
-          }}
-        />
-
-        {/* Second gradient layer twinkle offset */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              radial-gradient(ellipse 55% 45% at 70% 60%, rgba(62,207,142,0.2), transparent 55%),
-              radial-gradient(ellipse 40% 50% at 25% 40%, rgba(42,157,104,0.15), transparent 50%)
-            `,
-            animation: "hero-twinkle-2 11s ease-in-out infinite",
-          }}
-        />
-
-        {/* Flowing organic shapes - twinkle */}
-        <svg
-          className="absolute inset-0 w-full h-full"
-          viewBox="0 0 1200 800"
-          preserveAspectRatio="xMidYMid slice"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <filter id="turbulence">
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.015"
-                numOctaves="3"
-                seed="5"
-                result="noise"
-              />
-              <feDisplacementMap
-                in="SourceGraphic"
-                in2="noise"
-                scale="80"
-                xChannelSelector="R"
-                yChannelSelector="G"
-              />
-            </filter>
-          </defs>
-          <g filter="url(#turbulence)">
-            <path
-              d="M-100,400 Q200,100 500,350 T900,250 T1300,400 T1100,600 T600,550 T100,650 Z"
-              fill="rgba(62,207,142,0.15)"
-              style={{ animation: "hero-twinkle-3 6s ease-in-out infinite" }}
-            />
-            <path
-              d="M-50,300 Q300,500 600,200 T1000,450 T800,700 T300,600 Z"
-              fill="rgba(42,157,104,0.12)"
-              style={{ animation: "hero-twinkle-3 9s ease-in-out infinite 2s" }}
-            />
-            <path
-              d="M100,600 Q400,300 700,500 T1100,300 T1200,600 T700,700 T200,500 Z"
-              fill="rgba(62,207,142,0.1)"
-              style={{ animation: "hero-twinkle-4 7s ease-in-out infinite 1s" }}
-            />
-          </g>
-        </svg>
-
-        {/* Halftone dot overlay - twinkle */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle, rgba(62,207,142,0.4) 1px, transparent 1px)`,
-            backgroundSize: "8px 8px",
-            animation: "hero-dots-twinkle 6s ease-in-out infinite",
-          }}
-        />
-
-        {/* Second halftone layer */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle, rgba(62,207,142,0.5) 0.5px, transparent 0.5px)`,
-            backgroundSize: "4px 4px",
-            backgroundPosition: "2px 2px",
-            animation: "hero-dots-twinkle-2 9s ease-in-out infinite 1.5s",
-          }}
-        />
-
-        {/* Vignette for center readability */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_50%,rgba(14,14,14,0.85),transparent_100%)]" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 py-20 max-w-3xl mx-auto">
-        {/* Logo */}
-        <div className="animate-fade-up mb-6">
-          <Image
-            src="/images/daemon-icon.png"
-            alt="DAEMON"
-            width={56}
-            height={56}
-            className="mx-auto rounded-2xl"
-            priority
-          />
-        </div>
-
-        {/* Badges */}
-        <div className="animate-fade-up flex items-center justify-center gap-3 mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-[13px] text-accent">
-            <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-            v{release.version}: GitHub release is live
-          </div>
-          <a
-            href="https://github.com/nullxnothing/daemon"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-card/50 text-[13px] text-muted-foreground hover:text-foreground hover:border-accent/30 transition-colors"
-          >
-            <svg className="size-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-            Star on GitHub
-          </a>
-        </div>
-
-        {/* Headline */}
-        <h1
-          className="animate-fade-up text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold tracking-[-0.03em] leading-[0.95]"
-          style={{ animationDelay: "100ms" }}
-        >
-          <span className="text-foreground">Solana&apos;s</span>
-          <br />
-          <span className="text-foreground">first IDE.</span>
-        </h1>
-
-        {/* Subtitle */}
-        <p
-          className="animate-fade-up mt-6 text-lg md:text-xl text-muted max-w-md mx-auto leading-relaxed"
-          style={{ animationDelay: "200ms" }}
-        >
-          AI agents, built-in wallet, token launches, and deploys. All from one desktop app.
-        </p>
-
-        {/* CTAs */}
-        <div
-          className="animate-fade-up mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
-          style={{ animationDelay: "300ms" }}
-        >
-          <a
-            href={WINDOWS_URL}
-            download
-            onClick={() => track("Download", { os: "windows", location: "hero" })}
-            className="group flex items-center gap-2.5 bg-accent text-accent-foreground px-7 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_40px_rgba(62,207,142,0.3)]"
-          >
-            <Monitor className="size-[18px]" />
-            Download for Windows
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-          </a>
-          <a
-            href={MAC_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("Download", { os: "mac-arm64", location: "hero" })}
-            className="group flex items-center gap-2.5 border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 rounded-full font-medium text-[15px] text-muted transition-all duration-200 hover:border-white/20 hover:text-foreground hover:bg-white/10"
-          >
-            <Apple className="size-[18px]" />
-            Mac (Apple Silicon)
-          </a>
-          <a
-            href={LINUX_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("Download", { os: "linux", location: "hero" })}
-            className="group flex items-center gap-2.5 border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 rounded-full font-medium text-[15px] text-muted transition-all duration-200 hover:border-white/20 hover:text-foreground hover:bg-white/10"
-          >
-            <Terminal className="size-[18px]" />
-            Install for Linux
-          </a>
-        </div>
-        <div
-          className="animate-fade-up mt-4 flex items-center justify-center gap-2 text-[13px] text-muted-foreground"
-          style={{ animationDelay: "340ms" }}
-        >
-          <span>Intel Mac?</span>
-          <a
-            href={MAC_INTEL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("Download", { os: "mac-x64", location: "hero" })}
-            className="text-accent hover:text-accent/80 transition-colors"
-          >
-            Download the x64 build
-          </a>
-        </div>
-
-        {/* Contract address */}
-        <div
-          className="animate-fade-up mt-8 flex justify-center"
-          style={{ animationDelay: "400ms" }}
-        >
-          <CaPill />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function DemoVideo() {
   return (
-    <div className="relative w-full max-w-5xl mx-auto">
-      <div className="absolute -inset-4 bg-accent/5 rounded-3xl blur-3xl animate-glow-pulse" />
-      <div className="relative rounded-2xl border border-border bg-[#0c0c0c] overflow-hidden shadow-2xl shadow-black/50">
+    <div className="relative">
+      <div className="absolute -inset-x-10 -inset-y-8 bg-[linear-gradient(90deg,transparent,rgba(88,200,138,0.08),transparent)] blur-3xl" />
+      <div className="relative overflow-hidden rounded-lg border border-white/[0.08] bg-surface shadow-[0_28px_90px_rgba(0,0,0,0.28)]">
+        <div className="flex h-9 items-center gap-2 border-b border-white/[0.06] bg-white/[0.025] px-4">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#d86f6f]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#d7b75f]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-accent" />
+          <span className="ml-auto font-mono text-[11px] text-muted-foreground">daemon://workspace</span>
+        </div>
         <video
-          className="w-full"
+          className="block w-full"
+          aria-label="Daemon IDE interface preview"
           autoPlay
           loop
           muted
@@ -280,26 +35,77 @@ function DemoVideo() {
 
 export function Hero({ release }: { release: ReleaseInfo }) {
   return (
-    <section className="relative px-4 sm:px-6 pt-20 pb-16">
-      {/* Hero card */}
-      <div className="max-w-6xl mx-auto">
-        <HeroCard release={release} />
-      </div>
-
-      {/* Demo video below the card */}
+    <section className="relative overflow-hidden px-5 pb-20 pt-28 sm:px-7 lg:px-10 lg:pb-28 lg:pt-32">
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(88,200,138,0.045),transparent_34%)]" />
       <div
-        className="animate-fade-up max-w-6xl mx-auto mt-16"
-        style={{ animationDelay: "450ms" }}
-      >
-        <div className="text-center mb-8">
-          <p className="text-accent text-[13px] font-medium tracking-wider uppercase mb-3">
-            See it in action
+        className="absolute inset-0 opacity-[0.18]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      <div className="relative mx-auto grid max-w-[88rem] items-center gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(520px,1.08fr)] xl:gap-16">
+        <div className="max-w-[42rem] text-center lg:text-left">
+          <div className="animate-fade-up mb-7 flex items-center justify-center gap-3 text-[12px] font-mono uppercase tracking-[0.22em] text-muted-foreground lg:justify-start">
+            <Image
+              src="/images/daemon-mark-white.png"
+              alt="Daemon"
+              width={26}
+              height={26}
+              priority
+            />
+            <span>AI-native IDE for Solana</span>
+          </div>
+
+          <h1
+            className="animate-fade-up mx-auto max-w-[9ch] text-balance text-[clamp(2.9rem,6vw,5.4rem)] font-bold leading-[0.9] tracking-[-0.055em] lg:mx-0"
+            style={{ animationDelay: "80ms" }}
+          >
+            Solana&apos;s first IDE.
+          </h1>
+
+          <p
+            className="animate-fade-up mt-7 max-w-[36rem] text-balance text-[1.06rem] leading-[1.72] text-muted md:text-[1.18rem] lg:mx-0"
+            style={{ animationDelay: "160ms" }}
+          >
+            Agents, wallet tooling, launches, swaps, and deploys stay in one
+            Solana-native workspace instead of five separate tools.
           </p>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight gradient-text">
-            One app. Everything you need.
-          </h2>
+
+          <div
+            className="animate-fade-up mt-9 flex flex-col items-center gap-3 sm:flex-row lg:justify-start"
+            style={{ animationDelay: "240ms" }}
+          >
+            <a
+              href="/docs/installation#download"
+              onClick={() => track("Download", { location: "hero" })}
+              className="group inline-flex items-center justify-center gap-2.5 rounded-lg bg-accent px-6 py-3 text-[15px] font-semibold text-accent-foreground transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_32px_rgba(88,200,138,0.24)]"
+            >
+              Download Daemon
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+            </a>
+          </div>
+
+          <div
+            className="animate-fade-up mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-mono text-[12px] text-muted-foreground lg:justify-start"
+            style={{ animationDelay: "300ms" }}
+          >
+            <span className="inline-flex items-center rounded-md border border-white/8 bg-white/[0.025] px-2.5 py-1">v{release.version}</span>
+            <span className="inline-flex items-center rounded-md border border-white/8 bg-white/[0.025] px-2.5 py-1">Windows / macOS / Linux</span>
+            <a
+              href="/docs"
+              className="transition-colors hover:text-foreground"
+            >
+              Docs
+            </a>
+          </div>
         </div>
-        <DemoVideo />
+
+        <div className="animate-fade-up lg:translate-x-8 xl:translate-x-12" style={{ animationDelay: "180ms" }}>
+          <DemoVideo />
+        </div>
       </div>
     </section>
   );

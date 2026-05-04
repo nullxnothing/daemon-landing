@@ -44,4 +44,5 @@ DAEMON consolidates all of that into one app:
 DAEMON is free and open source under the MIT License.
 
 - **GitHub:** [github.com/nullxnothing/daemon](https://github.com/nullxnothing/daemon)
+- **Telegram:** [t.me/daemonide](https://t.me/daemonide)
 - **Built by:** [nullxnothing](https://github.com/nullxnothing)
