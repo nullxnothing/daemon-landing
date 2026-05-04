@@ -47,10 +47,6 @@ export default async function Home() {
         </ScrollReveal>
         <SectionDivider />
         <ScrollReveal>
-          <AppFactory />
-        </ScrollReveal>
-        <SectionDivider />
-        <ScrollReveal>
           <DaemonDemo />
         </ScrollReveal>
         <SectionDivider />
