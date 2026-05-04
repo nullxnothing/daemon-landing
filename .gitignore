@@ -65,3 +65,6 @@ PLUGIN_TODOS.md
 .playwright-mcp/
 Usersoffic.claudeplans/
 .vercel
+.env*.local
+
+.telemetry-admin-token.local
