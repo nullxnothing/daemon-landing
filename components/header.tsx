@@ -16,12 +16,12 @@ const DEXSCREENER_URL =
 
 const navLinks = [
   { label: "Factory", href: "/factory" },
-  { label: "Product", href: "#features" },
+  { label: "Product", href: "/#features" },
   { label: "Access", href: "/access" },
   { label: "Arena", href: "/arena" },
   { label: "Roadmap", href: "/roadmap" },
   { label: "Docs", href: "/docs" },
-  { label: "Why Daemon", href: "#architecture" },
+  { label: "Why Daemon", href: "/#architecture" },
 ];
 
 function DiscordIcon({ className = "size-[18px]" }: { className?: string }) {
@@ -116,11 +116,11 @@ export function Header() {
               href={DEXSCREENER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors p-2 opacity-75 hover:opacity-100"
+              className="text-muted-foreground hover:text-foreground transition-colors p-2"
               aria-label="View on Dex Screener"
               title="Dex Screener"
             >
-              <DexScreenerLogo className="size-[18px] rounded-[4px]" />
+              <DexScreenerLogo className="size-[18px]" />
             </a>
             <Link
               href="/docs/installation#download"
@@ -187,7 +187,7 @@ export function Header() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-muted hover:text-foreground transition-colors py-2.5 px-2 rounded-lg hover:bg-card text-sm"
                 >
-                  <DexScreenerLogo className="size-4 rounded-[3px]" />
+                  <DexScreenerLogo className="size-4" />
                   Dex Screener
                 </a>
                 <a

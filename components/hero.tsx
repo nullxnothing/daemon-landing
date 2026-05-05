@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { track } from "@vercel/analytics";
 import { ArrowRight } from "lucide-react";
@@ -60,32 +61,38 @@ export function Hero({ release }: { release: ReleaseInfo }) {
           </div>
 
           <h1
-            className="animate-fade-up mx-auto max-w-[9ch] text-balance text-[clamp(2.9rem,6vw,5.4rem)] font-bold leading-[0.9] tracking-[-0.055em] lg:mx-0"
+            className="animate-fade-up mx-auto max-w-[14ch] text-balance text-[clamp(2.9rem,6vw,5.4rem)] font-bold leading-[0.95] tracking-[-0.055em] lg:mx-0"
             style={{ animationDelay: "80ms" }}
           >
-            Solana&apos;s first IDE.
+            Build Solana apps without leaving your editor.
           </h1>
 
           <p
             className="animate-fade-up mt-7 max-w-[36rem] text-balance text-[1.06rem] leading-[1.72] text-muted md:text-[1.18rem] lg:mx-0"
             style={{ animationDelay: "160ms" }}
           >
-            Agents, wallet tooling, launches, swaps, and deploys stay in one
-            Solana-native workspace instead of five separate tools.
+            Daemon is a Solana-native IDE that bundles agents, wallets, launches, swaps,
+            and deploys into one workspace — so you ship faster and stop juggling five tools.
           </p>
 
           <div
             className="animate-fade-up mt-9 flex flex-col items-center gap-3 sm:flex-row lg:justify-start"
             style={{ animationDelay: "240ms" }}
           >
-            <a
+            <Link
               href="/docs/installation#download"
               onClick={() => track("Download", { location: "hero" })}
               className="group inline-flex items-center justify-center gap-2.5 rounded-lg bg-accent px-6 py-3 text-[15px] font-semibold text-accent-foreground transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_32px_rgba(88,200,138,0.24)]"
             >
               Download Daemon
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            </Link>
+            <Link
+              href="/#features"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.025] px-6 py-3 text-[15px] font-semibold text-foreground transition-all duration-200 hover:border-white/20 hover:bg-white/[0.05]"
+            >
+              See how it works
+            </Link>
           </div>
 
           <div
@@ -94,12 +101,12 @@ export function Hero({ release }: { release: ReleaseInfo }) {
           >
             <span className="inline-flex items-center rounded-md border border-white/8 bg-white/[0.025] px-2.5 py-1">v{release.version}</span>
             <span className="inline-flex items-center rounded-md border border-white/8 bg-white/[0.025] px-2.5 py-1">Windows / macOS / Linux</span>
-            <a
+            <Link
               href="/docs"
               className="transition-colors hover:text-foreground"
             >
               Docs
-            </a>
+            </Link>
           </div>
         </div>
 

@@ -15,7 +15,7 @@ const FOOTER_LINKS = {
     { label: "Arena", href: "/arena" },
     { label: "Features", href: "/#features" },
     { label: "Docs", href: "/docs" },
-    { label: "Roadmap", href: "/docs/roadmap" },
+    { label: "Roadmap", href: "/roadmap" },
   ],
   Community: [
     {
@@ -49,6 +49,11 @@ const FOOTER_LINKS = {
     { label: "Brand Kit", href: "/docs/brand-kit" },
     { label: "Contributing", href: "/docs/contributing" },
   ],
+  Legal: [
+    { label: "Privacy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
+    { label: "Contact", href: "mailto:hello@daemon.computer" },
+  ],
 } as const;
 
 function DiscordIcon({ className = "size-4" }: { className?: string }) {
@@ -63,7 +68,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border">
       <div className="max-w-6xl mx-auto px-6 pt-14 pb-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-10 mb-14">
+        <div className="grid grid-cols-2 gap-10 mb-14 sm:grid-cols-4">
           {Object.entries(FOOTER_LINKS).map(([heading, links]) => (
             <div key={heading}>
               <h3 className="text-[13px] font-semibold text-foreground tracking-wide uppercase mb-4">
@@ -132,7 +137,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
             >
-              <DexScreenerLogo className="size-4 rounded-[3px]" />
+              <DexScreenerLogo className="size-4" />
               Dex Screener
             </a>
             <span className="size-1 rounded-full bg-white/10" />
