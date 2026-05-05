@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { Github, Menu, Send, Twitter, X } from "lucide-react";
 import { DexScreenerLogo } from "@/components/dex-screener-logo";
@@ -18,6 +19,7 @@ const navLinks = [
   { label: "Product", href: "#features" },
   { label: "Access", href: "/access" },
   { label: "Arena", href: "/arena" },
+  { label: "Roadmap", href: "/roadmap" },
   { label: "Docs", href: "/docs" },
   { label: "Why Daemon", href: "#architecture" },
 ];
@@ -51,7 +53,7 @@ export function Header() {
     >
       <div className="w-full px-5 sm:px-7 lg:px-10">
         <nav className="mx-auto flex h-18 w-full max-w-[88rem] items-center justify-between">
-          <a href="/" className="flex items-center gap-2.5 group">
+          <Link href="/" className="flex items-center gap-2.5 group">
             <Image
               src="/images/daemon-mark-white.png"
               alt="DAEMON"
@@ -59,7 +61,7 @@ export function Header() {
               height={28}
             />
             <span className="text-sm font-semibold tracking-wide">Daemon</span>
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
@@ -120,12 +122,12 @@ export function Header() {
             >
               <DexScreenerLogo className="size-[18px] rounded-[4px]" />
             </a>
-            <a
+            <Link
               href="/docs/installation#download"
               className="ml-3 inline-flex items-center gap-2 rounded-lg border border-accent/30 bg-accent px-5 py-2.5 text-[13px] font-semibold text-accent-foreground transition-all hover:brightness-110 hover:shadow-[0_0_24px_rgba(88,200,138,0.2)]"
             >
               Download
-            </a>
+            </Link>
           </div>
 
           <button
@@ -197,12 +199,12 @@ export function Header() {
                   <Github className="size-4" />
                   GitHub
                 </a>
-                <a
+                <Link
                   href="/docs/installation#download"
                   className="flex items-center justify-center gap-2 rounded-lg bg-foreground px-4 py-2.5 text-sm font-medium text-background"
                 >
                   Download
-                </a>
+                </Link>
               </div>
             </div>
           </div>
