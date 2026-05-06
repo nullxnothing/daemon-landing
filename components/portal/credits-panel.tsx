@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Transaction } from "@solana/web3.js";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Check, Loader2 } from "lucide-react";
 import type { CreditBundle } from "@/lib/portal-data";
 import { cn } from "@/lib/utils";
@@ -22,6 +24,8 @@ export function CreditsPanel({
   tier: string | null;
 }) {
   const router = useRouter();
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -33,20 +37,46 @@ export function CreditsPanel({
       setError("Sign in on the Overview tab to buy credits.");
       return;
     }
+    if (!publicKey) {
+      setError("Connect the same wallet in the header before paying.");
+      return;
+    }
     setBusyId(bundleId);
     setError(null);
     setSuccess(null);
     try {
-      const res = await fetch("/api/credits/purchase", {
+      const intentRes = await fetch("/api/credits/payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ bundleId }),
       });
-      const body = (await res.json()) as
-        | { ok: true; data: { charged: number } }
+      const intentBody = (await intentRes.json()) as
+        | {
+            ok: true;
+            data: {
+              intent: { id: string; chargedUsdc: number };
+              payment: { transaction: string; amountUsdc: number };
+            };
+          }
         | { ok: false; error: string };
-      if (!body.ok) throw new Error(body.error);
-      setSuccess(`Charged ${body.data.charged} USDC. Credits added.`);
+      if (!intentBody.ok) throw new Error(intentBody.error);
+
+      const transaction = Transaction.from(base64ToBytes(intentBody.data.payment.transaction));
+      const signature = await sendTransaction(transaction, connection);
+      setSuccess("Payment sent. Confirming USDC transfer...");
+      await connection.confirmTransaction(signature, "confirmed");
+
+      const confirmRes = await fetch("/api/credits/confirm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ intentId: intentBody.data.intent.id, signature }),
+      });
+      const confirmBody = (await confirmRes.json()) as
+        | { ok: true; data: { signature: string } }
+        | { ok: false; error: string };
+      if (!confirmBody.ok) throw new Error(confirmBody.error);
+
+      setSuccess(`Paid ${intentBody.data.payment.amountUsdc} USDC. Credits added.`);
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Purchase failed.");
@@ -114,4 +144,13 @@ export function CreditsPanel({
       )}
     </section>
   );
+}
+
+function base64ToBytes(value: string) {
+  const binary = atob(value);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i += 1) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes;
 }

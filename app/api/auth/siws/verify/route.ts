@@ -2,9 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { PublicKey } from "@solana/web3.js";
 import nacl from "tweetnacl";
 import bs58 from "bs58";
-import { SIWS_COOKIE, isLikelySolanaAddress, verifyRemote } from "@/lib/siws";
+import {
+  SIWS_COOKIE,
+  consumeChallenge,
+  createSession,
+  isLikelySolanaAddress,
+  verifyRemote,
+} from "@/lib/siws";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 30;
 
@@ -39,14 +46,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: "Invalid signature." }, { status: 401 });
   }
 
-  const remote = await verifyRemote({ wallet, signature, message });
-  const token = remote?.token ?? signature;
-  const expiresAt = remote?.expiresAt ?? new Date(Date.now() + SESSION_TTL_SECONDS * 1000).toISOString();
+  const challengeOk = await consumeChallenge(wallet, message);
+  if (!challengeOk) {
+    return NextResponse.json(
+      { ok: false, error: "Challenge expired, reused, or not issued by DAEMON." },
+      { status: 401 },
+    );
+  }
+
+  await verifyRemote({ wallet, signature, message });
+  const session = createSession(wallet);
+  const expiresAt = session.expiresAt;
 
   const response = NextResponse.json({ ok: true, data: { wallet, expiresAt } });
   response.cookies.set({
     name: SIWS_COOKIE,
-    value: token,
+    value: session.token,
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",

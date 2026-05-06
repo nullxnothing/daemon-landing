@@ -2,7 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Coins, Hammer, LayoutDashboard, Lock, Search, Trophy, UserSquare } from "lucide-react";
+import {
+  Bot,
+  Coins,
+  Hammer,
+  LayoutDashboard,
+  Lock,
+  Search,
+  Trophy,
+  UserSquare,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type TabDef = {
@@ -15,6 +24,7 @@ const TABS: TabDef[] = [
   { href: "/portal", label: "Overview", icon: LayoutDashboard },
   { href: "/portal/staking", label: "Staking", icon: Lock },
   { href: "/portal/credits", label: "Credits", icon: Coins },
+  { href: "/portal/ai", label: "Daemon AI", icon: Bot },
   { href: "/portal/forge", label: "Forge", icon: Hammer },
   { href: "/portal/builder", label: "Builder", icon: UserSquare },
   { href: "/portal/leaderboard", label: "Leaderboard", icon: Trophy },

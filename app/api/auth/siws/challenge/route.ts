@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { buildLocalChallenge, isLikelySolanaAddress, requestRemoteChallenge } from "@/lib/siws";
+import {
+  buildLocalChallenge,
+  isLikelySolanaAddress,
+  requestRemoteChallenge,
+  storeChallenge,
+} from "@/lib/siws";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   const body = (await request.json().catch(() => null)) as { wallet?: string } | null;
@@ -16,6 +22,7 @@ export async function POST(request: NextRequest) {
 
   const remote = await requestRemoteChallenge(wallet);
   const challenge = remote ?? buildLocalChallenge(wallet);
+  await storeChallenge(wallet, challenge);
 
   return NextResponse.json({ ok: true, data: challenge });
 }

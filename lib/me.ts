@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { SIWS_COOKIE } from "@/lib/siws";
+import { SIWS_COOKIE, verifySessionToken } from "@/lib/siws";
 import { getAccessStatus, type AccessStatus } from "@/lib/access";
 import { getWalletState, ownedForgeItems, getBuilder } from "@/lib/portal-store";
 import type { ForgeItem } from "@/lib/portal-data";
@@ -17,6 +17,8 @@ export async function getMe(): Promise<MePayload | null> {
   const token = jar.get(SIWS_COOKIE)?.value;
   const wallet = jar.get(`${SIWS_COOKIE}_wallet`)?.value;
   if (!token || !wallet) return null;
+  const session = verifySessionToken(token);
+  if (!session || session.wallet !== wallet) return null;
 
   const [access, state, owned] = await Promise.all([
     getAccessStatus(wallet),

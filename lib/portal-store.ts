@@ -25,6 +25,9 @@ export type LedgerEntry = {
   automationDelta: number;
   usdc: number;
   note: string;
+  paymentIntentId?: string;
+  signature?: string;
+  aiRunId?: string;
 };
 
 export type WalletState = {
@@ -47,6 +50,40 @@ export type ForgeSubmission = {
   status: "submitted" | "approved" | "rejected";
 };
 
+export type PaymentIntentStatus = "pending" | "submitted" | "confirmed" | "expired" | "failed";
+
+export type PaymentIntent = {
+  id: string;
+  wallet: string;
+  bundleId: string;
+  ai: number;
+  automation: number;
+  priceUsdc: number;
+  chargedUsdc: number;
+  status: PaymentIntentStatus;
+  createdAt: string;
+  expiresAt: string;
+  signature: string | null;
+  confirmedAt: string | null;
+};
+
+export type AiRunMode = "fast" | "builder" | "deep";
+
+export type AiRunStatus = "running" | "completed" | "failed";
+
+export type AiRun = {
+  id: string;
+  wallet: string;
+  mode: AiRunMode;
+  prompt: string;
+  response: string | null;
+  status: AiRunStatus;
+  creditsCharged: number;
+  error: string | null;
+  createdAt: string;
+  completedAt: string | null;
+};
+
 const K_WALLET = (a: string) => `daemon:wallet:${a}`;
 const K_HANDLE = (h: string) => `daemon:handle:${h.toLowerCase()}`;
 const K_BUILDER = (h: string) => `daemon:builder:${h.toLowerCase()}`;
@@ -54,6 +91,10 @@ const K_BUILDERS = "daemon:builders";
 const K_LISTING = (s: string) => `daemon:listing:${s}`;
 const K_LISTINGS = "daemon:listings";
 const K_SUBMISSIONS = "daemon:submissions";
+const K_PAYMENT_INTENT = (id: string) => `daemon:payment-intent:${id}`;
+const K_WALLET_PAYMENT_INTENTS = (wallet: string) => `daemon:wallet:${wallet}:payment-intents`;
+const K_AI_RUN = (id: string) => `daemon:ai-run:${id}`;
+const K_WALLET_AI_RUNS = (wallet: string) => `daemon:wallet:${wallet}:ai-runs`;
 
 function defaultState(wallet: string): WalletState {
   return {
@@ -111,6 +152,138 @@ export async function purchaseBundle(input: PurchaseBundleInput) {
   state.ledger.unshift(entry);
   await saveWalletState(state);
   return { state, entry, charged };
+}
+
+export async function createPaymentIntent(input: PurchaseBundleInput): Promise<PaymentIntent> {
+  const discount = tierDiscountRate(input.tier);
+  const chargedUsdc = +(input.priceUsdc * (1 - discount)).toFixed(2);
+  const now = new Date();
+  const intent: PaymentIntent = {
+    id: cryptoId(),
+    wallet: input.wallet,
+    bundleId: input.bundleId,
+    ai: input.ai,
+    automation: input.automation,
+    priceUsdc: input.priceUsdc,
+    chargedUsdc,
+    status: "pending",
+    createdAt: now.toISOString(),
+    expiresAt: new Date(now.getTime() + 15 * 60 * 1000).toISOString(),
+    signature: null,
+    confirmedAt: null,
+  };
+  await kv.setJson(K_PAYMENT_INTENT(intent.id), intent);
+  await kv.lpush(K_WALLET_PAYMENT_INTENTS(input.wallet), intent.id);
+  return intent;
+}
+
+export async function getPaymentIntent(id: string): Promise<PaymentIntent | null> {
+  return kv.getJson<PaymentIntent>(K_PAYMENT_INTENT(id));
+}
+
+export async function savePaymentIntent(intent: PaymentIntent): Promise<void> {
+  await kv.setJson(K_PAYMENT_INTENT(intent.id), intent);
+}
+
+export async function confirmBundlePayment(intent: PaymentIntent, signature: string) {
+  const stored = await getPaymentIntent(intent.id);
+  if (!stored) return { ok: false as const, error: "Payment intent was not found." };
+  if (stored.status === "confirmed") {
+    return { ok: true as const, state: await getWalletState(stored.wallet), entry: null };
+  }
+
+  stored.status = "confirmed";
+  stored.signature = signature;
+  stored.confirmedAt = new Date().toISOString();
+
+  const state = await getWalletState(stored.wallet);
+  const entry: LedgerEntry = {
+    id: cryptoId(),
+    at: stored.confirmedAt,
+    kind: "purchase",
+    aiDelta: stored.ai,
+    automationDelta: stored.automation,
+    usdc: stored.chargedUsdc,
+    note: `Bundle ${stored.bundleId}`,
+    paymentIntentId: stored.id,
+    signature,
+  };
+  state.credits.ai += stored.ai;
+  state.credits.automation += stored.automation;
+  state.ledger.unshift(entry);
+  await Promise.all([saveWalletState(state), savePaymentIntent(stored)]);
+  return { ok: true as const, state, entry };
+}
+
+export async function listAiRuns(wallet: string, limit = 25): Promise<AiRun[]> {
+  const ids = await kv.lrange(K_WALLET_AI_RUNS(wallet), 0, limit - 1);
+  if (ids.length === 0) return [];
+  const runs = await Promise.all(ids.map((id) => kv.getJson<AiRun>(K_AI_RUN(id))));
+  return runs.filter((run): run is AiRun => Boolean(run));
+}
+
+export async function createAiRun(input: {
+  wallet: string;
+  mode: AiRunMode;
+  prompt: string;
+  creditsCharged: number;
+}): Promise<AiRun> {
+  const run: AiRun = {
+    id: cryptoId(),
+    wallet: input.wallet,
+    mode: input.mode,
+    prompt: input.prompt,
+    response: null,
+    status: "running",
+    creditsCharged: input.creditsCharged,
+    error: null,
+    createdAt: new Date().toISOString(),
+    completedAt: null,
+  };
+  await kv.setJson(K_AI_RUN(run.id), run);
+  await kv.lpush(K_WALLET_AI_RUNS(input.wallet), run.id);
+  return run;
+}
+
+export async function completeAiRun(
+  run: AiRun,
+  result: { response: string; creditsCharged: number },
+): Promise<{ ok: true; state: WalletState; run: AiRun } | { ok: false; error: string; run: AiRun }> {
+  const state = await getWalletState(run.wallet);
+  if (state.credits.ai < result.creditsCharged) {
+    run.status = "failed";
+    run.error = "Insufficient AI credits.";
+    run.completedAt = new Date().toISOString();
+    await kv.setJson(K_AI_RUN(run.id), run);
+    return { ok: false, error: run.error, run };
+  }
+
+  state.credits.ai -= result.creditsCharged;
+  state.ledger.unshift({
+    id: cryptoId(),
+    at: new Date().toISOString(),
+    kind: "ai_run",
+    aiDelta: -result.creditsCharged,
+    automationDelta: 0,
+    usdc: 0,
+    note: `Daemon AI ${run.mode} run`,
+    aiRunId: run.id,
+  });
+
+  run.status = "completed";
+  run.response = result.response;
+  run.creditsCharged = result.creditsCharged;
+  run.completedAt = new Date().toISOString();
+  await Promise.all([saveWalletState(state), kv.setJson(K_AI_RUN(run.id), run)]);
+  return { ok: true, state, run };
+}
+
+export async function failAiRun(run: AiRun, error: string): Promise<AiRun> {
+  run.status = "failed";
+  run.error = error;
+  run.completedAt = new Date().toISOString();
+  await kv.setJson(K_AI_RUN(run.id), run);
+  return run;
 }
 
 export async function listForgeItems(): Promise<ForgeItem[]> {
