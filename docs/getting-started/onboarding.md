@@ -22,8 +22,8 @@ The **Solana** profile enables all Solana-specific panels by default, including 
 
 DAEMON auto-installs the Claude CLI if it's not detected on your system. You can authenticate in two ways:
 
-1. **OAuth sign-in** — Opens a browser window to authenticate with your Anthropic account
-2. **API key** — Paste your Anthropic API key directly in the settings
+1. **OAuth sign-in**, Opens a browser window to authenticate with your Anthropic account
+2. **API key**, Paste your Anthropic API key directly in the settings
 
 The Claude CLI powers all agent spawning, Grind Mode, and AI-assisted features throughout the IDE.
 
@@ -31,9 +31,9 @@ The Claude CLI powers all agent spawning, Grind Mode, and AI-assisted features t
 
 These connections are fully optional and can be skipped during onboarding. Configure them later in **Settings > Integrations**:
 
-- **Gmail** — Email notifications and summaries
-- **Vercel** — One-click project deployment
-- **Railway** — One-click backend deployment
+- **Gmail**, Email notifications and summaries
+- **Vercel**, One-click project deployment
+- **Railway**, One-click backend deployment
 
 ## After Onboarding
 

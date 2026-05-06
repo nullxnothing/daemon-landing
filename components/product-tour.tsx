@@ -11,7 +11,7 @@ const CAPTIONS: { title: string; description: string }[] = [
   { title: "Launch Screen", description: "Daemon boots into a minimal, focused workspace." },
   { title: "Code Editor", description: "Monaco editor with an integrated file tree and terminal." },
   { title: "Agent Launcher", description: "Spin up AI agents with your preferred model." },
-  { title: "Claude Panel", description: "Chat with Claude directly inside your IDE." },
+  { title: "Claude Panel", description: "Chat with Claude directly inside the workspace." },
   { title: "Git Integration", description: "Stage, commit, and diff without leaving the editor." },
   { title: "Solana Wallet", description: "View token balances and manage wallets natively." },
   { title: "Settings", description: "Configure API keys and provider preferences." },

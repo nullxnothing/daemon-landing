@@ -13,16 +13,16 @@
 
 Before launching DAEMON, make sure you have the following installed:
 
-- **Node.js 22+** — Required for agent spawning and terminal sessions. Download from [nodejs.org](https://nodejs.org/).
-- **pnpm** (recommended) — Faster installs, used internally by DAEMON. Install with `npm install -g pnpm`.
+- **Node.js 22+**, Required for agent spawning and terminal sessions. Download from [nodejs.org](https://nodejs.org/).
+- **pnpm** (recommended), Faster installs, used internally by DAEMON. Install with `npm install -g pnpm`.
 
 ## First Launch
 
 On first run, DAEMON shows a boot loader sequence followed by the onboarding wizard. This walks you through:
 
-1. **Workspace configuration** — Choose your development profile
-2. **Claude setup** — Connect to Claude for AI agent support
-3. **Optional integrations** — Gmail, Vercel, Railway, and more
+1. **Workspace configuration**, Choose your development profile
+2. **Claude setup**, Connect to Claude for AI agent support
+3. **Optional integrations**, Gmail, Vercel, Railway, and more
 
 The entire process takes about 2 minutes.
 
@@ -37,4 +37,4 @@ The entire process takes about 2 minutes.
 
 ## Updating
 
-DAEMON includes auto-update support via electron-builder. When a new version is available, you'll see a notification in the status bar. Click to download and install the update — no manual steps required.
+DAEMON includes auto-update support via electron-builder. When a new version is available, you'll see a notification in the status bar. Click to download and install the update, no manual steps required.

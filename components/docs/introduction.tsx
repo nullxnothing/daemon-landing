@@ -10,10 +10,11 @@ export function IntroductionDoc() {
 
       <H2 id="what-is-daemon">What is DAEMON?</H2>
       <Paragraph>
-        DAEMON is <strong className="text-foreground">Solana&apos;s first IDE</strong>, a
-        standalone desktop application built from scratch for Solana development. It combines a
-        full-featured code editor, AI agents, built-in wallet, token launcher, and one-click
-        deployment into a single app.
+        DAEMON is <strong className="text-foreground">the operator console for Solana developers</strong>:
+        a standalone desktop application that bundles a full-featured code editor, AI agents, built-in
+        wallet, token launcher, swaps, and one-click deploys into a single workspace. The headline
+        primitive, <strong className="text-foreground">Shipline</strong>, takes you from prompt to
+        mainnet in 60 seconds.
       </Paragraph>
       <Paragraph>
         DAEMON is not a VS Code fork. It is not a plugin or extension. It is a purpose-built

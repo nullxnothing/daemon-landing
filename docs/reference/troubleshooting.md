@@ -13,7 +13,7 @@ DAEMON wraps the Monaco editor in an ErrorBoundary that catches initialization f
 Steps to diagnose:
 
 1. Open the terminal and run `claude --version` to confirm the CLI is installed
-2. If not installed, DAEMON can auto-install it — go to **Settings > Integrations > Claude**
+2. If not installed, DAEMON can auto-install it, go to **Settings > Integrations > Claude**
 3. If installed but not connecting, re-run the OAuth sign-in (sessions can expire)
 4. If using an API key, verify it's valid and has available credits
 
@@ -21,7 +21,7 @@ Steps to diagnose:
 
 **Solution:** Right-click to paste in the terminal.
 
-The xterm.js terminal does not show a context menu — right-click triggers paste directly. This is standard xterm.js behavior. `Ctrl+V` may not work in all terminal contexts because the terminal captures keyboard input for the running process.
+The xterm.js terminal does not show a context menu, right-click triggers paste directly. This is standard xterm.js behavior. `Ctrl+V` may not work in all terminal contexts because the terminal captures keyboard input for the running process.
 
 ## Missing tools or panels
 
@@ -29,10 +29,10 @@ The xterm.js terminal does not show a context menu — right-click triggers past
 
 Some panels are only enabled for specific profiles:
 
-- **Wallet** — Solana profile only (by default)
-- **Token Dashboard** — Solana profile only
-- **Jupiter Swap** — Solana profile only
-- **Browser** — Web and Custom profiles
+- **Wallet**, Solana profile only (by default)
+- **Token Dashboard**, Solana profile only
+- **Jupiter Swap**, Solana profile only
+- **Browser**, Web and Custom profiles
 
 Switch to the **Custom** profile to enable everything manually.
 

@@ -8,9 +8,9 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Daemon | Solana's First IDE",
+  title: "Daemon | The Solana Operator Console",
   description:
-    "Solana's first IDE. Built from scratch with AI agents, built-in wallet, token launches, Jupiter swaps, and one-click deploys. Free and open source.",
+    "Daemon is the operator console for Solana developers. Agents, wallets, launches, swaps, and deploys, in one workspace. Prompt to mainnet in 60 seconds with Shipline. Free and open source.",
   icons: {
     icon: "/images/daemon-mark-white.png",
     apple: "/images/daemon-mark-white.png",
@@ -31,16 +31,16 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "nullxnothing" }],
   openGraph: {
-    title: "Daemon | Solana's First IDE",
+    title: "Daemon | The Solana Operator Console",
     description:
-      "Solana's first IDE. AI agents, built-in wallet, token launches, and one-click deploys, all from one desktop app.",
+      "Agents, wallets, launches, swaps, and deploys, in one workspace. Prompt to mainnet in 60 seconds with Shipline.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Daemon | Solana's First IDE",
+    title: "Daemon | The Solana Operator Console",
     description:
-      "Solana's first IDE. Built from scratch with AI agents, wallet, token launches, and deploys. Free and open source.",
+      "The operator console for Solana developers. Prompt to mainnet in 60 seconds. Free and open source.",
   },
 };
 

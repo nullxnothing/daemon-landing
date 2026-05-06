@@ -6,9 +6,9 @@ DAEMON supports one-click deployment to Vercel and Railway directly from the edi
 
 Deploy frontend projects to Vercel with a single click:
 
-1. **Connect once** — Link your Vercel account in **Settings > Integrations**
-2. **Deploy** — Click the deploy button in the Command Drawer or use the deployment panel
-3. **Monitor** — View deployment status and logs directly in DAEMON
+1. **Connect once**, Link your Vercel account in **Settings > Integrations**
+2. **Deploy**, Click the deploy button in the Command Drawer or use the deployment panel
+3. **Monitor**, View deployment status and logs directly in DAEMON
 
 DAEMON automatically detects your framework (Next.js, React, etc.) and configures the build settings.
 
@@ -23,9 +23,9 @@ DAEMON automatically detects your framework (Next.js, React, etc.) and configure
 
 Deploy backend services and databases to Railway:
 
-1. **Connect once** — Link your Railway account in **Settings > Integrations**
-2. **Deploy** — Select your project and click deploy
-3. **Monitor** — View logs and service status in DAEMON
+1. **Connect once**, Link your Railway account in **Settings > Integrations**
+2. **Deploy**, Select your project and click deploy
+3. **Monitor**, View logs and service status in DAEMON
 
 ### Use Cases
 
@@ -41,7 +41,7 @@ A typical deployment workflow in DAEMON:
 1. Write and test your code in the Monaco editor
 2. Run tests with an AI agent or the terminal
 3. Commit changes via the visual git panel
-4. Click deploy — your app is live
+4. Click deploy, your app is live
 
 The entire cycle from code to production happens inside one app.
 

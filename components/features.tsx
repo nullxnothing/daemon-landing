@@ -63,16 +63,17 @@ export function Features() {
       <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)]">
         <div className="max-w-[28rem]">
           <p className="text-accent text-[13px] font-semibold tracking-[0.2em] uppercase">
-            Built for Solana
+            Operator console
           </p>
           <h2 className="mt-5 text-4xl font-bold leading-[1.05] tracking-[-0.03em] gradient-text md:text-[3.1rem]">
-            One workspace.
+            One console.
             <br />
             Less drag.
           </h2>
           <p className="mt-6 text-[17px] text-muted leading-relaxed">
-            Daemon feels better when the workflow is tighter. The product is most convincing
-            when it replaces switching, setup, and glue code.
+            Daemon collapses the eight tools a Solana developer juggles into one workspace.
+            Editor, agents, wallet, swaps, launches, deploys: same app, same window, same
+            session.
           </p>
         </div>
 

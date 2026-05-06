@@ -1,6 +1,6 @@
 # AI Agents
 
-DAEMON integrates Claude Code agents directly into the IDE. Every agent runs as a real CLI process with full tool access — not a chat overlay or browser-based assistant.
+DAEMON integrates Claude Code agents directly into the IDE. Every agent runs as a real CLI process with full tool access, not a chat overlay or browser-based assistant.
 
 ## Agent Launcher
 
@@ -30,9 +30,9 @@ Each agent runs as an independent Claude Code process with full filesystem acces
 
 Create your own agents with:
 
-- **Custom system prompts** — Define exactly how the agent should behave
-- **Model selection** — Choose between Opus, Sonnet, and Haiku based on your task
-- **MCP configuration** — Assign project-level or global MCP servers to each agent
+- **Custom system prompts**, Define exactly how the agent should behave
+- **Model selection**, Choose between Opus, Sonnet, and Haiku based on your task
+- **MCP configuration**, Assign project-level or global MCP servers to each agent
 
 DAEMON also includes **41 pre-built Claude agents** available for import from the Agent Launcher. These cover common development tasks across web, Solana, testing, and DevOps workflows.
 
@@ -40,8 +40,8 @@ DAEMON also includes **41 pre-built Claude agents** available for import from th
 
 Toggle project-level and global MCP servers from the Claude panel or Settings. Changes are written to:
 
-- `.claude/settings.json` — Project-level configuration
-- `.mcp.json` — Global MCP server registry
+- `.claude/settings.json`, Project-level configuration
+- `.mcp.json`, Global MCP server registry
 
 ## Agent Sessions
 

@@ -36,8 +36,8 @@ The sidebar provides icon-based navigation for all major panels:
 
 The center area contains the Monaco editor with tabbed navigation. Two tabs are permanently pinned:
 
-- **Browser** — Built-in browser with security sandbox for previewing your app
-- **Dashboard** — Token dashboard with real-time price, holders, and charts
+- **Browser**, Built-in browser with security sandbox for previewing your app
+- **Dashboard**, Token dashboard with real-time price, holders, and charts
 
 All other tabs are your open files, editable in the full Monaco editor with syntax highlighting, breadcrumbs, and multi-cursor support.
 
@@ -45,9 +45,9 @@ All other tabs are your open files, editable in the full Monaco editor with synt
 
 The right panel has three tabs:
 
-- **Claude** — Shows agent connection status, active MCP servers, current model, and available skills
-- **Dashboard** — Quick access to token metrics
-- **Sessions** — View and manage active agent sessions
+- **Claude**, Shows agent connection status, active MCP servers, current model, and available skills
+- **Dashboard**, Quick access to token metrics
+- **Sessions**, View and manage active agent sessions
 
 ## Bottom Terminal
 

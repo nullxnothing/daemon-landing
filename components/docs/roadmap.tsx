@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { DocHeading, DocSubheading, H2, H3, Paragraph, CardGrid, InfoCard, Divider } from "./primitives";
 
 export function RoadmapDoc() {
@@ -10,9 +11,9 @@ export function RoadmapDoc() {
 
       <CardGrid>
         <InfoCard title="Solana Keychain Integration">
-          Enterprise-grade signing with 10 pluggable backends — AWS KMS, Fireblocks, Turnkey,
+          Enterprise-grade signing with 10 pluggable backends, AWS KMS, Fireblocks, Turnkey,
           HashiCorp Vault, and more. Built on the Solana Foundation&apos;s official keychain SDK.
-          <a href="/docs/solana-keychain" className="block mt-1 text-accent text-[13px] hover:underline">Read the integration guide &rarr;</a>
+          <Link href="/docs/solana-keychain" className="block mt-1 text-accent text-[13px] hover:underline">Read the integration guide &rarr;</Link>
         </InfoCard>
         <InfoCard title="Multi-Agent Orchestration">
           Run multiple AI agents simultaneously with intelligent task distribution and

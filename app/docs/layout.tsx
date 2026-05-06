@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     default: "DAEMON Docs",
   },
   description:
-    "Documentation for DAEMON, Solana's first IDE. Installation, features, AI agents, Solana development, and more.",
+    "Documentation for DAEMON, the Solana operator console. Installation, Shipline, AI agents, wallet, deploys, and more.",
 };
 
 export default function DocsLayout({

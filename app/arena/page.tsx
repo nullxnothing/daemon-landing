@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Github } from "lucide-react";
 import { Header } from "@/components/header";
@@ -82,12 +83,12 @@ export default async function ArenaPage() {
                   View live board
                   <ArrowRight className="size-4" />
                 </a>
-                <a
+                <Link
                   href="/docs/daemon-pro"
                   className="inline-flex items-center gap-2 rounded-full border border-border bg-white/5 px-5 py-3 text-sm text-muted hover:text-foreground hover:border-accent/30 transition-colors"
                 >
                   Read Pro docs
-                </a>
+                </Link>
               </div>
             </div>
 

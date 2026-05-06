@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, ExternalLink, ShieldCheck, Sparkles, Zap } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -43,13 +44,13 @@ export default async function AccessPage() {
                 Open Streamflow
                 <ExternalLink className="size-4" />
               </a>
-              <a
+              <Link
                 href="/docs/installation#download"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-white/5 px-5 py-3 text-sm text-muted hover:text-foreground hover:border-accent/30 transition-colors"
               >
                 Download DAEMON
                 <ArrowRight className="size-4" />
-              </a>
+              </Link>
             </div>
 
             <div className="mt-10 grid gap-4 md:grid-cols-3">

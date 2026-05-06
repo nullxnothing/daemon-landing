@@ -46,6 +46,7 @@ const FOOTER_LINKS = {
   ],
   Resources: [
     { label: "Documentation", href: "/docs" },
+    { label: "Pitch deck", href: "/pitch" },
     { label: "Brand Kit", href: "/docs/brand-kit" },
     { label: "Contributing", href: "/docs/contributing" },
   ],

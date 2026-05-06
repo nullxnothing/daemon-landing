@@ -47,13 +47,13 @@ pnpm run rebuild
 ## Architecture
 
 ```
-electron/          Main process — IPC handlers, services, database
+electron/          Main process, IPC handlers, services, database
   ipc/             One handler file per domain
   services/        Business logic (never imported from renderer)
   db/              SQLite schema + migrations
   shared/          Types shared between main and renderer
 
-src/               Renderer — React 18 + TypeScript
+src/               Renderer, React 18 + TypeScript
   panels/          One directory per panel
   store/           Zustand stores
   components/      Shared UI components
@@ -64,10 +64,10 @@ test/              Vitest test suites
 
 ## Rules
 
-- All DB access stays in the main process — renderer uses IPC only
+- All DB access stays in the main process, renderer uses IPC only
 - All IPC handlers use `IpcHandlerFactory` and return `{ ok, data/error }`
-- CSS Modules only, no Tailwind — follow existing token system in `styles/tokens.css`
-- No emoji in UI chrome — status via colored dots only
+- CSS Modules only, no Tailwind, follow existing token system in `styles/tokens.css`
+- No emoji in UI chrome, status via colored dots only
 - Test with `pnpm run package` before submitting PRs that touch native modules or Electron main
 
 ## Commit Convention
@@ -85,7 +85,7 @@ Use [Conventional Commits](https://www.conventionalcommits.org/):
 
 ## Pull Requests
 
-- Keep PRs focused — one feature or fix per PR
+- Keep PRs focused, one feature or fix per PR
 - Include screenshots for UI changes
 - Ensure `pnpm run typecheck` and `pnpm run test` pass
 - Fill out the PR template

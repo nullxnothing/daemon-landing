@@ -15,11 +15,11 @@ function DemoVideo() {
           <span className="h-2.5 w-2.5 rounded-full bg-[#d86f6f]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#d7b75f]" />
           <span className="h-2.5 w-2.5 rounded-full bg-accent" />
-          <span className="ml-auto font-mono text-[11px] text-muted-foreground">daemon://workspace</span>
+          <span className="ml-auto font-mono text-[11px] text-muted-foreground">daemon://console</span>
         </div>
         <video
           className="block w-full"
-          aria-label="Daemon IDE interface preview"
+          aria-label="Daemon operator console preview"
           autoPlay
           loop
           muted
@@ -57,22 +57,23 @@ export function Hero({ release }: { release: ReleaseInfo }) {
               height={26}
               priority
             />
-            <span>AI-native IDE for Solana</span>
+            <span>The Solana operator console</span>
           </div>
 
           <h1
-            className="animate-fade-up mx-auto max-w-[14ch] text-balance text-[clamp(2.9rem,6vw,5.4rem)] font-bold leading-[0.95] tracking-[-0.055em] lg:mx-0"
+            className="animate-fade-up mx-auto max-w-[16ch] text-balance text-[clamp(2.9rem,6vw,5.4rem)] font-bold leading-[0.95] tracking-[-0.055em] lg:mx-0"
             style={{ animationDelay: "80ms" }}
           >
-            Build Solana apps without leaving your editor.
+            Ship Solana apps from one console.
           </h1>
 
           <p
             className="animate-fade-up mt-7 max-w-[36rem] text-balance text-[1.06rem] leading-[1.72] text-muted md:text-[1.18rem] lg:mx-0"
             style={{ animationDelay: "160ms" }}
           >
-            Daemon is a Solana-native IDE that bundles agents, wallets, launches, swaps,
-            and deploys into one workspace — so you ship faster and stop juggling five tools.
+            Daemon is the operator console for Solana developers. Agents, wallets, launches,
+            swaps, and deploys, in one workspace. Go from prompt to mainnet in 60 seconds with{" "}
+            <Link href="/#shipline" className="text-foreground underline decoration-accent/40 underline-offset-4 hover:decoration-accent">Shipline</Link>.
           </p>
 
           <div

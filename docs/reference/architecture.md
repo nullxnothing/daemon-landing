@@ -1,12 +1,12 @@
 # Architecture
 
-DAEMON is a standalone Electron application — not a fork of VS Code, not a wrapper around an existing editor. Every layer is built intentionally for Solana development.
+DAEMON is a standalone Electron application, not a fork of VS Code, not a wrapper around an existing editor. Every layer is built intentionally for Solana development.
 
 ## Core Principles
 
 ### 1. Process Isolation
 
-All database and filesystem access runs in the main process. The renderer never touches SQLite directly — everything flows through typed IPC handlers. This ensures stability, security, and clean separation of concerns.
+All database and filesystem access runs in the main process. The renderer never touches SQLite directly, everything flows through typed IPC handlers. This ensures stability, security, and clean separation of concerns.
 
 ### 2. Typed IPC Contract
 
@@ -18,7 +18,7 @@ The Monaco editor runs through a custom protocol handler registered in Electron'
 
 ### 4. Native Modules
 
-`better-sqlite3` and `node-pty` are unpacked from ASAR for production builds. Real PTY sessions, real database — not browser polyfills pretending to be native.
+`better-sqlite3` and `node-pty` are unpacked from ASAR for production builds. Real PTY sessions, real database, not browser polyfills pretending to be native.
 
 ## Tech Stack
 
@@ -84,11 +84,11 @@ type IpcResponse<T> =
 
 DAEMON uses Zustand with one store per domain:
 
-- `useEditorStore` — Open files, active tab, editor state
-- `useWalletStore` — Wallet connection, balances, tokens
-- `useAgentStore` — Active agents, sessions, Grind Mode state
-- `useGitStore` — Branch, status, diff, stash
-- `useTerminalStore` — Terminal sessions, splits, history
+- `useEditorStore`, Open files, active tab, editor state
+- `useWalletStore`, Wallet connection, balances, tokens
+- `useAgentStore`, Active agents, sessions, Grind Mode state
+- `useGitStore`, Branch, status, diff, stash
+- `useTerminalStore`, Terminal sessions, splits, history
 
 ## Database
 

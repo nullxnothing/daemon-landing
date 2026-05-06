@@ -48,7 +48,7 @@ const features: Feature[] = [
     ],
     stack: ["node-pty", "Claude Agent SDK", "SQLite session store", "xterm.js"],
     details:
-      "Builds on the existing Agent Launcher. Today you spawn one agent per terminal tab. V2.1 introduces a Conductor — a top-level agent that breaks a goal into subtasks, dispatches them to worker agents, and reconciles their outputs. Workers communicate through a shared SQLite-backed message bus so they can hand off context without re-reading files. The IDE renders a live DAG of who's blocking who.",
+      "Builds on the existing Agent Launcher. Today you spawn one agent per terminal tab. V2.1 introduces a Conductor, a top-level agent that breaks a goal into subtasks, dispatches them to worker agents, and reconciles their outputs. Workers communicate through a shared SQLite-backed message bus so they can hand off context without re-reading files. The IDE renders a live DAG of who's blocking who.",
   },
   {
     icon: Cpu,
@@ -64,11 +64,11 @@ const features: Feature[] = [
       "Per-agent model override (Claude for hard tasks, local for grunt work)",
       "Embeddings via local models for the codebase index",
       "Streaming token output through the existing PTY pipeline",
-      "Works with no internet — full offline mode",
+      "Works with no internet, full offline mode",
     ],
     stack: ["Ollama", "LM Studio", "OpenAI-compatible adapter", "llama.cpp"],
     details:
-      "DAEMON treats Ollama and LM Studio as additional providers behind the same agent interface used for Claude. The launcher detects a running Ollama daemon on localhost:11434, lists installed models, and lets you assign one to any agent slot. For routine work — file renames, scaffolding, simple edits — you save credits by routing to a local model while reserving Claude for reasoning-heavy steps.",
+      "DAEMON treats Ollama and LM Studio as additional providers behind the same agent interface used for Claude. The launcher detects a running Ollama daemon on localhost:11434, lists installed models, and lets you assign one to any agent slot. For routine work, file renames, scaffolding, simple edits, you save credits by routing to a local model while reserving Claude for reasoning-heavy steps.",
   },
   {
     icon: Smartphone,
@@ -88,7 +88,7 @@ const features: Feature[] = [
     ],
     stack: ["Expo SDK 55", "React Native 0.85", "expo-router", "expo-secure-store", "Zustand"],
     details:
-      "The mobile app is a thin client that pairs with your desktop DAEMON instance. Your laptop keeps doing the work — running agents, holding files, executing code — and the phone is a remote control. When an agent hits a checkpoint that requires human approval, the desktop pushes through the relay and the phone pings you. Tap to approve, deny, or open the diff. Useful for the long-running Grind Mode runs where you don't want to babysit a terminal.",
+      "The mobile app is a thin client that pairs with your desktop DAEMON instance. Your laptop keeps doing the work, running agents, holding files, executing code, and the phone is a remote control. When an agent hits a checkpoint that requires human approval, the desktop pushes through the relay and the phone pings you. Tap to approve, deny, or open the diff. Useful for the long-running Grind Mode runs where you don't want to babysit a terminal.",
   },
   {
     icon: Puzzle,
@@ -121,14 +121,14 @@ const features: Feature[] = [
     capabilities: [
       "Live cursors and presence in the editor",
       "Shared terminal with read/write handoff",
-      "One agent, two operators — both can prompt and approve",
+      "One agent, two operators, both can prompt and approve",
       "Session replay for async review",
       "End-to-end encrypted via libsodium",
       "Works through NAT via WebRTC + relay fallback",
     ],
     stack: ["Yjs CRDT", "WebRTC", "libsodium", "Liveblocks-style relay"],
     details:
-      "A CRDT layer on top of the Monaco model and the PTY buffer. Two people open the same DAEMON workspace, see each other's cursors, and share a single Claude Code session. Either person can type, prompt the agent, or approve a tool call — but writes are serialized so the agent never sees conflicting input. Sessions are recorded so you can scrub back through what your partner did while you were asleep.",
+      "A CRDT layer on top of the Monaco model and the PTY buffer. Two people open the same DAEMON workspace, see each other's cursors, and share a single Claude Code session. Either person can type, prompt the agent, or approve a tool call, but writes are serialized so the agent never sees conflicting input. Sessions are recorded so you can scrub back through what your partner did while you were asleep.",
   },
   {
     icon: Shield,
@@ -155,7 +155,7 @@ const features: Feature[] = [
     title: "Cloud Sync",
     tagline: "Your settings, plugins, and sessions across machines.",
     description:
-      "Encrypted sync of DAEMON state — themes, MCP configs, agent templates, recent sessions — between every machine you use.",
+      "Encrypted sync of DAEMON state, themes, MCP configs, agent templates, recent sessions, between every machine you use.",
     status: "Planned",
     eta: "V2.4",
     capabilities: [
@@ -164,11 +164,11 @@ const features: Feature[] = [
       "Resume an agent session on a different device",
       "Versioned config history with rollback",
       "Self-host option using S3 or local filesystem",
-      "Zero-knowledge — we never see your config",
+      "Zero-knowledge, we never see your config",
     ],
     stack: ["age encryption", "S3-compatible backend", "CRDT for conflict-free merge"],
     details:
-      "Cloud Sync is opt-in and zero-knowledge. Your DAEMON state is encrypted with a key derived from your passphrase before it leaves your machine. The backend is just blob storage — anyone can self-host. The killer feature is session portability: start an agent on your desktop, close the laptop, open DAEMON on another machine, resume the same agent mid-task.",
+      "Cloud Sync is opt-in and zero-knowledge. Your DAEMON state is encrypted with a key derived from your passphrase before it leaves your machine. The backend is just blob storage, anyone can self-host. The killer feature is session portability: start an agent on your desktop, close the laptop, open DAEMON on another machine, resume the same agent mid-task.",
   },
   {
     icon: Users,

@@ -1,6 +1,6 @@
 # Grind Mode
 
-Grind Mode is DAEMON's signature feature — a multi-panel agent grid that lets you run multiple Claude agents working on different parts of your project simultaneously.
+Grind Mode is DAEMON's signature feature, a multi-panel agent grid that lets you run multiple Claude agents working on different parts of your project simultaneously.
 
 ## How It Works
 
@@ -41,10 +41,10 @@ Grind Mode is most effective when you have independent tasks that don't depend o
 
 ## Tips
 
-- **Keep tasks independent** — Agents work best on separate files or modules. Avoid assigning overlapping files to multiple agents.
-- **Use specific prompts** — Give each agent a clear, focused task. Vague prompts produce vague results.
-- **Monitor progress** — Watch each panel's output to catch issues early. You can interact with any agent at any time.
-- **Scale as needed** — Start with two agents for simpler tasks, scale up for larger projects.
+- **Keep tasks independent**, Agents work best on separate files or modules. Avoid assigning overlapping files to multiple agents.
+- **Use specific prompts**, Give each agent a clear, focused task. Vague prompts produce vague results.
+- **Monitor progress**, Watch each panel's output to catch issues early. You can interact with any agent at any time.
+- **Scale as needed**, Start with two agents for simpler tasks, scale up for larger projects.
 
 ## Keyboard Shortcut
 

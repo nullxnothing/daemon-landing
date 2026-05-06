@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Github, Menu, Send, Twitter, X } from "lucide-react";
+import { ChevronDown, Github, Menu, Send, Twitter, X } from "lucide-react";
 import { DexScreenerLogo } from "@/components/dex-screener-logo";
 import { cn } from "@/lib/utils";
 
@@ -14,15 +14,20 @@ const GITHUB_URL = "https://github.com/nullxnothing/daemon";
 const DEXSCREENER_URL =
   "https://dexscreener.com/solana/7dhjuvz2xrafy1kztibhrxtliutj7vkivh9zhwm4tyq9";
 
-const navLinks = [
-  { label: "Factory", href: "/factory" },
+const primaryNavLinks = [
   { label: "Product", href: "/#features" },
+  { label: "Docs", href: "/docs" },
+];
+
+const moreNavLinks = [
+  { label: "Factory", href: "/factory" },
   { label: "Access", href: "/access" },
   { label: "Arena", href: "/arena" },
   { label: "Roadmap", href: "/roadmap" },
-  { label: "Docs", href: "/docs" },
   { label: "Why Daemon", href: "/#architecture" },
 ];
+
+const mobileNavLinks = [...primaryNavLinks, ...moreNavLinks];
 
 function DiscordIcon({ className = "size-[18px]" }: { className?: string }) {
   return (
@@ -35,6 +40,8 @@ function DiscordIcon({ className = "size-[18px]" }: { className?: string }) {
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const moreMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -42,13 +49,37 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!moreMenuRef.current?.contains(event.target as Node)) {
+        setIsMoreOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMoreOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-background/70 backdrop-blur-2xl border-b border-border"
-          : "bg-transparent",
+        isMobileMenuOpen
+          ? "bg-background/95 backdrop-blur-2xl border-b border-border"
+          : isScrolled
+            ? "bg-background/70 backdrop-blur-2xl border-b border-border"
+            : "bg-transparent",
       )}
     >
       <div className="w-full px-5 sm:px-7 lg:px-10">
@@ -63,8 +94,8 @@ export function Header() {
             <span className="text-sm font-semibold tracking-wide">Daemon</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+          <div className="hidden md:flex items-center gap-7">
+            {primaryNavLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
@@ -73,6 +104,49 @@ export function Header() {
                 {link.label}
               </a>
             ))}
+            <div
+              ref={moreMenuRef}
+              className="relative"
+              onMouseEnter={() => setIsMoreOpen(true)}
+              onMouseLeave={() => setIsMoreOpen(false)}
+            >
+              <button
+                type="button"
+                onClick={() => setIsMoreOpen(true)}
+                className="inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+                aria-haspopup="menu"
+                aria-expanded={isMoreOpen}
+              >
+                More
+                <ChevronDown
+                  className={cn(
+                    "size-3.5 transition-transform duration-200",
+                    isMoreOpen && "rotate-180",
+                  )}
+                />
+              </button>
+
+              {isMoreOpen && (
+                <div
+                  className="absolute left-1/2 top-full w-48 -translate-x-1/2 pt-4 animate-fade-in"
+                  role="menu"
+                >
+                  <div className="rounded-lg border border-border bg-background/95 p-1.5 shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-2xl">
+                    {moreNavLinks.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        onClick={() => setIsMoreOpen(false)}
+                        className="block rounded-md px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
+                        role="menuitem"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="hidden md:flex items-center gap-2">
@@ -140,9 +214,9 @@ export function Header() {
         </nav>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden pb-4 border-t border-border animate-fade-in">
+          <div className="md:hidden border-t border-border bg-background/95 pb-4 backdrop-blur-2xl animate-fade-in">
             <div className="flex flex-col gap-1 pt-3">
-              {navLinks.map((link) => (
+              {mobileNavLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}

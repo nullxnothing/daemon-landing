@@ -1,6 +1,6 @@
 # Solana Keychain
 
-Enterprise-grade signing with pluggable backends — AWS KMS, Fireblocks, Turnkey, and more.
+Enterprise-grade signing with pluggable backends, AWS KMS, Fireblocks, Turnkey, and more.
 
 {% hint style="info" %}
 Solana Keychain integration is in active development. This page documents the architecture and planned implementation. Built on the [Solana Foundation's official keychain SDK](https://github.com/solana-foundation/solana-keychain).
@@ -10,7 +10,7 @@ Solana Keychain integration is in active development. This page documents the ar
 
 By default, DAEMON stores wallet keypairs locally using your OS keychain (via Electron's safeStorage). This works great for solo development, but teams and enterprises need more: hardware security modules, cloud KMS, custodial platforms, and audit trails.
 
-Solana Keychain is a unified signing library maintained by the Solana Foundation. It lets DAEMON support **10 signing backends** through a single interface — without changing how the rest of the app works.
+Solana Keychain is a unified signing library maintained by the Solana Foundation. It lets DAEMON support **10 signing backends** through a single interface, without changing how the rest of the app works.
 
 ## Supported Backends
 
@@ -30,7 +30,7 @@ Solana Keychain is a unified signing library maintained by the Solana Foundation
 
 ## How It Works
 
-DAEMON's wallet architecture already isolates all signing in the Electron main process. The renderer (UI) never sees private keys — it only sends signing requests over IPC. This makes keychain integration clean: we only change *where* the signing happens, not *how* the UI works.
+DAEMON's wallet architecture already isolates all signing in the Electron main process. The renderer (UI) never sees private keys, it only sends signing requests over IPC. This makes keychain integration clean: we only change *where* the signing happens, not *how* the UI works.
 
 ### Current Flow (Local Keypair)
 
@@ -120,9 +120,9 @@ async function createSigner(walletId, config) {
 
 ## Security
 
-- **Keys never in renderer** — All signing stays in the Electron main process
-- **Credentials encrypted** — Backend API keys stored via OS keychain encryption
-- **Memory cleanup** — Local keypairs zeroed after use, remote backends never expose raw keys
-- **Health checks** — `isAvailable()` called before every signing operation
-- **Audit trail** — All transactions logged regardless of backend
-- **Security audited** — The solana-keychain SDK has undergone independent review by Accretion
+- **Keys never in renderer**, All signing stays in the Electron main process
+- **Credentials encrypted**, Backend API keys stored via OS keychain encryption
+- **Memory cleanup**, Local keypairs zeroed after use, remote backends never expose raw keys
+- **Health checks**, `isAvailable()` called before every signing operation
+- **Audit trail**, All transactions logged regardless of backend
+- **Security audited**, The solana-keychain SDK has undergone independent review by Accretion

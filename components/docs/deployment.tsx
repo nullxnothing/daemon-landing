@@ -5,10 +5,26 @@ export function DeploymentDoc() {
     <>
       <DocHeading>Deployment</DocHeading>
       <DocSubheading>
-        One-click deployment to Vercel and Railway directly from the editor.
+        Ship Solana programs through Shipline, and ship web services to Vercel or Railway, without leaving the workspace.
       </DocSubheading>
 
-      <H2 id="vercel">Vercel</H2>
+      <H2 id="shipline">Shipline (Solana programs)</H2>
+      <Paragraph>
+        Shipline is DAEMON&apos;s headline primitive: prompt → Anchor program → mainnet in 60 seconds.
+      </Paragraph>
+      <List
+        items={[
+          <><strong className="text-foreground">Prompt</strong>, describe the program in natural language; the agent scaffolds the Anchor crate, IDL, and tests</>,
+          <><strong className="text-foreground">Simulate</strong>, see compute usage and account diffs inline as you tweak the program</>,
+          <><strong className="text-foreground">Ship</strong>, one-click deploy via priority-fee-protected Jito bundle, signed in-app with the built-in wallet</>,
+        ]}
+      />
+      <Paragraph>
+        Shipline replaces the typical loop of editor → CLI → explorer → Phantom → retry. Same window,
+        same session, no tab switches.
+      </Paragraph>
+
+      <H2 id="vercel">Vercel (web frontends)</H2>
       <Paragraph>Deploy frontend projects to Vercel with a single click:</Paragraph>
       <List
         items={[
@@ -49,11 +65,11 @@ export function DeploymentDoc() {
           "Write and test your code in the Monaco editor",
           "Run tests with an AI agent or the terminal",
           "Commit changes via the visual git panel",
-          "Click deploy and your app is live",
+          "Ship, Shipline for Solana programs, one-click for Vercel or Railway",
         ]}
       />
       <Paragraph>
-        The entire cycle from code to production happens inside one app. Deployment settings are
+        The entire cycle from code to production happens inside one console. Deployment settings are
         stored per-project and persist across sessions.
       </Paragraph>
     </>

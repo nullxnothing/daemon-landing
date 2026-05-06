@@ -3,6 +3,7 @@ import { Hero } from "@/components/hero";
 import { AppFactory } from "@/components/app-factory";
 import { DaemonDemo } from "@/components/daemon-demo/DaemonDemo";
 import { Features } from "@/components/features";
+import { Shipline } from "@/components/shipline";
 import { Architecture } from "@/components/architecture";
 import { Comparison } from "@/components/comparison";
 import { ProductTour } from "@/components/product-tour";
@@ -41,6 +42,10 @@ export default async function Home() {
       <main>
         <Hero release={release} />
         <EcosystemProof />
+        <SectionDivider />
+        <ScrollReveal>
+          <Shipline />
+        </ScrollReveal>
         <SectionDivider />
         <ScrollReveal>
           <AppFactory />

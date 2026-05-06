@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { Github, ArrowRight } from "lucide-react";
 import type { ReleaseInfo } from "@/lib/downloads";
@@ -27,22 +28,22 @@ export function CTA({ release }: { release: ReleaseInfo }) {
           Get Started
         </p>
         <h2 className="text-4xl md:text-[3.25rem] font-bold tracking-[-0.02em] leading-[1.1] gradient-text text-balance">
-          Download the workspace.
+          Download the console.
         </h2>
         <p className="mt-6 text-[17px] text-muted max-w-xl mx-auto leading-relaxed">
-          Free, open source, and purpose-built for Solana development from first edit to deploy.
+          Free, open source, and purpose-built for Solana, from prompt to mainnet, in one window.
         </p>
 
         {/* Keep the decision simple here; platform choices live on the installation page. */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
+          <Link
             href="/docs/installation#download"
             onClick={() => track("Download", { location: "cta" })}
             className="group flex items-center gap-2.5 bg-accent text-accent-foreground px-7 py-3.5 rounded-lg font-semibold text-[15px] transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_32px_rgba(88,200,138,0.22)]"
           >
             Download Daemon
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-          </a>
+          </Link>
           <a
             href="https://pump.fun/coin/4vpf4qNtNVkvz2dm5qL2mT6jBXH9gDY8qH2QsHN5pump"
             target="_blank"
@@ -55,9 +56,9 @@ export function CTA({ release }: { release: ReleaseInfo }) {
         </div>
         <p className="mt-4 text-[13px] text-muted-foreground">
           Windows, macOS Apple Silicon, macOS Intel, and Linux builds are available.{" "}
-          <a href="/docs/installation" className="hover:text-foreground transition-colors">
+          <Link href="/docs/installation" className="hover:text-foreground transition-colors">
             See platform options.
-          </a>
+          </Link>
         </p>
 
         {/* Meta info */}

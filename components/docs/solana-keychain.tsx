@@ -5,7 +5,7 @@ export function SolanaKeychainDoc() {
     <>
       <DocHeading>Solana Keychain</DocHeading>
       <DocSubheading>
-        Enterprise-grade signing with pluggable backends — AWS KMS, Fireblocks, Turnkey, and more.
+        Enterprise-grade signing with pluggable backends, AWS KMS, Fireblocks, Turnkey, and more.
       </DocSubheading>
 
       <Hint type="info">
@@ -22,7 +22,7 @@ export function SolanaKeychainDoc() {
       <Paragraph>
         Solana Keychain is a unified signing library maintained by the Solana Foundation. It lets
         DAEMON support <strong className="text-foreground">10 signing backends</strong> through a
-        single interface — without changing how the rest of the app works.
+        single interface, without changing how the rest of the app works.
       </Paragraph>
 
       <H2 id="supported-backends">Supported Backends</H2>
@@ -46,7 +46,7 @@ export function SolanaKeychainDoc() {
       <H2 id="how-it-works">How It Works</H2>
       <Paragraph>
         DAEMON&apos;s wallet architecture already isolates all signing in the Electron main process.
-        The renderer (UI) never sees private keys — it only sends signing requests over IPC. This
+        The renderer (UI) never sees private keys, it only sends signing requests over IPC. This
         makes keychain integration clean: we only change <em>where</em> the signing happens, not
         <em>how</em> the UI works.
       </Paragraph>
@@ -137,7 +137,7 @@ async function createSigner(
 
       <H3>The withSigner Wrapper</H3>
       <Paragraph>
-        Replaces the existing <Code>withKeypair()</Code> — same pattern, different signer source:
+        Replaces the existing <Code>withKeypair()</Code>, same pattern, different signer source:
       </Paragraph>
       <CodeBlock title="electron/services/SolanaService.ts">{`async function withSigner<T>(
   walletId: string,
@@ -187,7 +187,7 @@ ALTER TABLE wallets ADD COLUMN signer_config TEXT;
         </InfoCard>
         <InfoCard title="Configuration Forms">
           Backend-specific forms for entering credentials (API keys, regions, key IDs). All secrets
-          are sent to the main process and stored encrypted — never held in the renderer.
+          are sent to the main process and stored encrypted, never held in the renderer.
         </InfoCard>
         <InfoCard title="Connection Test">
           One-click test button that calls the backend&apos;s isAvailable() method and reports
@@ -208,7 +208,7 @@ ALTER TABLE wallets ADD COLUMN signer_config TEXT;
           ["Signing logic", <strong key="y2" className="text-accent">Yes</strong>, "Uses signer.signTransactions() instead of keypair.sign()"],
           ["IPC contract", "Minimal", "Existing handlers unchanged, 3 new handlers added"],
           ["Wallet UI", <strong key="y3" className="text-accent">Yes</strong>, "New backend settings section"],
-          ["Transaction history", "No", "Identical — just stores signatures"],
+          ["Transaction history", "No", "Identical, just stores signatures"],
           ["Helius / portfolio", "No", "Read-only, doesn't involve signing"],
           ["Jupiter swaps", "Signing only", "Quote flow unchanged"],
           ["PumpFun launches", "Signing only", "Token creation flow unchanged"],
@@ -257,21 +257,21 @@ ALTER TABLE wallets ADD COLUMN signer_config TEXT;
       <H2 id="migration">Migration Path</H2>
       <List
         items={[
-          <><strong className="text-foreground">Phase 1</strong> — Add @solana/keychain, build KeychainService, create withSigner() wrapper. Zero user-facing changes — local keypair behavior is identical.</>,
-          <><strong className="text-foreground">Phase 2</strong> — Add keychain IPC handlers and backend selector UI. Users can now switch backends per-wallet.</>,
-          <><strong className="text-foreground">Phase 3</strong> — Add backend-specific config forms one at a time (AWS KMS first, then Vault, Turnkey, etc.).</>,
+          <><strong className="text-foreground">Phase 1</strong>, Add @solana/keychain, build KeychainService, create withSigner() wrapper. Zero user-facing changes, local keypair behavior is identical.</>,
+          <><strong className="text-foreground">Phase 2</strong>, Add keychain IPC handlers and backend selector UI. Users can now switch backends per-wallet.</>,
+          <><strong className="text-foreground">Phase 3</strong>, Add backend-specific config forms one at a time (AWS KMS first, then Vault, Turnkey, etc.).</>,
         ]}
       />
 
       <H2 id="security">Security</H2>
       <List
         items={[
-          <><strong className="text-foreground">Keys never in renderer</strong> — All signing stays in the Electron main process behind IPC</>,
-          <><strong className="text-foreground">Credentials encrypted</strong> — Backend API keys stored via SecureKeyService (OS keychain encryption)</>,
-          <><strong className="text-foreground">Memory cleanup</strong> — Local keypairs zeroed after use, remote backends never expose raw keys</>,
-          <><strong className="text-foreground">Health checks</strong> — isAvailable() called before every signing operation</>,
-          <><strong className="text-foreground">Audit trail</strong> — All transactions logged to transaction_history table regardless of backend</>,
-          <><strong className="text-foreground">Security audited</strong> — The solana-keychain SDK has undergone independent security review by Accretion</>,
+          <><strong className="text-foreground">Keys never in renderer</strong>, All signing stays in the Electron main process behind IPC</>,
+          <><strong className="text-foreground">Credentials encrypted</strong>, Backend API keys stored via SecureKeyService (OS keychain encryption)</>,
+          <><strong className="text-foreground">Memory cleanup</strong>, Local keypairs zeroed after use, remote backends never expose raw keys</>,
+          <><strong className="text-foreground">Health checks</strong>, isAvailable() called before every signing operation</>,
+          <><strong className="text-foreground">Audit trail</strong>, All transactions logged to transaction_history table regardless of backend</>,
+          <><strong className="text-foreground">Security audited</strong>, The solana-keychain SDK has undergone independent security review by Accretion</>,
         ]}
       />
     </>

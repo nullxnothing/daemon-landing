@@ -66,27 +66,27 @@ export function BrandKitDoc() {
       <div className="grid gap-3 sm:grid-cols-2 my-4">
         <LogoCard
           src="/images/daemon-icon.png"
-          alt="Primary mark — white on dark"
+          alt="Primary mark, white on dark"
           bg="#0a0a0a"
-          label="Primary — White on dark"
+          label="Primary, White on dark"
         />
         <LogoCard
           src="/images/daemon-mark-white.png"
-          alt="White mark — transparent background"
+          alt="White mark, transparent background"
           bg="#141414"
-          label="White — Transparent background"
+          label="White, Transparent background"
         />
         <LogoCard
           src="/images/daemon-mark-dark.png"
-          alt="Dark mark — transparent background"
+          alt="Dark mark, transparent background"
           bg="#f0f0f0"
-          label="Dark — For light backgrounds"
+          label="Dark, For light backgrounds"
         />
         <LogoCard
           src="/images/daemon-icon.png"
           alt="Mark on surface"
           bg="#141414"
-          label="On surface — UI contexts"
+          label="On surface, UI contexts"
         />
       </div>
 
