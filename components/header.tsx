@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, Github, Menu, Send, Twitter, X } from "lucide-react";
 import { DexScreenerLogo } from "@/components/dex-screener-logo";
+import { ConnectButton } from "@/components/header/connect-button";
 import { cn } from "@/lib/utils";
 
 const TELEGRAM_URL = "https://t.me/daemonide";
@@ -20,8 +21,8 @@ const primaryNavLinks = [
 ];
 
 const moreNavLinks = [
+  { label: "Portal", href: "/portal" },
   { label: "Factory", href: "/factory" },
-  { label: "Access", href: "/access" },
   { label: "Arena", href: "/arena" },
   { label: "Roadmap", href: "/roadmap" },
   { label: "Why Daemon", href: "/#architecture" },
@@ -198,10 +199,11 @@ export function Header() {
             </a>
             <Link
               href="/docs/installation#download"
-              className="ml-3 inline-flex items-center gap-2 rounded-lg border border-accent/30 bg-accent px-5 py-2.5 text-[13px] font-semibold text-accent-foreground transition-all hover:brightness-110 hover:shadow-[0_0_24px_rgba(88,200,138,0.2)]"
+              className="ml-3 inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-4 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:border-accent/40 hover:text-foreground"
             >
               Download
             </Link>
+            <ConnectButton />
           </div>
 
           <button
