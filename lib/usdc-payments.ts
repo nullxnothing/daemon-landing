@@ -5,6 +5,7 @@ import {
   type ParsedTransactionWithMeta,
 } from "@solana/web3.js";
 import {
+  createAssociatedTokenAccountIdempotentInstruction,
   createTransferCheckedInstruction,
   getAssociatedTokenAddressSync,
 } from "@solana/spl-token";
@@ -44,6 +45,14 @@ export async function buildUsdcPaymentTransaction(input: {
 
   const tx = new Transaction();
   tx.feePayer = payer;
+  tx.add(
+    createAssociatedTokenAccountIdempotentInstruction(
+      payer,
+      treasuryAta,
+      treasuryOwner,
+      mint,
+    ),
+  );
   tx.add(
     createTransferCheckedInstruction(
       payerAta,
