@@ -6,25 +6,27 @@ import { Footer } from "@/components/footer";
 import {
   Activity,
   ArrowRight,
-  Code2,
+  CheckCircle2,
   Download,
+  GitCommit,
   Github,
+  Package,
   Radio,
-  Users,
+  Star,
   Zap,
 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Pitch Deck | DAEMON",
   description:
-    "Seven-slide pitch deck for DAEMON, the Solana operator console for developers.",
+    "DAEMON, the Solana operator console for developers — Frontier Hackathon 2026 submission.",
 };
 
 const TRACTION = [
-  { value: "$3.90K", label: "Income so far", icon: Activity },
-  { value: "500+", label: "Community followers", icon: Users },
-  { value: "250+", label: "Downloads", icon: Download },
-  { value: "24/7", label: "Build velocity", icon: Github },
+  { value: "510", label: "Downloads across releases", icon: Download },
+  { value: "34", label: "Releases in 37 days", icon: Package },
+  { value: "151", label: "Commits in last 30 days", icon: GitCommit },
+  { value: "MIT", label: "Open source from day one", icon: Github },
 ];
 
 const TOOL_STACK = [
@@ -55,29 +57,43 @@ const EVENTS = [
   { label: "status", value: "confirmed" },
 ];
 
-const REVENUE_MODEL = [
-  { value: "$99-199", label: "Pro / month", detail: "Power-user Solana operator tier" },
-  { value: "1K", label: "devs @ $150", detail: "$1.8M ARR model" },
-  { value: "10K", label: "devs @ $150", detail: "$18M ARR model" },
-  { value: "Teams", label: "enterprise path", detail: "Seats, support, private integrations" },
+const PRICING_REASONS = [
+  {
+    value: "Hours saved",
+    label: "Not seats sold",
+    detail: "Pro tier is priced against the time devs already lose stitching tools together. One saved deploy pays for the month.",
+  },
+  {
+    value: "$99-199",
+    label: "Pro / month",
+    detail: "Solo operator tier. Live event stream, one-click deploy, integrated wallet, agent assist.",
+  },
+  {
+    value: "Free core",
+    label: "MIT, always",
+    detail: "Editor, terminal, and wallet stay open source. Pro layers on infrastructure, not gatekeeping.",
+  },
 ];
 
-const TEAM = [
-  { role: "Founder / builder", name: "nullxnothing", detail: "Shipping DAEMON in public with daily product velocity." },
-  { role: "Open seat", name: "Solana systems lead", detail: "Rust, Anchor, transaction simulation, RPC reliability." },
-  { role: "Open seat", name: "Product engineer", detail: "Desktop IDE, wallet UX, extensions, and developer workflows." },
-  { role: "Advisor target", name: "Solana infra operator", detail: "Helius, Anza, Superteam, Jito, or RPC ecosystem." },
+const SHIPPED = [
+  "Integrated Solana wallet (sign in-app)",
+  "One-click Anchor deploy",
+  "Live mainnet event pane",
+  "Replay engine (v3.0.5)",
+  "34 releases shipped publicly",
 ];
 
-const ROADMAP = [
-  "Live program events pane",
+const NEXT_UP = [
   "Jito bundle path",
-  "VS Code extension",
-  "JetBrains extension",
+  "VS Code + JetBrains extensions",
+  "Multi-program workspace",
+  "Team mode (shared deploys)",
 ];
 
 const PITCH_IMAGES = {
   readiness: "/Screenshot%202026-04-29%20144734.png",
+  toolboxVideo: "/pitch/solana-toolbox.mp4",
+  integrationsVideo: "/pitch/integrations.mp4",
 };
 
 export default function PitchPage() {
@@ -85,6 +101,17 @@ export default function PitchPage() {
     <>
       <Header />
       <main className="relative bg-background pt-20">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(88,200,138,0.045),transparent_18%)]" />
+          <div
+            className="absolute inset-0 opacity-[0.1]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+            }}
+          />
+        </div>
         <DeckNav />
 
         <Slide id="problem" kicker="Slide 01 / Hook + Problem">
@@ -105,7 +132,7 @@ export default function PitchPage() {
               </div>
             </div>
 
-            <ToolMess title="Today" items={TOOL_STACK} />
+            <ToolMess title="Today's Solana dev stack" items={TOOL_STACK} />
           </div>
         </Slide>
 
@@ -120,10 +147,11 @@ export default function PitchPage() {
                 off-screen wallet confusion. One unbroken operator flow.
               </p>
             </div>
-            <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-              <ScreenshotFrame
-                src={PITCH_IMAGES.readiness}
-                alt="DAEMON project readiness workspace"
+            <div className="grid gap-4 lg:grid-cols-[1.4fr_0.6fr]">
+              <VideoFrame
+                src={PITCH_IMAGES.toolboxVideo}
+                poster={PITCH_IMAGES.readiness}
+                label="Live capture · Solana toolbox"
               />
               <FlowStack />
             </div>
@@ -137,8 +165,8 @@ export default function PitchPage() {
                 Live program events streaming.
               </h2>
               <p className="mt-7 text-xl leading-8 text-muted">
-                A Laserstream-style pane for deployed program events: transactions, state changes,
-                CU consumption, and confirmations directly inside the editor.
+                A live mainnet stream for deployed programs: transactions, state changes, CU
+                consumption, and confirmations rendered directly inside the editor.
               </p>
               <div className="mt-8 grid gap-3">
                 <Punch icon={Radio} text="Real-time program events" />
@@ -153,65 +181,77 @@ export default function PitchPage() {
         <Slide id="traction" kicker="Slide 04 / Real Users Check">
           <div className="min-h-[calc(100vh-5rem)] py-16">
             <h2 className="max-w-5xl text-[clamp(3rem,7.5vw,6.5rem)] font-bold leading-[0.88] tracking-[-0.055em]">
-              Real traction. Real velocity.
+              37 days. Public proof.
             </h2>
+            <p className="mt-7 max-w-3xl text-xl leading-8 text-muted">
+              Started March 31. Shipping a release almost every day, in the open, on GitHub.
+              Numbers below are not projections — they are the repo.
+            </p>
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {TRACTION.map((item) => (
                 <TractionCard key={item.label} {...item} />
               ))}
             </div>
-            <div className="mt-10 grid gap-4 lg:grid-cols-3">
-              <Quote text="Deployed faster because wallet, terminal, and repo context stayed together." />
-              <Quote text="The app finally treats Solana work like an operator workflow, not a set of browser tabs." />
-              <Quote text="Daily commits. Fast iteration. This is the kind of desktop shell Solana devs need." />
+            <div className="mt-8 inline-flex items-center gap-2 rounded-md border border-border bg-card/70 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+              <Star className="size-3.5 text-accent" />
+              Verifiable at github.com/nullxnothing/daemon
             </div>
           </div>
         </Slide>
 
-        <Slide id="monetization" kicker="Slide 05 / Monetization">
+        <Slide id="monetization" kicker="Slide 05 / Why people pay">
           <div className="min-h-[calc(100vh-5rem)] py-16">
             <h2 className="text-[clamp(3rem,7.5vw,6.5rem)] font-bold leading-[0.88] tracking-[-0.055em]">
-              Clear path to $18M ARR.
+              Priced on hours saved.
             </h2>
             <p className="mt-7 max-w-3xl text-xl leading-8 text-muted">
-              Developer tools monetize when they save hours. DAEMON starts with solo operators,
-              expands to teams, then becomes the standard Solana workflow surface.
+              Solana devs already pay for RPC, indexing, and explorer access. DAEMON wraps the
+              workflow on top — the editor where those services finally feel like one product.
             </p>
-            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {REVENUE_MODEL.map((item) => (
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {PRICING_REASONS.map((item) => (
                 <RevenueCard key={item.label} {...item} />
               ))}
             </div>
-            <RevenueTable />
           </div>
         </Slide>
 
-        <Slide id="team" kicker="Slide 06 / Team + Momentum">
+        <Slide id="team" kicker="Slide 06 / Shipped vs next">
           <div className="min-h-[calc(100vh-5rem)] py-16">
             <h2 className="text-[clamp(3rem,7.5vw,6.5rem)] font-bold leading-[0.88] tracking-[-0.055em]">
-              Founder-led. Builder-first.
+              Working today. Bigger tomorrow.
             </h2>
             <p className="mt-7 max-w-3xl text-xl leading-8 text-muted">
-              The product is shipping before the full company is filled out. The next step is
-              surrounding the working app with Solana systems, product, and infra depth.
+              DAEMON is not a deck. The features below are downloadable now. The roadmap is the
+              same cadence applied to deeper Solana tooling.
             </p>
-            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {TEAM.map((item) => (
-                <TeamCard key={`${item.role}-${item.name}`} {...item} />
-              ))}
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              <ShipColumn title="Shipped" tone="accent" items={SHIPPED} />
+              <ShipColumn title="Next 90 days" tone="muted" items={NEXT_UP} />
+            </div>
+            <div className="mt-8">
+              <div className="mb-3 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                <span className="h-px w-5 bg-accent/50" />
+                Live integrations · Solana ecosystem
+              </div>
+              <VideoFrame
+                src={PITCH_IMAGES.integrationsVideo}
+                label="Recorded · in-app"
+              />
             </div>
           </div>
         </Slide>
 
-        <Slide id="ask" kicker="Slide 07 / Ask + Roadmap">
+        <Slide id="ask" kicker="Slide 07 / Try it">
           <div className="grid min-h-[calc(100vh-5rem)] items-center gap-10 lg:grid-cols-[1fr_1fr]">
             <div>
               <h2 className="text-[clamp(3rem,7.5vw,6.5rem)] font-bold leading-[0.88] tracking-[-0.055em]">
-                Make DAEMON the Solana dev stack.
+                Run DAEMON yourself.
               </h2>
               <p className="mt-7 text-xl leading-8 text-muted">
-                Immediate focus: win operator workflows, prove the Pro tier, and ship the
-                integrations Solana developers already stitch together by hand.
+                The fastest review is a 5-minute install. Download the latest release, deploy a
+                program, watch the event pane light up. The deck stops here — the product
+                doesn&apos;t.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link
@@ -222,21 +262,27 @@ export default function PitchPage() {
                   <ArrowRight className="size-4" />
                 </Link>
                 <a
-                  href="https://x.com/DaemonTerminal"
+                  href="https://github.com/nullxnothing/daemon"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-md border border-border bg-card/70 px-5 py-3 text-sm font-semibold text-foreground transition hover:border-accent/40"
                 >
-                  Talk on X
+                  <Github className="size-4" />
+                  Read the source
                 </a>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-2 text-[11px] font-mono uppercase tracking-[0.18em] text-muted">
+                <span className="rounded border border-border bg-card/60 px-2 py-1">Frontier Hackathon 2026</span>
+                <span className="rounded border border-border bg-card/60 px-2 py-1">MIT licensed</span>
+                <span className="rounded border border-border bg-card/60 px-2 py-1">v3.0.10</span>
               </div>
             </div>
             <div className="rounded-lg border border-border bg-card/75 p-6">
               <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-                6-month roadmap
+                What changes after the hackathon
               </div>
               <div className="mt-6 grid gap-3">
-                {ROADMAP.map((item, index) => (
+                {NEXT_UP.map((item, index) => (
                   <RoadmapRow key={item} index={index + 1} text={item} />
                 ))}
               </div>
@@ -250,16 +296,27 @@ export default function PitchPage() {
 }
 
 function DeckNav() {
-  const items = ["problem", "solution", "wedge", "traction", "monetization", "team", "ask"];
+  const items = [
+    { id: "problem", label: "Problem" },
+    { id: "solution", label: "Solution" },
+    { id: "wedge", label: "Tech Wedge" },
+    { id: "traction", label: "Traction" },
+    { id: "monetization", label: "Revenue" },
+    { id: "team", label: "Team" },
+    { id: "ask", label: "Ask" },
+  ];
   return (
-    <nav className="fixed right-4 top-1/2 z-20 hidden -translate-y-1/2 flex-col gap-2 xl:flex">
+    <nav className="fixed right-4 top-1/2 z-20 hidden -translate-y-1/2 flex-col gap-1.5 xl:flex">
       {items.map((item, index) => (
         <a
-          key={item}
-          href={`#${item}`}
-          className="flex size-8 items-center justify-center rounded-md border border-border bg-background/80 font-mono text-[10px] text-muted transition hover:border-accent/40 hover:text-accent"
+          key={item.id}
+          href={`#${item.id}`}
+          className="group relative flex size-8 items-center justify-center rounded-md border border-border bg-background/80 font-mono text-[10px] text-muted backdrop-blur-sm transition hover:border-accent/50 hover:bg-card hover:text-accent"
         >
           {index + 1}
+          <span className="pointer-events-none absolute right-10 whitespace-nowrap rounded border border-border bg-card/95 px-2 py-1 text-[10px] font-medium text-foreground opacity-0 shadow-sm backdrop-blur-sm transition-opacity group-hover:opacity-100">
+            {item.label}
+          </span>
         </a>
       ))}
     </nav>
@@ -278,9 +335,10 @@ function Slide({
   return (
     <section
       id={id}
-      className="mx-auto max-w-7xl scroll-mt-24 border-b border-white/[0.06] px-5 py-8 sm:px-8"
+      className="relative mx-auto max-w-7xl scroll-mt-20 border-b border-white/6 px-5 pt-14 pb-20 sm:px-8 sm:pt-20 sm:pb-28"
     >
-      <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+      <div className="mb-2 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+        <span className="h-px w-5 bg-accent/50" />
         {kicker}
       </div>
       {children}
@@ -314,24 +372,45 @@ function ScreenshotFrame({
   alt: string;
 }) {
   return (
-    <div className="overflow-hidden rounded-lg border border-border bg-card/75 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
-      <Image src={src} alt={alt} width={2200} height={1370} className="h-auto w-full" priority />
+    <div className="relative">
+      <div className="absolute -inset-6 bg-[radial-gradient(ellipse_at_center,rgba(88,200,138,0.07),transparent_65%)] blur-2xl" />
+      <div className="relative overflow-hidden rounded-lg border border-border/80 bg-card/75 shadow-[0_28px_90px_rgba(0,0,0,0.5)]">
+        <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent/40 to-transparent" />
+        <Image src={src} alt={alt} width={2200} height={1370} className="h-auto w-full" priority />
+      </div>
     </div>
   );
 }
 
 function ToolMess({ title, items }: { title: string; items: string[] }) {
   return (
-    <div className="rounded-lg border border-red-400/20 bg-red-400/[0.035] p-5">
-      <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-red-200">
-        {title}
+    <div className="relative rounded-lg border border-red-400/25 bg-red-400/[0.035] p-5">
+      <div className="flex items-center justify-between">
+        <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-red-200">
+          {title}
+        </div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-red-200/70">
+          {items.length} apps · {items.length} contexts
+        </div>
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-2">
-        {items.map((item) => (
-          <div key={item} className="rounded-md border border-border bg-background/70 px-3 py-2 text-sm text-muted">
+      <p className="mt-3 text-sm leading-6 text-muted">
+        What a Solana dev opens to ship one feature today. Each box is a separate window, account,
+        and tab.
+      </p>
+      <div className="mt-5 grid grid-cols-2 gap-2">
+        {items.map((item, index) => (
+          <div
+            key={item}
+            className="rounded-md border border-red-400/15 bg-background/70 px-3 py-2 text-sm text-muted/80 line-through decoration-red-300/30 decoration-1"
+            style={{ transform: `rotate(${(index % 2 === 0 ? -0.4 : 0.4)}deg)` }}
+          >
             {item}
           </div>
         ))}
+      </div>
+      <div className="mt-5 flex items-center gap-2 border-t border-red-400/15 pt-4 text-xs font-medium text-red-200/80">
+        <span className="font-mono uppercase tracking-[0.16em]">DAEMON →</span>
+        <span className="text-foreground">replaces all of this with one window.</span>
       </div>
     </div>
   );
@@ -375,9 +454,10 @@ function EventPane() {
       <div className="flex items-center justify-between border-b border-border pb-3">
         <div className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
           <Radio className="size-4" />
-          Laserstream events
+          Mainnet event stream
         </div>
-        <span className="rounded-sm border border-accent/30 bg-accent/10 px-2 py-1 text-[10px] text-accent">
+        <span className="flex items-center gap-1.5 rounded-sm border border-accent/30 bg-accent/10 px-2 py-1 text-[10px] text-accent">
+          <span className="size-1.5 animate-pulse rounded-full bg-accent" />
           live
         </span>
       </div>
@@ -411,21 +491,14 @@ function TractionCard({
   icon: React.ComponentType<{ className?: string }>;
 }) {
   return (
-    <div className="rounded-lg border border-border bg-card/75 p-5">
+    <div className="relative overflow-hidden rounded-lg border border-border bg-card/75 p-5">
+      <div className="absolute inset-x-0 bottom-0 h-0.5 bg-linear-to-r from-accent/0 via-accent/50 to-accent/0" />
       <Icon className="size-5 text-accent" />
-      <div className="mt-5 text-[clamp(2.5rem,5vw,4.8rem)] font-bold leading-none tracking-[-0.045em]">
+      <div className="mt-5 text-[clamp(2.5rem,5vw,4.8rem)] font-bold leading-none tracking-[-0.045em] text-foreground">
         {value}
       </div>
       <div className="mt-3 text-sm font-medium text-muted">{label}</div>
     </div>
-  );
-}
-
-function Quote({ text }: { text: string }) {
-  return (
-    <blockquote className="rounded-lg border border-border bg-card/75 p-5 text-lg font-semibold leading-8 text-foreground">
-      &quot;{text}&quot;
-    </blockquote>
   );
 }
 
@@ -439,7 +512,8 @@ function RevenueCard({
   detail: string;
 }) {
   return (
-    <article className="rounded-lg border border-border bg-card/75 p-6">
+    <article className="relative overflow-hidden rounded-lg border border-border bg-card/75 p-6">
+      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent/40 to-transparent" />
       <div className="text-[clamp(2.2rem,4vw,3.5rem)] font-bold leading-none tracking-[-0.045em] text-accent">
         {value}
       </div>
@@ -449,41 +523,65 @@ function RevenueCard({
   );
 }
 
-function RevenueTable() {
+function ShipColumn({
+  title,
+  tone,
+  items,
+}: {
+  title: string;
+  tone: "accent" | "muted";
+  items: string[];
+}) {
+  const isAccent = tone === "accent";
   return (
-    <div className="mt-8 overflow-hidden rounded-lg border border-border bg-card/75">
-      <div className="grid grid-cols-3 border-b border-border bg-background/50 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
-        <span>Scenario</span>
-        <span>ARPU</span>
-        <span>ARR</span>
+    <div className={`rounded-lg border bg-card/75 p-6 ${isAccent ? "border-accent/30" : "border-border border-dashed"}`}>
+      <div className={`font-mono text-[11px] font-semibold uppercase tracking-[0.18em] ${isAccent ? "text-accent" : "text-muted"}`}>
+        {title}
       </div>
-      {[
-        ["1K operators", "$150/mo", "$1.8M"],
-        ["10K operators", "$150/mo", "$18M"],
-        ["50K operators", "$150/mo", "$90M"],
-      ].map(([scenario, arpu, arr]) => (
-        <div key={scenario} className="grid grid-cols-3 border-b border-border px-5 py-4 text-sm last:border-b-0">
-          <span className="font-semibold text-foreground">{scenario}</span>
-          <span className="text-muted">{arpu}</span>
-          <span className="font-semibold text-accent">{arr}</span>
-        </div>
-      ))}
+      <ul className="mt-5 grid gap-3">
+        {items.map((item) => (
+          <li key={item} className="flex items-start gap-3 rounded-md border border-border bg-background/60 p-3">
+            <CheckCircle2 className={`mt-0.5 size-5 shrink-0 ${isAccent ? "text-accent" : "text-muted/60"}`} />
+            <span className="text-sm leading-6 font-medium text-foreground">{item}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-function TeamCard({ role, name, detail }: { role: string; name: string; detail: string }) {
+function VideoFrame({
+  src,
+  poster,
+  label,
+}: {
+  src: string;
+  poster?: string;
+  label?: string;
+}) {
   return (
-    <article className="rounded-lg border border-border bg-card/75 p-6">
-      <div className="flex size-14 items-center justify-center rounded-md border border-accent/20 bg-accent/8">
-        <Code2 className="size-6 text-accent" />
+    <div className="relative">
+      <div className="absolute -inset-6 bg-[radial-gradient(ellipse_at_center,rgba(88,200,138,0.07),transparent_65%)] blur-2xl" />
+      <div className="relative overflow-hidden rounded-lg border border-border/80 bg-card/75 shadow-[0_28px_90px_rgba(0,0,0,0.5)]">
+        <div className="absolute inset-x-0 top-0 z-10 h-px bg-linear-to-r from-transparent via-accent/40 to-transparent" />
+        {label ? (
+          <div className="absolute left-3 top-3 z-10 flex items-center gap-1.5 rounded border border-accent/30 bg-background/80 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-accent backdrop-blur-sm">
+            <span className="size-1.5 animate-pulse rounded-full bg-accent" />
+            {label}
+          </div>
+        ) : null}
+        <video
+          src={src}
+          poster={poster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="h-auto w-full"
+        />
       </div>
-      <div className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-        {role}
-      </div>
-      <div className="mt-2 text-2xl font-bold tracking-[-0.035em] text-foreground">{name}</div>
-      <div className="mt-3 text-sm leading-6 text-muted">{detail}</div>
-    </article>
+    </div>
   );
 }
 
