@@ -39,7 +39,7 @@ export default function NotFound() {
             Roadmap
           </Link>
           <a
-            href="https://discord.gg/98CRP2kjG"
+            href="https://discord.gg/WYdGJY9Fx"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors hover:text-foreground"

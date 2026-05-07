@@ -9,7 +9,7 @@ import { ConnectButton } from "@/components/header/connect-button";
 import { cn } from "@/lib/utils";
 
 const TELEGRAM_URL = "https://t.me/daemonide";
-const DISCORD_URL = "https://discord.gg/98CRP2kjG";
+const DISCORD_URL = "https://discord.gg/WYdGJY9Fx";
 const X_URL = "https://x.com/DaemonTerminal";
 const GITHUB_URL = "https://github.com/nullxnothing/daemon";
 const DEXSCREENER_URL =

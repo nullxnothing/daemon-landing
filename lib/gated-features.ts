@@ -26,7 +26,7 @@ export const GATED_FEATURES: GatedFeature[] = [
     label: "Private staker channel",
     copy: "First-line supporter access and direct line to the team.",
     requires: { kind: "tier", tier: "signal" },
-    cta: { label: "Join Discord", href: "https://discord.gg/98CRP2kjG", external: true },
+    cta: { label: "Join Discord", href: "https://discord.gg/WYdGJY9Fx", external: true },
   },
   {
     id: "early-drops",
