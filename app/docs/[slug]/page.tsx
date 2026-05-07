@@ -14,6 +14,7 @@ import { SolanaDevelopmentDoc } from "@/components/docs/solana-development";
 import { SolanaKeychainDoc } from "@/components/docs/solana-keychain";
 import { DaemonProDoc } from "@/components/docs/daemon-pro";
 import { JuiceIntegrationDoc } from "@/components/docs/juice-integration";
+import { SeekerCompanionDoc } from "@/components/docs/seeker-companion";
 import { EditorTerminalDoc } from "@/components/docs/editor-terminal";
 import { GitIntegrationDoc } from "@/components/docs/git-integration";
 import { DeploymentDoc } from "@/components/docs/deployment";
@@ -37,6 +38,7 @@ const contentMap: Record<string, React.ComponentType<{ release: ReleaseInfo }>> 
   "solana-keychain": SolanaKeychainDoc,
   "daemon-pro": DaemonProDoc,
   "juice-integration": JuiceIntegrationDoc,
+  "seeker-companion": SeekerCompanionDoc,
   "editor-terminal": EditorTerminalDoc,
   "git-integration": GitIntegrationDoc,
   deployment: DeploymentDoc,

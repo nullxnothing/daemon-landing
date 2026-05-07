@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "How Daemon handles your data on the marketing site and in the desktop app.",
 };
 
-const UPDATED = "May 5, 2026";
+const UPDATED = "May 7, 2026";
 const CONTACT_EMAIL = "hello@daemon.computer";
 
 export default function PrivacyPage() {
@@ -50,6 +50,27 @@ export default function PrivacyPage() {
                 project files stay on your device. Network requests are made only to the
                 third-party services you choose to use (Solana RPC providers, Helius,
                 Jupiter, AI model providers, etc.) using credentials you supply.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="mb-3 text-lg font-semibold text-foreground">Daemon Seeker mobile app</h2>
+              <p>
+                Daemon Seeker is the companion mobile app distributed via the Solana
+                Mobile dApp Store. The app stores pairing codes, the desktop relay URL,
+                and the active wallet&apos;s public address locally on your device. It does
+                not collect analytics or upload identifying data to our servers.
+              </p>
+              <p className="mt-3">
+                Wallet authorization runs through the Solana Mobile Wallet Adapter
+                (MWA). Private keys never leave your wallet app and are never seen by
+                Daemon Seeker. Push notification permissions are optional and only used
+                to alert you about pending agent approvals.
+              </p>
+              <p className="mt-3">
+                When you pair the app with your Daemon desktop install, the mobile app
+                only communicates with the desktop relay URL you provide. We do not
+                operate a hosted relay for the mobile app.
               </p>
             </section>
 

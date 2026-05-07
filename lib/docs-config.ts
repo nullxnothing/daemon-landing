@@ -29,6 +29,12 @@ export const docsConfig: DocSection[] = [
     ],
   },
   {
+    title: "Mobile",
+    items: [
+      { title: "Daemon Seeker", slug: "seeker-companion" },
+    ],
+  },
+  {
     title: "Integrations",
     items: [
       { title: "Juice Integration", slug: "juice-integration" },

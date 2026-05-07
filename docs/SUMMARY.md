@@ -14,6 +14,10 @@
 * [Solana Development](core-features/solana-development.md)
 * [Solana Keychain](core-features/solana-keychain.md)
 
+## Mobile
+
+* [Daemon Seeker](mobile/seeker-companion.md)
+
 ## Editor & Tools
 
 * [Monaco Editor & Terminal](editor-tools/editor-terminal.md)
