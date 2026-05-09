@@ -37,6 +37,7 @@ export const docsConfig: DocSection[] = [
   {
     title: "Integrations",
     items: [
+      { title: "Streamlock Integration", slug: "streamlock-integration" },
       { title: "Juice Integration", slug: "juice-integration" },
     ],
   },

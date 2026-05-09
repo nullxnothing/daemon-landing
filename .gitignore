@@ -67,4 +67,10 @@ Usersoffic.claudeplans/
 .vercel
 .env*.local
 
+# Build info
+tsconfig.tsbuildinfo
+
+# Temp assets
+tmp-*
+
 .telemetry-admin-token.local

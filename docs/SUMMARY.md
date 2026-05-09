@@ -18,6 +18,10 @@
 
 * [Daemon Seeker](mobile/seeker-companion.md)
 
+## Integrations
+
+* [Streamlock Integration](integrations/streamlock-integration.md)
+
 ## Editor & Tools
 
 * [Monaco Editor & Terminal](editor-tools/editor-terminal.md)

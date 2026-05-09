@@ -13,6 +13,7 @@ import { GrindModeDoc } from "@/components/docs/grind-mode";
 import { SolanaDevelopmentDoc } from "@/components/docs/solana-development";
 import { SolanaKeychainDoc } from "@/components/docs/solana-keychain";
 import { DaemonProDoc } from "@/components/docs/daemon-pro";
+import { StreamlockIntegrationDoc } from "@/components/docs/streamlock-integration";
 import { JuiceIntegrationDoc } from "@/components/docs/juice-integration";
 import { SeekerCompanionDoc } from "@/components/docs/seeker-companion";
 import { EditorTerminalDoc } from "@/components/docs/editor-terminal";
@@ -37,6 +38,7 @@ const contentMap: Record<string, React.ComponentType<{ release: ReleaseInfo }>> 
   "solana-development": SolanaDevelopmentDoc,
   "solana-keychain": SolanaKeychainDoc,
   "daemon-pro": DaemonProDoc,
+  "streamlock-integration": StreamlockIntegrationDoc,
   "juice-integration": JuiceIntegrationDoc,
   "seeker-companion": SeekerCompanionDoc,
   "editor-terminal": EditorTerminalDoc,

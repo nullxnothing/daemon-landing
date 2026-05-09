@@ -94,6 +94,14 @@ export function Hero({ release }: { release: ReleaseInfo }) {
             >
               See how it works
             </Link>
+            <Link
+              href="/pitch"
+              onClick={() => track("Pitch", { location: "hero" })}
+              className="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-[15px] font-semibold text-muted-foreground transition-colors hover:text-foreground"
+            >
+              View pitch
+              <ArrowRight className="size-4" />
+            </Link>
           </div>
 
           <div

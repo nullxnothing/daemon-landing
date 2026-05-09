@@ -18,6 +18,7 @@ const DEXSCREENER_URL =
 const primaryNavLinks = [
   { label: "Product", href: "/#features" },
   { label: "Docs", href: "/docs" },
+  { label: "Pitch", href: "/pitch" },
 ];
 
 const moreNavLinks = [
@@ -83,19 +84,20 @@ export function Header() {
             : "bg-transparent",
       )}
     >
-      <div className="w-full px-5 sm:px-7 lg:px-10">
-        <nav className="mx-auto flex h-18 w-full max-w-[88rem] items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <Image
-              src="/images/daemon-mark-white.png"
-              alt="DAEMON"
-              width={28}
-              height={28}
-            />
-            <span className="text-sm font-semibold tracking-wide">Daemon</span>
-          </Link>
+      <div className="w-full px-5 sm:px-7 lg:px-12 xl:px-16">
+        <nav className="mx-auto flex h-18 w-full max-w-[100rem] items-center justify-between">
+          <div className="flex items-center gap-8">
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <Image
+                src="/images/daemon-mark-white.png"
+                alt="DAEMON"
+                width={28}
+                height={28}
+              />
+              <span className="text-[13px] font-semibold tracking-wide">Daemon</span>
+            </Link>
 
-          <div className="hidden md:flex items-center gap-7">
+            <div className="hidden md:flex items-center gap-6">
             {primaryNavLinks.map((link) => (
               <a
                 key={link.label}
@@ -148,58 +150,60 @@ export function Header() {
                 </div>
               )}
             </div>
+            </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-0.5">
             <a
               href={X_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              className="text-muted-foreground hover:text-foreground transition-colors p-1.5"
               aria-label="Follow on X"
             >
-              <Twitter className="size-[18px]" />
+              <Twitter className="size-[17px]" />
             </a>
             <a
               href={TELEGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              className="text-muted-foreground hover:text-foreground transition-colors p-1.5"
               aria-label="Join Telegram"
             >
-              <Send className="size-[18px]" />
+              <Send className="size-[17px]" />
             </a>
             <a
               href={DISCORD_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              className="text-muted-foreground hover:text-foreground transition-colors p-1.5"
               aria-label="Join Discord"
             >
-              <DiscordIcon />
+              <DiscordIcon className="size-[17px]" />
             </a>
             <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              className="text-muted-foreground hover:text-foreground transition-colors p-1.5"
               aria-label="GitHub repository"
             >
-              <Github className="size-[18px]" />
+              <Github className="size-[17px]" />
             </a>
             <a
               href={DEXSCREENER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors p-2"
+              className="text-muted-foreground hover:text-foreground transition-colors p-1.5"
               aria-label="View on Dex Screener"
               title="Dex Screener"
             >
-              <DexScreenerLogo className="size-[18px]" />
+              <DexScreenerLogo className="size-[17px]" />
             </a>
+            <span aria-hidden className="mx-2 h-5 w-px bg-border" />
             <Link
               href="/docs/installation#download"
-              className="ml-3 inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-4 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:border-accent/40 hover:text-foreground"
+              className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-4 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:border-accent/40 hover:text-foreground"
             >
               Download
             </Link>

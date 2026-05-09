@@ -76,7 +76,7 @@ function hashResult(value: unknown): Record<string, number> {
 }
 
 function requireAdmin(request: NextRequest): NextResponse | null {
-  const token = process.env.TELEMETRY_ADMIN_TOKEN;
+  const token = process.env.TELEMETRY_ADMIN_TOKEN?.trim();
   if (!token) {
     return NextResponse.json({ error: "Telemetry summary token is not configured" }, { status: 500 });
   }

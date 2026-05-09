@@ -248,7 +248,7 @@
   align-items: center;
   animation: ecosystem-marquee 42s linear infinite;
   display: flex;
-  gap: 0.5rem;
+  gap: 0;
   width: max-content;
   will-change: transform;
 }
@@ -258,6 +258,7 @@
   display: flex;
   flex: 0 0 auto;
   gap: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .ecosystem-rail-window:hover .ecosystem-rail-track {
