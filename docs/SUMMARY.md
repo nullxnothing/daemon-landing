@@ -21,6 +21,7 @@
 ## Integrations
 
 * [Streamlock Integration](integrations/streamlock-integration.md)
+* [Spawn Agents Integration](integrations/spawn-agents-integration.md)
 
 ## Editor & Tools
 

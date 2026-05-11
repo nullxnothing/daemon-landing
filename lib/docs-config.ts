@@ -39,6 +39,7 @@ export const docsConfig: DocSection[] = [
     items: [
       { title: "Streamlock Integration", slug: "streamlock-integration" },
       { title: "Juice Integration", slug: "juice-integration" },
+      { title: "Spawn Agents Integration", slug: "spawn-agents-integration" },
     ],
   },
   {
