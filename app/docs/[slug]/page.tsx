@@ -15,6 +15,7 @@ import { SolanaKeychainDoc } from "@/components/docs/solana-keychain";
 import { DaemonProDoc } from "@/components/docs/daemon-pro";
 import { StreamlockIntegrationDoc } from "@/components/docs/streamlock-integration";
 import { JuiceIntegrationDoc } from "@/components/docs/juice-integration";
+import { KausaLayerIntegrationDoc } from "@/components/docs/kausalayer-integration";
 import { SpawnAgentsIntegrationDoc } from "@/components/docs/spawn-agents-integration";
 import { SeekerCompanionDoc } from "@/components/docs/seeker-companion";
 import { EditorTerminalDoc } from "@/components/docs/editor-terminal";
@@ -41,6 +42,7 @@ const contentMap: Record<string, React.ComponentType<{ release: ReleaseInfo }>> 
   "daemon-pro": DaemonProDoc,
   "streamlock-integration": StreamlockIntegrationDoc,
   "juice-integration": JuiceIntegrationDoc,
+  "kausalayer-integration": KausaLayerIntegrationDoc,
   "spawn-agents-integration": SpawnAgentsIntegrationDoc,
   "seeker-companion": SeekerCompanionDoc,
   "editor-terminal": EditorTerminalDoc,

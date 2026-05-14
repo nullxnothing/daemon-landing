@@ -66,7 +66,7 @@ export function SolanaDevelopmentDoc() {
       <CardGrid>
         <InfoCard title="Quick Setup">Create a dev wallet, assign a project wallet, enable Solana MCPs, and write RPC_URL.</InfoCard>
         <InfoCard title="Readiness Checks">Project open, Solana project detected, wallet route, signer ready, provider path, MCP tools, and first agent.</InfoCard>
-        <InfoCard title="First Safe Actions">Wire SendAI Agent Kit, Helius, Phantom, Jupiter, Metaplex, and Light Protocol before mainnet flows.</InfoCard>
+        <InfoCard title="First Safe Actions">Wire SendAI Agent Kit, Helius, Phantom, Jupiter, Metaplex, Light Protocol, and KausaLayer before mainnet flows.</InfoCard>
       </CardGrid>
 
       <H2 id="wallet">Wallet And RPC Runtime</H2>
@@ -91,7 +91,7 @@ export function SolanaDevelopmentDoc() {
       <Table
         headers={["Category", "Tools"]}
         rows={[
-          ["MCPs", "Helius, Solana MCP, Phantom Docs, PayAI, and x402."],
+          ["MCPs", "Helius, Solana MCP, Phantom Docs, KausaLayer, PayAI, and x402."],
           ["Core Skills", "solana-architect, solana-wallet-tx-pipeline, solana-kit."],
           ["Infra Skills", "helius, quicknode, pyth, switchboard, light-protocol."],
           ["Trading Skills", "integrating-jupiter, raydium, meteora, drift, orca."],
@@ -118,7 +118,7 @@ export function SolanaDevelopmentDoc() {
       <CardGrid>
         <InfoCard title="Native Launch Adapters">Pump.fun, Raydium, and Meteora launch workflows use the shared wallet, RPC, and session model.</InfoCard>
         <InfoCard title="Protocol Packs">Jupiter, Metaplex, Raydium, Meteora, Drift, and Kamino are tracked as launch or integration packs.</InfoCard>
-        <InfoCard title="Guided Integrations">Orca, Sanctum, Pyth, Switchboard, Squads, Light Protocol, and x402/PayAI live in the integration catalog.</InfoCard>
+        <InfoCard title="Guided Integrations">Orca, Sanctum, Pyth, Switchboard, Squads, Light Protocol, KausaLayer, and x402/PayAI live in the integration catalog.</InfoCard>
       </CardGrid>
 
       <H3 id="import-tokens">Import Tokens</H3>

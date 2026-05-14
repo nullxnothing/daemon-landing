@@ -13,6 +13,7 @@ const ecosystemLogos = [
   { name: "QuickNode", src: "/logos/quicknode.png" },
   { name: "Metaplex", src: "/logos/metaplex.png" },
   { name: "Light Protocol", src: "/logos/light-protocol.png" },
+  { name: "KausaLayer", src: "/logos/kausalayer.svg" },
   { name: "Kamino", src: "/logos/kamino.png" },
   { name: "Orca", src: "/logos/orca.png" },
   { name: "Pyth", src: "/logos/pyth.png" },
